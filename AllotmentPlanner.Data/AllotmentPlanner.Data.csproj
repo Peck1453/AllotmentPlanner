@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,12 +49,91 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allotment.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllotmentAllocation.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllotmentPlannerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllotmentPlannerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllotmentPlannerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllotmentPlannerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllotmentPlannerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Crop.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CropHarvest.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CropRequirements.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Crop_Requirements.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GardenLocation.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Planted.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tended.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TendType.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAO\" />
     <Folder Include="IDAO\" />
     <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AllotmentPlannerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AllotmentPlannerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AllotmentPlannerModel.edmx.diagram">
+      <DependentUpon>AllotmentPlannerModel.edmx</DependentUpon>
+    </None>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AllotmentPlannerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllotmentPlannerModel.Context.cs</LastGenOutput>
+      <DependentUpon>AllotmentPlannerModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="AllotmentPlannerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AllotmentPlannerModel.edmx</DependentUpon>
+      <LastGenOutput>AllotmentPlannerModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

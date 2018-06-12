@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9ad883f58914183aef38a5a8e6426e8" Name="Diagram1">
+        <EntityTypeShape EntityType="AllotmentModel.AspNetUserClaims" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AllotmentModel.Allotment" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllotmentModel.AllotmentAllocation" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Crop" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Crop_Requirements" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.CropHarvest" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllotmentModel.CropRequirements" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AllotmentModel.GardenLocation" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Planted" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Tended" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AllotmentModel.TendType" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AllotmentModel.User" Width="1.5" PointX="7.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
