@@ -285,6 +285,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AllotmentPlanner.Data\AllotmentPlanner.Data.csproj">
+      <Project>{c2c1a860-c45f-4e5d-8c3f-bbe5460b7ddb}</Project>
+      <Name>AllotmentPlanner.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AllotmentPlanner.Services\AllotmentPlanner.Services.csproj">
+      <Project>{62ff01e6-8414-49eb-9c17-e349e3d6f70d}</Project>
+      <Name>AllotmentPlanner.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
