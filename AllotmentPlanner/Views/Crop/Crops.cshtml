@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AllotmentPlanner.Data.Crop>
+
+@{
+    ViewBag.Title = "Crops";
+}
+
+<h2>Crops</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cropName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cropSize)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cropName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cropSize)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.cropID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.cropID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.cropID })
+        </td>
+    </tr>
+}
+
+</table>
