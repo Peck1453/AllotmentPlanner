@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using AllotmentPlanner.Data;
 using AllotmentPlanner.Data.IDAO;
 using AllotmentPlanner.Data.DAO;
-
-
-
+using AllotmentPlanner.Data.ViewModel;
 
 namespace AllotmentPlanner.Services.Service
 {
@@ -26,6 +24,40 @@ namespace AllotmentPlanner.Services.Service
             return _cropDAO.GetCrops();
         }
 
+        public Crop GetCrop(int id)
+        {
+            return _cropDAO.GetCrop(id);
+
+       
+        }
+        public void addCrop(Crop crop)
+        {
+            _cropDAO.addCrop(crop);
+        }
+
+        public void addCropHarvest(CropHarvest crop)
+        {
+            _cropDAO.addCropHarvest(crop);
+
+
+        }
+        public void addCropRequirements(CropRequirements crop)
+        {
+
+            _cropDAO.addCropRequirements(crop);
+
+        }
+
+
+        public void editCrop(Crop crop)
+        {
+            _cropDAO.editCrop(crop);
+        }
+
+        public CropDataViewModel GetCropViewModel(int id)
+        {
+            return _cropDAO.GetCropViewModel(id);
+        }
 
     }
 }

@@ -1,0 +1,114 @@
+﻿@model AllotmentPlanner.Data.ViewModel.CropDataViewModel
+
+@{
+    ViewBag.Title = "CropDetails";
+}
+
+<h2>CropDetails</h2>
+
+<div>
+    <h4>CropDataViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CropId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CropName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpaceRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpaceRequired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EarlyPlanting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EarlyPlanting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatePlanting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatePlanting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EarlyHarvest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EarlyHarvest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LateHarvest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LateHarvest)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.growthTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.growthTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.birdNetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birdNetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.slugPellets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.slugPellets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Feed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Water)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Water)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

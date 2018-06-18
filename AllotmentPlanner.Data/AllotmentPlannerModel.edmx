@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="cropID" />
           </Key>
-          <Property Name="cropID" Type="int" Nullable="false" />
+          <Property Name="cropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cropName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cropSize" Type="int" Nullable="false" />
         </EntityType>
@@ -45,16 +45,16 @@
             <PropertyRef Name="cropID" />
           </Key>
           <Property Name="cropID" Type="int" Nullable="false" />
-          <Property Name="birdNetting" Type="bit" />
-          <Property Name="slugPellets" Type="bit" />
-          <Property Name="Feed" Type="bit" />
-          <Property Name="Water" Type="bit" />
+          <Property Name="birdNetting" Type="bit" Nullable="false" />
+          <Property Name="slugPellets" Type="bit" Nullable="false" />
+          <Property Name="Feed" Type="bit" Nullable="false" />
+          <Property Name="Water" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CropHarvest">
           <Key>
             <PropertyRef Name="cropID" />
           </Key>
-          <Property Name="cropID" Type="int" Nullable="false" />
+          <Property Name="cropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="earliestPlant" Type="date" Nullable="false" />
           <Property Name="latestPlant" Type="date" Nullable="false" />
           <Property Name="earliestHarvest" Type="date" Nullable="false" />
@@ -65,11 +65,11 @@
           <Key>
             <PropertyRef Name="cropID" />
           </Key>
-          <Property Name="cropID" Type="int" Nullable="false" />
-          <Property Name="birdNetting" Type="bit" />
-          <Property Name="slugPellets" Type="bit" />
-          <Property Name="Feed" Type="bit" />
-          <Property Name="Water" Type="bit" />
+          <Property Name="cropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="birdNetting" Type="bit" Nullable="false" />
+          <Property Name="slugPellets" Type="bit" Nullable="false" />
+          <Property Name="Feed" Type="bit" Nullable="false" />
+          <Property Name="Water" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="GardenLocation">
           <Key>
@@ -185,10 +185,10 @@
             <PropertyRef Name="cropID" />
           </Key>
           <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="birdNetting" Type="Boolean" />
-          <Property Name="slugPellets" Type="Boolean" />
-          <Property Name="Feed" Type="Boolean" />
-          <Property Name="Water" Type="Boolean" />
+          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
+          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
+          <Property Name="Feed" Type="Boolean" Nullable="false" />
+          <Property Name="Water" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CropHarvest">
           <Key>
@@ -206,10 +206,10 @@
             <PropertyRef Name="cropID" />
           </Key>
           <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="birdNetting" Type="Boolean" />
-          <Property Name="slugPellets" Type="Boolean" />
-          <Property Name="Feed" Type="Boolean" />
-          <Property Name="Water" Type="Boolean" />
+          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
+          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
+          <Property Name="Feed" Type="Boolean" Nullable="false" />
+          <Property Name="Water" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="GardenLocation">
           <Key>

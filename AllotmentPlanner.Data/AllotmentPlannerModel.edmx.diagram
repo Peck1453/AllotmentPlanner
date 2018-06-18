@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="AllotmentModel.AspNetUserClaims" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AllotmentModel.Allotment" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="AllotmentModel.AllotmentAllocation" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AllotmentModel.Crop" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Crop" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AllotmentModel.Crop_Requirements" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="AllotmentModel.CropHarvest" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="AllotmentModel.CropRequirements" Width="1.5" PointX="0.75" PointY="6.75" />

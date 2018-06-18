@@ -7,16 +7,16 @@
 <h2>Crops</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Crop", "AddCrop", new { controller = "CropAdmin" })
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.cropName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.cropSize)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -25,12 +25,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.cropName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.cropSize)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.cropID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.cropID }) |
+            @Html.ActionLink("Details", "CropDetails", new { id=item.cropID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.cropID })
         </td>
     </tr>

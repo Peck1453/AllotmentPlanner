@@ -24,9 +24,10 @@ namespace AllotmentPlanner.Controllers
         }
 
         // GET: Crop/Details/5
-        public ActionResult Details(int id)
+        public ActionResult CropDetails(int id)
         {
-            return View();
+            
+            return View(_cropService.GetCropViewModel(id));
         }
 
         // GET: Crop/Create
