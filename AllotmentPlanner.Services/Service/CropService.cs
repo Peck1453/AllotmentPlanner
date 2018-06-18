@@ -30,6 +30,20 @@ namespace AllotmentPlanner.Services.Service
 
        
         }
+
+        public CropHarvest GetCropHarvest(int id)
+        {
+            return _cropDAO.GetCropHarvest(id);
+
+        }
+        public CropRequirements GetCropRequirement(int id)
+        {
+            return _cropDAO.GetCropRequirement(id);
+
+        }
+
+
+
         public void addCrop(Crop crop)
         {
             _cropDAO.addCrop(crop);
@@ -53,6 +67,20 @@ namespace AllotmentPlanner.Services.Service
         {
             _cropDAO.editCrop(crop);
         }
+
+        public void editCropHarvest(CropHarvest crop)
+        {
+
+            _cropDAO.editCropHarvest(crop);
+
+        }
+        public void editCropRequirements(CropRequirements crop)
+        {
+
+            _cropDAO.editCropRequirements(crop);
+
+        }
+
 
         public CropDataViewModel GetCropViewModel(int id)
         {

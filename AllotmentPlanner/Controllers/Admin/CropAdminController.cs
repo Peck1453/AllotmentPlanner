@@ -33,32 +33,37 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpPost]
         public ActionResult AddCrop(Crop crop, CropHarvest croph, CropRequirements cropr)
         {
-            //try
-            //{
+                
+            try
+            {
             _cropService.addCrop(crop);
             _cropService.addCropHarvest(croph);
             _cropService.addCropRequirements(cropr);
+                
                 return RedirectToAction("Crops", new { controller = "Crop" });
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: CropAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditCrop(int id)
         {
             return View();
         }
 
         // POST: CropAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult EditCrop(int id, Crop crop, CropHarvest croph, CropRequirements cropr)
         {
             try
             {
-                // TODO: Add update logic here
+                _cropService.editCrop(crop);
+                _cropService.editCropHarvest(croph);
+                _cropService.editCropRequirements(cropr);
+
 
                 return RedirectToAction("Index");
             }

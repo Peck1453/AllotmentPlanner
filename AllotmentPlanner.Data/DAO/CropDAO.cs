@@ -41,6 +41,34 @@ namespace AllotmentPlanner.Data.DAO
 
         }
 
+        public CropHarvest GetCropHarvest(int id)
+        {
+            IQueryable<CropHarvest> _cropharv;
+
+            _cropharv = from cropharv
+                    in _context.CropHarvest
+                    where cropharv.cropID == id
+                    select cropharv;
+
+            return _cropharv.ToList().First();
+        }
+
+        public CropRequirements GetCropRequirement(int id)
+        {
+            IQueryable<CropRequirements> _cropreq;
+
+            _cropreq = from cropreq
+                       in _context.CropRequirements
+                       where cropreq.cropID == id
+                       select cropreq;
+
+            return _cropreq.ToList().First();
+        }
+
+
+
+
+
 
         //public IList<ProductBEAN> GetBEANProducts() //Gets list of products within a customised view with modified labels and text validation
         //{
@@ -58,7 +86,7 @@ namespace AllotmentPlanner.Data.DAO
         //    return _productBEANs.ToList();
         //}
 
-        
+
 
 
 
@@ -144,9 +172,42 @@ namespace AllotmentPlanner.Data.DAO
 
         public void editCrop(Crop crop)
         {
+            Crop myCrop = GetCrop(crop.cropID);
+
+            myCrop.cropName = crop.cropName;
+
+            _context.SaveChanges();
 
 
         }
+        public void editCropHarvest(CropHarvest crop)
+        {
+            CropHarvest myCrop = GetCropHarvest(crop.cropID);
+
+            myCrop.earliestHarvest = crop.earliestHarvest;
+            myCrop.latestHarvest = crop.latestHarvest;
+            myCrop.earliestPlant = crop.earliestPlant;
+            myCrop.latestPlant = crop.latestPlant;
+            myCrop.growthTime = crop.growthTime;
+
+            _context.SaveChanges();
+
+
+        }
+        public void editCropRequirements(CropRequirements crop)
+        {
+            CropRequirements myCrop = GetCropRequirement(crop.cropID);
+
+            myCrop.birdNetting = crop.birdNetting;
+            myCrop.slugPellets = crop.slugPellets;
+            myCrop.Feed = crop.Feed;
+            myCrop.Water = crop.Water;
+
+            _context.SaveChanges();
+
+
+        }
+
 
 
 

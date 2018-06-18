@@ -274,6 +274,7 @@
     <Content Include="Views\Crop\Crops.cshtml" />
     <Content Include="Views\CropAdmin\AddCrop.cshtml" />
     <Content Include="Views\Crop\CropDetails.cshtml" />
+    <Content Include="Views\CropAdmin\EditCrop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.cropSize)
         </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.cropID }) |
+            @Html.ActionLink("Edit", "EditCrop", new { controller = "CropAdmin", id=item.cropID }) |
             @Html.ActionLink("Details", "CropDetails", new { id=item.cropID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.cropID })
         </td>

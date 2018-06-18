@@ -13,11 +13,21 @@ namespace AllotmentPlanner.Services.IService
         IList<AllotmentPlanner.Data.Crop> GetCrops();
 
         Crop GetCrop(int id);
+        CropHarvest GetCropHarvest(int id);
+        CropRequirements GetCropRequirement(int id);
+
+
         void addCrop(Crop crop);
         void addCropHarvest(CropHarvest crop);
         void addCropRequirements(CropRequirements crop);
 
+
         void editCrop(Crop crop);
+        void editCropHarvest(CropHarvest crop);
+        void editCropRequirements(CropRequirements crop);
+
+
+
 
         CropDataViewModel GetCropViewModel(int id);
 
