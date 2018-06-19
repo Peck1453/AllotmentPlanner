@@ -36,9 +36,9 @@ namespace AllotmentPlanner.Services.Service
             return _cropDAO.GetCropHarvest(id);
 
         }
-        public CropRequirements GetCropRequirement(int id)
+        public CropRequirements GetCropRequirements(int id)
         {
-            return _cropDAO.GetCropRequirement(id);
+            return _cropDAO.GetCropRequirements(id);
 
         }
 
@@ -61,23 +61,21 @@ namespace AllotmentPlanner.Services.Service
             _cropDAO.addCropRequirements(crop);
 
         }
-
-
-        public void editCrop(Crop crop)
+        public void editCrop(CropDataViewModel cropDataViewModel)
         {
-            _cropDAO.editCrop(crop);
+            _cropDAO.editCrop(cropDataViewModel);
         }
 
-        public void editCropHarvest(CropHarvest crop)
+        public void editCropHarvest(CropDataViewModel cropDataViewModel)
         {
 
-            _cropDAO.editCropHarvest(crop);
+            _cropDAO.editCropHarvest(cropDataViewModel);
 
         }
-        public void editCropRequirements(CropRequirements crop)
+        public void editCropRequirements(CropDataViewModel cropDataViewModel)
         {
 
-            _cropDAO.editCropRequirements(crop);
+            _cropDAO.editCropRequirements(cropDataViewModel);
 
         }
 
@@ -86,6 +84,22 @@ namespace AllotmentPlanner.Services.Service
         {
             return _cropDAO.GetCropViewModel(id);
         }
+
+        public void DeleteCrop(Crop crop)
+        {
+            _cropDAO.DeleteCrop(crop);
+        }
+        public void DeleteCropHarvest(CropHarvest cropHarvest)
+        {
+            _cropDAO.DeleteCropHarvest(cropHarvest);
+        }
+        public void DeleteCropRequirements(CropRequirements cropRequirements)
+        {
+            _cropDAO.DeleteCropRequirements(cropRequirements);
+        }
+
+
+
 
     }
 }

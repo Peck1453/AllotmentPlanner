@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AllotmentPlanner.Data.ViewModel;
 
 namespace AllotmentPlanner.Controllers.Admin
 {
@@ -48,51 +49,94 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
 
+        [HttpGet]
         // GET: CropAdmin/Edit/5
         public ActionResult EditCrop(int id)
         {
-            return View();
+            return View(_cropService.GetCropViewModel(id));
         }
 
         // POST: CropAdmin/Edit/5
         [HttpPost]
-        public ActionResult EditCrop(int id, Crop crop, CropHarvest croph, CropRequirements cropr)
+        public ActionResult EditCrop(int id, CropDataViewModel cropDataViewModel)
         {
-            try
+            //try
+            //{
+            Crop myCrop = new Crop
             {
-                _cropService.editCrop(crop);
-                _cropService.editCropHarvest(croph);
-                _cropService.editCropRequirements(cropr);
+                    cropID = cropDataViewModel.CropId,
+                    cropName = cropDataViewModel.CropName,
+                    cropSize = cropDataViewModel.SpaceRequired
+                };
+                                
+                _cropService.editCrop(myCrop);
+
+            CropDataViewModel myCroph = new CropDataViewModel
+            {
+                CropId = cropDataViewModel.CropId,
+                EarlyHarvest = cropDataViewModel.EarlyHarvest,
+                LateHarvest = cropDataViewModel.LateHarvest,
+                EarlyPlanting = cropDataViewModel.EarlyPlanting,
+                LatePlanting = cropDataViewModel.LatePlanting,
+                growthTime = cropDataViewModel.growthTime,
+                };
+
+                _cropService.editCropHarvest(myCroph);
+
+            CropDataViewModel myCropr = new CropDataViewModel
+            {
+                birdNetting = cropDataViewModel.birdNetting,
+                slugPellets = cropDataViewModel.slugPellets,
+                Feed = cropDataViewModel.Feed,
+                Water = cropDataViewModel.Water,
+            };
+
+                _cropService.editCropRequirements(myCropr);
 
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                return  RedirectToAction("Crops", new { controller = "Crop" });
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         // GET: CropAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteCrop(int id) //Pulls the method for displaying the requested Product
         {
-            return View();
+            return View(_cropService.GetCropViewModel(id));
         }
 
-        // POST: CropAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteCrop(int id, CropDataViewModel cropDataViewModel) //Deletes the requested Product (identified by the Product ID)
         {
             try
             {
-                // TODO: Add delete logic here
+                {
+                    Crop myCrop = _cropService.GetCrop(id);
+                    _cropService.DeleteCrop(myCrop);
+                }
 
-                return RedirectToAction("Index");
+                {
+                    CropHarvest myCropHarvest = _cropService.GetCropHarvest(id);
+                    _cropService.DeleteCropHarvest(myCropHarvest);
+
+                }
+
+                {
+                    CropRequirements myCropRequirements = _cropService.GetCropRequirements(id);
+                    _cropService.DeleteCropRequirements(myCropRequirements);
+
+                }
+
             }
             catch
             {
-                return View();
+
             }
+            return RedirectToAction("Crops", new { controller = "Crop" });
         }
     }
 }

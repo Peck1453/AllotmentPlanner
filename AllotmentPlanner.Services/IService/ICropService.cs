@@ -14,7 +14,7 @@ namespace AllotmentPlanner.Services.IService
 
         Crop GetCrop(int id);
         CropHarvest GetCropHarvest(int id);
-        CropRequirements GetCropRequirement(int id);
+        CropRequirements GetCropRequirements(int id);
 
 
         void addCrop(Crop crop);
@@ -22,11 +22,14 @@ namespace AllotmentPlanner.Services.IService
         void addCropRequirements(CropRequirements crop);
 
 
-        void editCrop(Crop crop);
-        void editCropHarvest(CropHarvest crop);
-        void editCropRequirements(CropRequirements crop);
+        void editCrop(CropDataViewModel cropDataViewModel);
+        void editCropHarvest(CropDataViewModel cropDataViewModel);
+        void editCropRequirements(CropDataViewModel cropDataViewModel);
 
 
+        void DeleteCrop(Crop crop);
+        void DeleteCropHarvest(CropHarvest cropHarvest);
+        void DeleteCropRequirements(CropRequirements cropRequirements);
 
 
         CropDataViewModel GetCropViewModel(int id);
