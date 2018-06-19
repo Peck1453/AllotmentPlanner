@@ -275,6 +275,7 @@
     <Content Include="Views\CropAdmin\AddCrop.cshtml" />
     <Content Include="Views\Crop\CropDetails.cshtml" />
     <Content Include="Views\CropAdmin\EditCrop.cshtml" />
+    <Content Include="Views\CropAdmin\DeleteCrop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
