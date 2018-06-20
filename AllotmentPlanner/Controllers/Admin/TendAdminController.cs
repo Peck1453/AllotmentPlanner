@@ -33,16 +33,16 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpPost]
         public ActionResult AddTend(TendType tend)
         {
-            //try
-            //{
+            try
+            {
                 _tendService.addTend(tend);
 
                 return RedirectToAction("Tends", new { controller = "Tend" });
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: TendAdmin/Edit/5

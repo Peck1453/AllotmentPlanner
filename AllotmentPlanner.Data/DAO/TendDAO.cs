@@ -68,7 +68,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             TendType myTend = getTend(tend.tendId);
 
-            _context.TendType.Remove(tend);
+            _context.TendType.Remove(myTend);
             _context.SaveChanges();
 
 

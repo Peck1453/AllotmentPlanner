@@ -86,11 +86,13 @@
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAO\CropDAO.cs" />
+    <Compile Include="DAO\GardenDAO.cs" />
     <Compile Include="DAO\TendDAO.cs" />
     <Compile Include="GardenLocation.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IDAO\ICropDAO.cs" />
+    <Compile Include="IDAO\IGardenDAO.cs" />
     <Compile Include="IDAO\ITendDAO.cs" />
     <Compile Include="Planted.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>

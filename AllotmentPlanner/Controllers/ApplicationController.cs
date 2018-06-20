@@ -11,12 +11,15 @@ namespace AllotmentPlanner.Controllers
     {
         public CropService _cropService;
         public TendService _tendService;
+        public GardenService _gardenService;
 
         public ApplicationController()
         {
             _cropService = new CropService();
 
             _tendService = new TendService();
+
+            _gardenService = new GardenService();
 
 
         }
