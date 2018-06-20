@@ -103,7 +103,7 @@
           <Key>
             <PropertyRef Name="tendId" />
           </Key>
-          <Property Name="tendId" Type="int" Nullable="false" />
+          <Property Name="tendId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tendName" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="User">

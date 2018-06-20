@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IService\ICropService.cs" />
+    <Compile Include="IService\ITendService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CropService.cs" />
+    <Compile Include="Service\TendService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />

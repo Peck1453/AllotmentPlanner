@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AllotmentPlanner.Data.Crop>
 
 @{
-    ViewBag.Title = "Crops";
+    ViewBag.Title = "List of CropsCrops";
 }
 
 <h2>Crops</h2>
@@ -31,7 +31,7 @@
         <td>
             @Html.ActionLink("Edit", "EditCrop", new { controller = "CropAdmin", id=item.cropID }) |
             @Html.ActionLink("Details", "CropDetails", new { id=item.cropID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.cropID })
+            @Html.ActionLink("Delete", "DeleteCrop", new { id=item.cropID })
         </td>
     </tr>
 }

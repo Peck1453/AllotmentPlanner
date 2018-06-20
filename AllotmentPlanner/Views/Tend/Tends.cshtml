@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AllotmentPlanner.Data.TendType>
+
+@{
+    ViewBag.Title = "Tend Actions";
+}
+
+<h2>Tends</h2>
+
+<p>
+    @Html.ActionLink("Add Tend Action", "AddTend", new { controller = "TendAdmin" })
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.tendId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.tendName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.tendId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.tendName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditTend", new { controller = "TendAdmin", id = item.tendId }) |
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Delete", "DeleteTend", new { controller = "TendAdmin", id = item.tendId }))
+        </td>
+    </tr>
+}
+
+</table>

@@ -64,12 +64,12 @@ namespace AllotmentPlanner.Controllers.Admin
             //{
             Crop myCrop = new Crop
             {
-                    cropID = cropDataViewModel.CropId,
-                    cropName = cropDataViewModel.CropName,
-                    cropSize = cropDataViewModel.SpaceRequired
-                };
+                cropID = cropDataViewModel.CropId,
+                cropName = cropDataViewModel.CropName,
+                cropSize = cropDataViewModel.SpaceRequired
+            };
                                 
-                _cropService.editCrop(myCrop);
+                //_cropService.editCrop(myCrop);
 
             CropDataViewModel myCroph = new CropDataViewModel
             {
@@ -109,7 +109,6 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public ActionResult DeleteCrop(int id, CropDataViewModel cropDataViewModel) //Deletes the requested Product (identified by the Product ID)
         {
             try

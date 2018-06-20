@@ -201,10 +201,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\CropAdminController.cs" />
+    <Compile Include="Controllers\Admin\TendAdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CropController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TendController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,6 +278,10 @@
     <Content Include="Views\Crop\CropDetails.cshtml" />
     <Content Include="Views\CropAdmin\EditCrop.cshtml" />
     <Content Include="Views\CropAdmin\DeleteCrop.cshtml" />
+    <Content Include="Views\Tend\Tends.cshtml" />
+    <Content Include="Views\TendAdmin\AddTend.cshtml" />
+    <Content Include="Views\TendAdmin\EditTend.cshtml" />
+    <Content Include="Views\TendAdmin\DeleteTend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,10 +10,13 @@ namespace AllotmentPlanner.Controllers
     public abstract class ApplicationController : Controller
     {
         public CropService _cropService;
+        public TendService _tendService;
 
         public ApplicationController()
         {
             _cropService = new CropService();
+
+            _tendService = new TendService();
 
 
         }
