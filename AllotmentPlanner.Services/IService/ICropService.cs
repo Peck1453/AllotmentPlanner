@@ -22,9 +22,9 @@ namespace AllotmentPlanner.Services.IService
         void addCropRequirements(CropRequirements crop);
 
 
-        void editCrop(CropDataViewModel cropDataViewModel);
-        void editCropHarvest(CropDataViewModel cropDataViewModel);
-        void editCropRequirements(CropDataViewModel cropDataViewModel);
+        void editCrop(Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements);
+        //void editCropHarvest(CropDataViewModel cropDataViewModel);
+        //void editCropRequirements(CropDataViewModel cropDataViewModel);
 
 
         void DeleteCrop(Crop crop);

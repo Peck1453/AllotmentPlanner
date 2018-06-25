@@ -61,23 +61,23 @@ namespace AllotmentPlanner.Services.Service
             _cropDAO.addCropRequirements(crop);
 
         }
-        public void editCrop(CropDataViewModel cropDataViewModel)
+        public void editCrop(Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements)
         {
-            _cropDAO.editCrop(cropDataViewModel);
+            _cropDAO.editCrop(crop,cropHarvest,cropRequirements);
         }
 
-        public void editCropHarvest(CropDataViewModel cropDataViewModel)
-        {
+        //public void editCropHarvest(CropDataViewModel cropDataViewModel)
+        //{
 
-            _cropDAO.editCropHarvest(cropDataViewModel);
+        //    _cropDAO.editCropHarvest(cropDataViewModel);
 
-        }
-        public void editCropRequirements(CropDataViewModel cropDataViewModel)
-        {
+        //}
+        //public void editCropRequirements(CropDataViewModel cropDataViewModel)
+        //{
 
-            _cropDAO.editCropRequirements(cropDataViewModel);
+        //    _cropDAO.editCropRequirements(cropDataViewModel);
 
-        }
+        //}
 
 
         public CropDataViewModel GetCropViewModel(int id)

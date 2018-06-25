@@ -16,9 +16,9 @@ namespace AllotmentPlanner.Data.IDAO
         CropRequirements GetCropRequirements(int id);
 
 
-        void editCrop(CropDataViewModel cropDataViewModel);
-        void editCropHarvest(CropDataViewModel cropDataViewModel);
-        void editCropRequirements(CropDataViewModel cropDataViewModel);
+        void editCrop(Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements);
+        //void editCropHarvest(CropDataViewModel cropDataViewModel);
+        //void editCropRequirements(CropDataViewModel cropDataViewModel);
 
 
         CropDataViewModel GetCropViewModel(int id);

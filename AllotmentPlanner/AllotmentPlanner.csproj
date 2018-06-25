@@ -212,6 +212,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806251129209_initial.cs" />
+    <Compile Include="Migrations\201806251129209_initial.Designer.cs">
+      <DependentUpon>201806251129209_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -313,6 +318,11 @@
       <Project>{62ff01e6-8414-49eb-9c17-e349e3d6f70d}</Project>
       <Name>AllotmentPlanner.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806251129209_initial.resx">
+      <DependentUpon>201806251129209_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

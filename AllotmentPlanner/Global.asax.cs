@@ -18,6 +18,7 @@ namespace AllotmentPlanner
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalFilters.Filters.Add(new System.Web.Mvc.AuthorizeAttribute());
         }
     }
 }

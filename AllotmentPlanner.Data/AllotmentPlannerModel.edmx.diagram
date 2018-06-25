@@ -17,6 +17,12 @@
         <EntityTypeShape EntityType="AllotmentModel.Tended" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="AllotmentModel.TendType" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="AllotmentModel.User" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllotmentModel.C__MigrationHistory" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="11" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetUsers" Width="1.5" PointX="3" PointY="10" />
+        <AssociationConnector Association="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AllotmentModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

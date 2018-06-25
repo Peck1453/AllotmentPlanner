@@ -70,7 +70,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AllotmentPlannerModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Crop.cs">
@@ -83,6 +92,9 @@
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Crop_Requirements.cs">
+      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAO\CropDAO.cs" />

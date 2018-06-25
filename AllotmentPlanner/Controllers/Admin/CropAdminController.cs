@@ -58,7 +58,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: CropAdmin/Edit/5
         [HttpPost]
-        public ActionResult EditCrop(int id, CropDataViewModel cropDataViewModel)
+        public ActionResult EditCrop(int id, CropDataViewModel cropDataViewModel, Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements)
         {
             //try
             //{
@@ -68,30 +68,29 @@ namespace AllotmentPlanner.Controllers.Admin
                 cropName = cropDataViewModel.CropName,
                 cropSize = cropDataViewModel.SpaceRequired
             };
-                                
-                //_cropService.editCrop(myCrop);
 
-            CropDataViewModel myCroph = new CropDataViewModel
+
+            CropHarvest myCroph = new CropHarvest
             {
-                CropId = cropDataViewModel.CropId,
-                EarlyHarvest = cropDataViewModel.EarlyHarvest,
-                LateHarvest = cropDataViewModel.LateHarvest,
-                EarlyPlanting = cropDataViewModel.EarlyPlanting,
-                LatePlanting = cropDataViewModel.LatePlanting,
-                growthTime = cropDataViewModel.growthTime,
+                cropID = cropHarvest.cropID,
+                earliestHarvest = cropHarvest.earliestHarvest,
+                latestHarvest = cropHarvest.latestHarvest,
+                earliestPlant = cropHarvest.earliestPlant,
+                latestPlant = cropHarvest.latestPlant,
+                growthTime = cropHarvest.growthTime,
                 };
 
-                _cropService.editCropHarvest(myCroph);
 
-            CropDataViewModel myCropr = new CropDataViewModel
+            CropRequirements myCropr = new CropRequirements
             {
-                birdNetting = cropDataViewModel.birdNetting,
-                slugPellets = cropDataViewModel.slugPellets,
-                Feed = cropDataViewModel.Feed,
-                Water = cropDataViewModel.Water,
+                cropID = cropRequirements.cropID,
+                birdNetting = cropRequirements.birdNetting,
+                slugPellets = cropRequirements.slugPellets,
+                Feed = cropRequirements.Feed,
+                Water = cropRequirements.Water,
             };
 
-                _cropService.editCropRequirements(myCropr);
+                _cropService.editCrop(myCrop, myCroph, myCropr);
 
 
                 return  RedirectToAction("Crops", new { controller = "Crop" });
