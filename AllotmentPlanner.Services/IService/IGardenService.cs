@@ -10,10 +10,13 @@ namespace AllotmentPlanner.Services.IService
 {
     public interface IGardenService
     {
-        IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations();
+
         GardenLocation GetGardenLocation(string pcode);
-        void editGarden(GardenLocation gardenLocation);
+        Allotment GetAllotment(string pcode);
+        GardenViewModel GetGardenViewModel(string pcode);
         void addGarden(GardenLocation gardenLocation);
+        void addGardenAllotment(Allotment allotment);
+        void editGarden(GardenLocation gardenLocation, Allotment allotment);
         void DeleteGarden(GardenLocation gardenLocation);
 
     }

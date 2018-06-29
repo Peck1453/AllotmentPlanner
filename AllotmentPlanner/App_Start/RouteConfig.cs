@@ -16,7 +16,7 @@ namespace AllotmentPlanner
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Crop", action = "Crops", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "AdminDashboard", id = UrlParameter.Optional }
             );
         }
     }

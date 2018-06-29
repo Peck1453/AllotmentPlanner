@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using AllotmentPlanner.Data;
 using AllotmentPlanner.Data.IDAO;
 using AllotmentPlanner.Data.DAO;
+using AllotmentPlanner.Data.ViewModel;
+
 
 
 namespace AllotmentPlanner.Services.Service
@@ -29,8 +31,14 @@ namespace AllotmentPlanner.Services.Service
         public GardenLocation GetGardenLocation(string pcode)
         {
             return _gardenDAO.GetGardenLocation(pcode);
-
-
+        }
+        public Allotment GetAllotment(string pcode)
+        {
+            return _gardenDAO.GetAllotment(pcode);
+        }
+        public GardenViewModel GetGardenViewModel(string pcode)
+        {
+            return _gardenDAO.GetGardenViewModel(pcode);
         }
 
         public void addGarden(GardenLocation gardenLocation)
@@ -39,10 +47,16 @@ namespace AllotmentPlanner.Services.Service
 
         }
 
-        public void editGarden(GardenLocation gardenLocation)
+        public void addGardenAllotment(Allotment allotment)
+        {
+            _gardenDAO.addGardenAllotment(allotment);
+        }
+
+
+        public void editGarden(GardenLocation gardenLocation, Allotment allotment)
         {
 
-            _gardenDAO.editGarden(gardenLocation);
+            _gardenDAO.editGarden(gardenLocation, allotment);
 
 
         }

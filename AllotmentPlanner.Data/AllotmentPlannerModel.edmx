@@ -19,9 +19,9 @@
           <Key>
             <PropertyRef Name="gardenID" />
           </Key>
-          <Property Name="gardenID" Type="int" Nullable="false" />
-          <Property Name="size" Type="int" />
-          <Property Name="postCode" Type="nchar" MaxLength="10" />
+          <Property Name="gardenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="size" Type="int" Nullable="false" />
+          <Property Name="postCode" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="AllotmentAllocation">
           <Key>
@@ -282,8 +282,8 @@
             <PropertyRef Name="gardenID" />
           </Key>
           <Property Name="gardenID" Type="Int32" Nullable="false" />
-          <Property Name="size" Type="Int32" />
-          <Property Name="postCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="size" Type="Int32" Nullable="false" />
+          <Property Name="postCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="AllotmentAllocation">
           <Key>

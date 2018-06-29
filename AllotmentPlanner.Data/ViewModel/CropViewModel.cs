@@ -21,9 +21,9 @@ namespace AllotmentPlanner.Data.ViewModel
         [DataType(DataType.Date)]
         [Display(Name = "Earliest Planting Date")]
         //[Required(ErrorMessage = "Please enter a date the promo code will expire")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EarlyPlanting { get; set; }
+
         [DataType(DataType.Date)]
         [Display(Name = "Latest Planting Date")]
         //[Required(ErrorMessage = "Please enter a date the promo code will expire")]

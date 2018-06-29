@@ -32,6 +32,9 @@
             @Html.ActionLink("Edit", "EditTend", new { controller = "TendAdmin", id = item.tendId }) |
             @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
             @Html.ActionLink("Delete", "DeleteTend", new { controller = "TendAdmin", id = item.tendId }))
+            @Html.ActionLink("Back to Dashboard", "AdminDashboard", "Home")
+
+
         </td>
     </tr>
 }

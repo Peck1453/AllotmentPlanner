@@ -32,13 +32,29 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: CropAdmin/Create
         [HttpPost]
-        public ActionResult AddCrop(Crop crop, CropHarvest croph, CropRequirements cropr)
+        public ActionResult AddCrop(Crop crop, CropHarvest croph, CropRequirements cropr, CropDataViewModel cropDataViewModel)
         {
                 
             try
             {
-            _cropService.addCrop(crop);
-            _cropService.addCropHarvest(croph);
+                Crop mycrop = new Crop
+                {
+                    cropID = cropDataViewModel.CropId,
+                    cropName = cropDataViewModel.CropName,
+                    cropSize = cropDataViewModel.SpaceRequired
+                };
+            _cropService.addCrop(mycrop);
+                CropHarvest myCroph = new CropHarvest
+                {
+                    cropID = cropDataViewModel.CropId,
+                    earliestHarvest = cropDataViewModel.EarlyHarvest,
+                    latestHarvest = cropDataViewModel.LateHarvest,
+                    earliestPlant = cropDataViewModel.EarlyPlanting,
+                    latestPlant = cropDataViewModel.LatePlanting,
+                    growthTime = cropDataViewModel.growthTime,
+                };
+
+            _cropService.addCropHarvest(myCroph);
             _cropService.addCropRequirements(cropr);
                 
                 return RedirectToAction("Crops", new { controller = "Crop" });
@@ -60,9 +76,9 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpPost]
         public ActionResult EditCrop(int id, CropDataViewModel cropDataViewModel, Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements)
         {
-            //try
-            //{
-            Crop myCrop = new Crop
+            try
+            {
+                Crop myCrop = new Crop
             {
                 cropID = cropDataViewModel.CropId,
                 cropName = cropDataViewModel.CropName,
@@ -72,12 +88,12 @@ namespace AllotmentPlanner.Controllers.Admin
 
             CropHarvest myCroph = new CropHarvest
             {
-                cropID = cropHarvest.cropID,
-                earliestHarvest = cropHarvest.earliestHarvest,
-                latestHarvest = cropHarvest.latestHarvest,
-                earliestPlant = cropHarvest.earliestPlant,
-                latestPlant = cropHarvest.latestPlant,
-                growthTime = cropHarvest.growthTime,
+                cropID = cropDataViewModel.CropId,
+                earliestHarvest = cropDataViewModel.EarlyHarvest,
+                latestHarvest = cropDataViewModel.LateHarvest,
+                earliestPlant = cropDataViewModel.EarlyPlanting,
+                latestPlant = cropDataViewModel.LatePlanting,
+                growthTime = cropDataViewModel.growthTime,
                 };
 
 
@@ -93,12 +109,12 @@ namespace AllotmentPlanner.Controllers.Admin
                 _cropService.editCrop(myCrop, myCroph, myCropr);
 
 
-                return  RedirectToAction("Crops", new { controller = "Crop" });
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+                return RedirectToAction("Crops", new { controller = "Crop" });
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: CropAdmin/Delete/5

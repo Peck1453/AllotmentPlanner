@@ -289,12 +289,15 @@
     <Content Include="Views\TendAdmin\AddTend.cshtml" />
     <Content Include="Views\TendAdmin\EditTend.cshtml" />
     <Content Include="Views\TendAdmin\DeleteTend.cshtml" />
+    <Content Include="Views\Home\AdminDashboard.cshtml" />
+    <Content Include="Views\Garden\Gardens.cshtml" />
+    <Content Include="Views\Garden\GardenDetails.cshtml" />
+    <Content Include="Views\GardenAdmin\AddGarden.cshtml" />
+    <Content Include="Views\GardenAdmin\EditGarden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Application\" />
-    <Folder Include="Views\GardenAdmin\" />
-    <Folder Include="Views\Garden\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

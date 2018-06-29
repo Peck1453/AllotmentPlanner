@@ -15,9 +15,9 @@ namespace AllotmentPlanner.Controllers
         }
 
         // GET: Garden/Details/5
-        public ActionResult Garden(string pcode)
+        public ActionResult GardenDetails(string pcode)
         {
-            return View(_gardenService.GetGardenLocation(pcode));
+            return View(_gardenService.GetGardenViewModel(pcode));
         }
 
         // GET: Garden/Create

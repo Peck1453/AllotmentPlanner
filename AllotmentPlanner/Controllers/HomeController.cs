@@ -26,5 +26,11 @@ namespace AllotmentPlanner.Controllers
 
             return View();
         }
+
+        public ActionResult AdminDashboard()
+        {
+            return View();
+
+        }
     }
 }

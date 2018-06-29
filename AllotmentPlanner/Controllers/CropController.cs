@@ -9,11 +9,6 @@ namespace AllotmentPlanner.Controllers
     public class CropController : ApplicationController
 
     {
-
-        //    public CropController()
-        //{
-
-        //}
         
         
         // GET: Crop

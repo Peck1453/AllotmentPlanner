@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "AdminDashboard";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Welcome back to Allotment Planner!</h1>
+        <p class="lead">From this Dashboard Page you should be able to manage crops, gardens and users. Should be</p>
+        <hr class="my-4">
+    </div>
+</div>
+
+<h2>AdminDashboard</h2>
+
+@Html.ActionLink("View and Edit Crops", "Crops", "Crop")<br />
+@Html.ActionLink("View and Edit Tend Actions", "Tends", "Tend")<br />
+@Html.ActionLink("View and Edit Gardens", "Gardens", "Garden")<br />
+@Html.ActionLink("View and Edit Users (Current unused)", "Crops", "Crop")<br />

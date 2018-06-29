@@ -15,7 +15,7 @@ namespace AllotmentPlanner.Data
     public partial class Allotment
     {
         public int gardenID { get; set; }
-        public Nullable<int> size { get; set; }
+        public int size { get; set; }
         public string postCode { get; set; }
     }
 }

@@ -39,9 +39,40 @@ namespace AllotmentPlanner.Data.DAO
                     select garden;
 
             return _garden.ToList().First();
-
-
         }
+
+        public Allotment GetAllotment(string pcode)
+        {
+            IQueryable<Allotment> _allotment;
+
+            _allotment = from allotment
+                    in _context.Allotment
+                      where allotment.postCode == pcode
+                      select allotment;
+
+            return _allotment.ToList().First();
+        }
+
+
+
+        public GardenViewModel GetGardenViewModel(string pcode)
+        {
+            IQueryable<GardenViewModel> _gardenViewModel = from garden in _context.GardenLocation
+                                                           from allot in _context.Allotment
+                                                           where garden.postCode == pcode
+                                                           && allot.postCode == allot.postCode
+                                                           select new GardenViewModel
+                                                           {
+                                                               postCode = garden.postCode,
+                                                               Name = garden.Name,
+                                                               Owner = garden.Owner,
+                                                               gardenID = allot.gardenID,
+                                                               size = allot.size
+                                                           };
+
+            return _gardenViewModel.ToList().First();
+        }
+
 
         public void addGarden(GardenLocation gardenLocation)
         {
@@ -52,14 +83,27 @@ namespace AllotmentPlanner.Data.DAO
 
         }
 
+        public void addGardenAllotment(Allotment allotment)
+        {
+            _context.Allotment.Add(allotment);
+            _context.SaveChanges();
+
+        }
 
 
-       public void editGarden(GardenLocation gardenLocation)
+
+       public void editGarden(GardenLocation gardenLocation, Allotment allotment)
         {
 
             GardenLocation mygarden = GetGardenLocation(gardenLocation.postCode);
+            Allotment myallotment = GetAllotment(allotment.postCode);
+
 
             mygarden.Name = gardenLocation.Name;
+            mygarden.Owner = gardenLocation.Owner;
+
+            myallotment.size = allotment.size;
+            myallotment.postCode = allotment.postCode;
 
             _context.SaveChanges();
 
@@ -74,6 +118,16 @@ namespace AllotmentPlanner.Data.DAO
 
 
         }
+
+        public void deleteGardenAllotment(Allotment allotment)
+        {
+            Allotment myallotment = GetAllotment(allotment.postCode);
+
+            _context.Allotment.Add(allotment);
+            _context.SaveChanges();
+
+        }
+
 
 
 

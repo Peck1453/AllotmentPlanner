@@ -120,6 +120,7 @@
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CropViewModel.cs" />
+    <Compile Include="ViewModel\GardenViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

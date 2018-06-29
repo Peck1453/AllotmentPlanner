@@ -31,7 +31,8 @@
         <td>
             @Html.ActionLink("Edit", "EditCrop", new { controller = "CropAdmin", id=item.cropID }) |
             @Html.ActionLink("Details", "CropDetails", new { id=item.cropID }) |
-            @Html.ActionLink("Delete", "DeleteCrop", new { id=item.cropID })
+            @Html.ActionLink("Delete", "DeleteCrop", new { controller = "CropAdmin", id=item.cropID })
+            @Html.ActionLink("Back to Dashboard", "AdminDashboard", "Home")
         </td>
     </tr>
 }
