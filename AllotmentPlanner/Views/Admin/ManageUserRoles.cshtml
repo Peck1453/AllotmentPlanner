@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "ManageUserRoles";
+}
+
+<h2>Manage User Roles</h2>
+
+@Html.ActionLink("Add User", "Register", new { controller = "Account" })  |
+@Html.ActionLink("Users", "GetUsers", "Admin")  |
+@Html.ActionLink("Add Role", "CreateRole", "Admin")  |
+@Html.ActionLink("User Roles", "GetRoles", "Admin")  |
+@Html.ActionLink("Find User Roles", "GetRolesForUser", "Admin")  |
+@Html.ActionLink("Manage User Roles", "ManageUserRoles", "Admin")
+<hr />
+
+@using (Html.BeginForm("ManageUserRoles", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        <label>Username:</label>
+        @Html.DropDownList("UserName", (IEnumerable<SelectListItem>)ViewBag.Users, "Select..." )
+        <br />
+
+        <label>Role:</label>
+        @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select...")
+        <br />
+
+        <input type="submit" value="Save" />
+    </div>
+}
