@@ -67,5 +67,18 @@ namespace AllotmentPlanner.Services.Service
 
         }
 
+        public IList<EditGardenViewModel> ViewSelectedCrops(int gardenid)
+        {
+
+            return _gardenDAO.ViewSelectedCrops(gardenid);
+        }
+
+
+        public EditGardenViewModel GetUserGarden(int id)
+        {
+
+            return _gardenDAO.GetUserGarden(id);
+        }
+
     }
 }

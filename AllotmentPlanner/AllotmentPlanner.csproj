@@ -301,6 +301,8 @@
     <Content Include="Views\Admin\ManageUserRoles.cshtml" />
     <Content Include="Views\Admin\GetRolesforUser.cshtml" />
     <Content Include="Views\Admin\GetRolesForUserConfirmed.cshtml" />
+    <Content Include="Views\Garden\ViewSelectedCrops.cshtml" />
+    <Content Include="Views\Home\GardenerDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

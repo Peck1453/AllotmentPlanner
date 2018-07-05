@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
+
 using System.Web.Mvc;
 
 namespace AllotmentPlanner.Controllers
@@ -12,6 +14,13 @@ namespace AllotmentPlanner.Controllers
         public ActionResult Gardens()
         {
             return View(_gardenService.GetGardenLocations());
+        }
+
+        public ActionResult ViewSelectedCrops(int gardenid)
+        {
+
+
+            return View(_gardenService.ViewSelectedCrops(gardenid));
         }
 
         // GET: Garden/Details/5

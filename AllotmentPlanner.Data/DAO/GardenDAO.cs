@@ -60,7 +60,7 @@ namespace AllotmentPlanner.Data.DAO
             IQueryable<GardenViewModel> _gardenViewModel = from garden in _context.GardenLocation
                                                            from allot in _context.Allotment
                                                            where garden.postCode == pcode
-                                                           && allot.postCode == allot.postCode
+                                                           && garden.postCode == allot.postCode
                                                            select new GardenViewModel
                                                            {
                                                                postCode = garden.postCode,
@@ -128,8 +128,66 @@ namespace AllotmentPlanner.Data.DAO
 
         }
 
+        public IList<EditGardenViewModel> ViewSelectedCrops(string UserID)
+        {
+                
+                IQueryable<EditGardenViewModel> _selectedcrops;
+            _selectedcrops = from allot in _context.Allotment
+                             from crop in _context.Crop
+                             from planted in _context.Planted
+                             from allocation in _context.AllotmentAllocation
+                             from user in _context.AspNetUsers
 
+                             where allocation.userID == UserID
+                             && allocation.gardenID == planted.gardenID
+                             where crop.cropID == planted.cropID
+                             select new EditGardenViewModel
+                             {
+                                 GardenId = allot.gardenID,
+                                 CropId = crop.cropID,
+                                 GardenSize = allot.size,
+                                 CropSize = crop.cropSize,
+                                 CropName = crop.cropName
+
+
+
+                             };
+
+            return _selectedcrops.ToList();
+
+
+        }
+
+        public void addcropstogarden()
+        {
+
+
+        }
+
+        public EditGardenViewModel GetUserGarden(int id)
+        {
+
+
+            IQueryable<EditGardenViewModel> _editgarden = from allot in _context.Allotment
+                                                          from crop in _context.Crop
+                                                          from planted in _context.Planted
+                                                          where allot.gardenID  == id
+                                                          where planted.cropID == crop.cropID
+                                                          select new EditGardenViewModel
+                                                          {
+                                                              GardenId = allot.gardenID,
+                                                              CropId = crop.cropID,
+                                                              GardenSize = allot.size,
+                                                              CropSize = crop.cropSize,
+                                                              CropName = crop.cropName
+                                                          };
+            return _editgarden.ToList().First();
+                                                         
+    }
+
+
+}
 
 
     }
-}
+

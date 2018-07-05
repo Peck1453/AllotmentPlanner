@@ -19,5 +19,9 @@ namespace AllotmentPlanner.Services.IService
         void editGarden(GardenLocation gardenLocation, Allotment allotment);
         void DeleteGarden(GardenLocation gardenLocation);
 
+
+        IList<EditGardenViewModel> ViewSelectedCrops(int id);
+        EditGardenViewModel GetUserGarden(int id);
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "GetUsers";
+    ViewBag.Title = "Users";
 }
 
 <h2>List of Users</h2>
@@ -15,7 +15,23 @@
 
 
 @Html.ActionLink("Add User", "Register", new { controller = "Account"})
-}
+
+<h3>Other tasks</h3>
+
+@Html.ActionLink("View Current Roles", "GetRoles", "Admin")|
+@Html.ActionLink("Assign User to Role", "ManageUserRoles", "Admin")|
+@Html.ActionLink("View Current Roles of Users", "GetRolesForUser", "Admin")|
+
+
+
+@Html.ActionLink("Back to Dashboard", "AdminDashboard", "Home")
+
+
+
+
+
+
+
 
 
 

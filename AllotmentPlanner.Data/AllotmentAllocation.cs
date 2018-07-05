@@ -15,8 +15,8 @@ namespace AllotmentPlanner.Data
     public partial class AllotmentAllocation
     {
         public int allocationID { get; set; }
-        public Nullable<int> userID { get; set; }
-        public Nullable<int> gardenID { get; set; }
+        public int userID { get; set; }
+        public int gardenID { get; set; }
         public Nullable<System.DateTime> dateFrom { get; set; }
         public Nullable<System.DateTime> dateTo { get; set; }
     }
