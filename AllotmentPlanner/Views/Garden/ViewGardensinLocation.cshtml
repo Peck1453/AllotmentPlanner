@@ -1,0 +1,61 @@
+﻿@model IEnumerable<AllotmentPlanner.Data.ViewModel.GardenViewModel>
+
+
+<h2>Assigned Gardens</h2>
+
+<p>
+    @Html.ActionLink("Add Garden to Location", "AddGardentoLocation", "GardenAdmin")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.postCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gardenID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignedGardener)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.postCode)
+        </td>
+
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.gardenID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignedGardener)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "EditGarden", new { controller = "GardenAdmin",  pcode=item.postCode}) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+
+<h2>Currently Unassigned Gardens</h2>
+
+@{
+    Html.RenderAction("_ViewEmptyGardensinLocation", "Garden");
+}
+

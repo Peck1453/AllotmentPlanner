@@ -18,7 +18,6 @@ namespace AllotmentPlanner.Data.ViewModel
         public DateTime LatestPlant { get; set; }
         public DateTime EarliestHarvest{ get; set; }
         public DateTime LastestHarvest { get; set; }
-        public bool CropRequirements { get; set; }
 
 
         public EditGardenViewModel() { }

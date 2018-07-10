@@ -32,13 +32,13 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: CropAdmin/Create
         [HttpPost]
-        public ActionResult AddGarden(GardenLocation garden, Allotment allotment)
+        public ActionResult AddGardenLocation(GardenLocation garden, Allotment allotment)
         {
 
             try
             {
-                _gardenService.addGarden(garden);
-                _gardenService.addGardenAllotment(allotment);
+                _gardenService.addGardenLocation(garden);
+                _gardenService.addGardentoAllotment(allotment);
 
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
@@ -48,6 +48,45 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
         [HttpGet]
+        public ActionResult AddGardentoLocation(string selectedPostCode, GardenViewModel garden)
+        {
+            List<SelectListItem> postCodeList = new List<SelectListItem>();
+            foreach (var location in _gardenService.GetGardenLocations())
+            {
+                postCodeList.Add(
+                    new SelectListItem()
+                    {
+                        Text = location.postCode,
+                        Value = location.postCode.ToString()
+
+                    });
+
+               
+            }
+            ViewBag.postCodeList = postCodeList;
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public ActionResult AddGardentoLocation(Allotment allotment)
+        {
+            try
+            {
+                _gardenService.addGardentoAllotment(allotment);
+                return RedirectToAction("Gardens", new { controller = "Garden" });
+
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+        [HttpGet]
+
         // GET: GardenAdmin/Edit/5
         public ActionResult EditGarden(string pcode)
         {
@@ -56,7 +95,40 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: GardenAdmin/Edit/5
         [HttpPost]
-        public ActionResult EditGarden(string pcode, GardenViewModel gardenViewModel, GardenLocation crop, Allotment allotment)
+        public ActionResult EditGarden(string pcode, GardenViewModel gardenViewModel, Allotment allotment)
+        {
+            {
+                try
+                {
+
+                    Allotment myAllotment = new Allotment
+                    {
+                        gardenID = gardenViewModel.gardenID,
+                        size =     gardenViewModel.size,
+                        postCode = gardenViewModel.postCode
+                    };
+
+                    _gardenService.editGarden(myAllotment);
+
+
+                    return RedirectToAction("Gardens", new { controller = "Garden" });
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+        }
+        [HttpGet]
+        // GET: GardenAdmin/Edit/5
+        public ActionResult editGardenLocation(int gardenid)
+        {
+            return View(_gardenService.GetAllotment(gardenid));
+        }
+
+        // POST: GardenAdmin/Edit/5
+        [HttpPost]
+        public ActionResult editGardenLocation(int gardenid, GardenViewModel gardenViewModel, GardenLocation location)
         {
             {
                 try
@@ -68,15 +140,7 @@ namespace AllotmentPlanner.Controllers.Admin
                         Owner = gardenViewModel.Owner
                     };
 
-
-                    Allotment myAllotment = new Allotment
-                    {
-                        gardenID = gardenViewModel.gardenID,
-                        size =     gardenViewModel.size,
-                        postCode = gardenViewModel.postCode
-                    };
-
-                    _gardenService.editGarden(mygardenLocation, myAllotment);
+                    _gardenService.editGarden(mygardenLocation);
 
 
                     return RedirectToAction("Gardens", new { controller = "Garden" });
@@ -88,8 +152,9 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
 
-            // GET: GardenAdmin/Delete/5
-             public ActionResult Delete(int id)
+
+        // GET: GardenAdmin/Delete/5
+        public ActionResult Delete(int id)
         {
             return View();
         }

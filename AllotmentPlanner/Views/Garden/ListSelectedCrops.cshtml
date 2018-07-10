@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AllotmentPlanner.Data.ViewModel.EditGardenViewModel>
+
+@{
+    ViewBag.Title = "ListSelectedCrops";
+}
+
+<h2>ListSelectedCrops</h2>
+
+@{
+    Html.RenderAction("_addcropstogarden", "Garden");
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GardenId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CropId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GardenSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CropName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CropSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EarliestPlant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LatestPlant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EarliestHarvest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastestHarvest)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GardenId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CropId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GardenSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CropName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CropSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EarliestPlant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LatestPlant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EarliestHarvest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastestHarvest)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+
+
+
+

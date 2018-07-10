@@ -1,6 +1,12 @@
 ﻿@model AllotmentPlanner.Data.ViewModel.GardenViewModel
 
-@using (Html.BeginForm())
+@{
+    ViewBag.Title = "AddGardentoLocation";
+}
+
+<h2>AddGardentoLocation</h2>
+
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -11,15 +17,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.postCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.postCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.DropDownListFor(model => model.postCode, (List<SelectListItem>)ViewBag.postCodeList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,18 +33,26 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.gardenID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.gardenID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.gardenID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.gardenID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.AssignedGardener, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AssignedGardener, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AssignedGardener, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.size, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,7 +64,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

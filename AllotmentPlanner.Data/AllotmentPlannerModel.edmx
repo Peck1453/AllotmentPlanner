@@ -27,9 +27,9 @@
           <Key>
             <PropertyRef Name="allocationID" />
           </Key>
-          <Property Name="allocationID" Type="int" Nullable="false" />
-          <Property Name="userID" Type="int" />
-          <Property Name="gardenID" Type="int" />
+          <Property Name="allocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="nvarchar" MaxLength="128" />
+          <Property Name="gardenID" Type="int" Nullable="false" />
           <Property Name="dateFrom" Type="date" />
           <Property Name="dateTo" Type="date" />
         </EntityType>
@@ -135,10 +135,10 @@
           <Key>
             <PropertyRef Name="plantedID" />
           </Key>
-          <Property Name="plantedID" Type="int" Nullable="false" />
+          <Property Name="plantedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cropID" Type="int" Nullable="false" />
-          <Property Name="dateIn" Type="date" Nullable="false" />
-          <Property Name="dateOut" Type="date" Nullable="false" />
+          <Property Name="dateIn" Type="date" />
+          <Property Name="dateOut" Type="date" />
           <Property Name="gardenID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tended">
@@ -242,19 +242,14 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AllotmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="AllotmentEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="C__MigrationHistory" EntityType="AllotmentModel.C__MigrationHistory" />
           <EntitySet Name="Allotment" EntityType="AllotmentModel.Allotment" />
           <EntitySet Name="AllotmentAllocation" EntityType="AllotmentModel.AllotmentAllocation" />
+          <EntitySet Name="AspNetRoles" EntityType="AllotmentModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="AllotmentModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="AllotmentModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="AllotmentModel.AspNetUsers" />
           <EntitySet Name="Crop" EntityType="AllotmentModel.Crop" />
           <EntitySet Name="Crop_Requirements" EntityType="AllotmentModel.Crop_Requirements" />
           <EntitySet Name="CropHarvest" EntityType="AllotmentModel.CropHarvest" />
@@ -264,10 +259,6 @@
           <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
           <EntitySet Name="TendType" EntityType="AllotmentModel.TendType" />
           <EntitySet Name="User" EntityType="AllotmentModel.User" />
-          <EntitySet Name="C__MigrationHistory" EntityType="AllotmentModel.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="AllotmentModel.AspNetRoles" />
-          <EntitySet Name="AspNetUserLogins" EntityType="AllotmentModel.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="AllotmentModel.AspNetUsers" />
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
@@ -277,105 +268,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Allotment">
-          <Key>
-            <PropertyRef Name="gardenID" />
-          </Key>
-          <Property Name="gardenID" Type="Int32" Nullable="false" />
-          <Property Name="size" Type="Int32" Nullable="false" />
-          <Property Name="postCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AllotmentAllocation">
-          <Key>
-            <PropertyRef Name="allocationID" />
-          </Key>
-          <Property Name="allocationID" Type="Int32" Nullable="false" />
-          <Property Name="userID" Type="Int32" />
-          <Property Name="gardenID" Type="Int32" />
-          <Property Name="dateFrom" Type="DateTime" Precision="0" />
-          <Property Name="dateTo" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="Crop">
-          <Key>
-            <PropertyRef Name="cropID" />
-          </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="cropName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="cropSize" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Crop_Requirements">
-          <Key>
-            <PropertyRef Name="cropID" />
-          </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
-          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
-          <Property Name="Feed" Type="Boolean" Nullable="false" />
-          <Property Name="Water" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CropHarvest">
-          <Key>
-            <PropertyRef Name="cropID" />
-          </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="earliestPlant" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="latestPlant" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="earliestHarvest" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="latestHarvest" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="growthTime" Type="Int32" />
-        </EntityType>
-        <EntityType Name="CropRequirements">
-          <Key>
-            <PropertyRef Name="cropID" />
-          </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
-          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
-          <Property Name="Feed" Type="Boolean" Nullable="false" />
-          <Property Name="Water" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="GardenLocation">
-          <Key>
-            <PropertyRef Name="postCode" />
-          </Key>
-          <Property Name="postCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Owner" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Planted">
-          <Key>
-            <PropertyRef Name="plantedID" />
-          </Key>
-          <Property Name="plantedID" Type="Int32" Nullable="false" />
-          <Property Name="cropID" Type="Int32" Nullable="false" />
-          <Property Name="dateIn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="dateOut" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="gardenID" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tended">
-          <Key>
-            <PropertyRef Name="tendedId" />
-          </Key>
-          <Property Name="tendedId" Type="Int32" Nullable="false" />
-          <Property Name="cropId" Type="Int32" Nullable="false" />
-          <Property Name="tendId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TendType">
-          <Key>
-            <PropertyRef Name="tendId" />
-          </Key>
-          <Property Name="tendId" Type="Int32" Nullable="false" />
-          <Property Name="tendName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -386,6 +278,24 @@
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Allotment">
+          <Key>
+            <PropertyRef Name="gardenID" />
+          </Key>
+          <Property Name="gardenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="size" Type="Int32" Nullable="false" />
+          <Property Name="postCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AllotmentAllocation">
+          <Key>
+            <PropertyRef Name="allocationID" />
+          </Key>
+          <Property Name="allocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="gardenID" Type="Int32" Nullable="false" />
+          <Property Name="dateFrom" Type="DateTime" Precision="0" />
+          <Property Name="dateTo" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -393,6 +303,15 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="AllotmentModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
@@ -424,6 +343,87 @@
           <NavigationProperty Name="AspNetUserLogins" Relationship="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="AllotmentModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="cropID" />
+          </Key>
+          <Property Name="cropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cropSize" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Crop_Requirements">
+          <Key>
+            <PropertyRef Name="cropID" />
+          </Key>
+          <Property Name="cropID" Type="Int32" Nullable="false" />
+          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
+          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
+          <Property Name="Feed" Type="Boolean" Nullable="false" />
+          <Property Name="Water" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CropHarvest">
+          <Key>
+            <PropertyRef Name="cropID" />
+          </Key>
+          <Property Name="cropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="earliestPlant" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="latestPlant" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="earliestHarvest" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="latestHarvest" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="growthTime" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CropRequirements">
+          <Key>
+            <PropertyRef Name="cropID" />
+          </Key>
+          <Property Name="cropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
+          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
+          <Property Name="Feed" Type="Boolean" Nullable="false" />
+          <Property Name="Water" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GardenLocation">
+          <Key>
+            <PropertyRef Name="postCode" />
+          </Key>
+          <Property Name="postCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Owner" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Planted">
+          <Key>
+            <PropertyRef Name="plantedID" />
+          </Key>
+          <Property Name="plantedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropID" Type="Int32" Nullable="false" />
+          <Property Name="dateIn" Type="DateTime" Precision="0" />
+          <Property Name="dateOut" Type="DateTime" Precision="0" />
+          <Property Name="gardenID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tended">
+          <Key>
+            <PropertyRef Name="tendedId" />
+          </Key>
+          <Property Name="tendedId" Type="Int32" Nullable="false" />
+          <Property Name="cropId" Type="Int32" Nullable="false" />
+          <Property Name="tendId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TendType">
+          <Key>
+            <PropertyRef Name="tendId" />
+          </Key>
+          <Property Name="tendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tendName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="true" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Type="AllotmentModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -448,13 +448,13 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AllotmentModelStoreContainer" CdmEntityContainer="AllotmentEntities">
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="AllotmentModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="AllotmentModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -475,6 +475,51 @@
                 <ScalarProperty Name="gardenID" ColumnName="gardenID" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="allocationID" ColumnName="allocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="AllotmentModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="AllotmentModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="AllotmentModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="AllotmentModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -565,51 +610,6 @@
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="AllotmentModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="AllotmentModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="AllotmentModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="AllotmentModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -303,6 +303,12 @@
     <Content Include="Views\Admin\GetRolesForUserConfirmed.cshtml" />
     <Content Include="Views\Garden\ViewSelectedCrops.cshtml" />
     <Content Include="Views\Home\GardenerDashboard.cshtml" />
+    <Content Include="Views\Garden\ListSelectedCrops.cshtml" />
+    <Content Include="Views\Garden\_addcropstogarden.cshtml" />
+    <Content Include="Views\GardenAdmin\editGardenLocation.cshtml" />
+    <Content Include="Views\Garden\ViewGardensinLocation.cshtml" />
+    <Content Include="Views\GardenAdmin\AddGardentoLocation.cshtml" />
+    <Content Include="Views\Garden\_ViewEmptyGardensinLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

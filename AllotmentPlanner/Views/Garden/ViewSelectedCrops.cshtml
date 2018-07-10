@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AllotmentPlanner.Data.ViewModel.UserGardenViewModel>
+﻿@model AllotmentPlanner.Data.ViewModel.EditGardenViewModel
 
 @{
     ViewBag.Title = "ViewSelectedCrops";
@@ -6,82 +6,85 @@
 
 <h2>ViewSelectedCrops</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+<div>
+    <h4>EditGardenViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
             @Html.DisplayNameFor(model => model.GardenId)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GardenId)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CropId)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropId)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.GardenSize)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GardenSize)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CropName)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropName)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CropSize)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CropSize)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.EarliestPlant)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EarliestPlant)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.LatestPlant)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatestPlant)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.EarliestHarvest)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EarliestHarvest)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.LastestHarvest)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CropRequirements)
-        </th>*@
-        <th></th>
-    </tr>
+        </dt>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GardenId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CropId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GardenSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CropName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CropSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EarliestPlant)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LatestPlant)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EarliestHarvest)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastestHarvest)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CropRequirements)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        <dd>
+            @Html.DisplayFor(model => model.LastestHarvest)
+        </dd>
 
-</table>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

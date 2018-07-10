@@ -28,50 +28,95 @@ namespace AllotmentPlanner.Services.Service
 
 
         }
+        public IList<GardenViewModel> ViewGardensinLocation(string pcode)
+        {
+            return _gardenDAO.ViewGardensinLocation(pcode);
+        }
+
+        public IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode)
+        {
+            return _gardenDAO.ViewEmptyGardensinLocation(pcode);
+        }
+
+
         public GardenLocation GetGardenLocation(string pcode)
         {
             return _gardenDAO.GetGardenLocation(pcode);
         }
-        public Allotment GetAllotment(string pcode)
+        public Allotment GetAllotment(int gardenId)
         {
-            return _gardenDAO.GetAllotment(pcode);
+            return _gardenDAO.GetAllotment(gardenId);
         }
         public GardenViewModel GetGardenViewModel(string pcode)
         {
             return _gardenDAO.GetGardenViewModel(pcode);
         }
 
-        public void addGarden(GardenLocation gardenLocation)
+        public void addGardenLocation(GardenLocation gardenLocation)
         {
-            _gardenDAO.addGarden(gardenLocation);
+            _gardenDAO.addGardenLocation(gardenLocation);
 
         }
 
-        public void addGardenAllotment(Allotment allotment)
+        public void addGardentoAllotment(Allotment allotment)
         {
-            _gardenDAO.addGardenAllotment(allotment);
+            _gardenDAO.addGardentoAllotment(allotment);
         }
 
 
-        public void editGarden(GardenLocation gardenLocation, Allotment allotment)
+        public void editGarden(GardenLocation gardenLocation)
         {
-
-            _gardenDAO.editGarden(gardenLocation, allotment);
-
-
+            _gardenDAO.editGardenLocation(gardenLocation);
         }
-        public void DeleteGarden(GardenLocation gardenLocation)
+        public void editGarden(Allotment allotment)
+        {
+            _gardenDAO.editGarden(allotment);
+        }
+            public void DeleteGarden(GardenLocation gardenLocation)
         {
             _gardenDAO.DeleteGarden(gardenLocation);
-
-
         }
 
-        public IList<EditGardenViewModel> ViewSelectedCrops(int gardenid)
+        public void addGardenerToGarden(AllotmentAllocation allotmentAllocation)
+        {
+            _gardenDAO.addGardenerToGarden(allotmentAllocation);
+        }
+        public void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation)
+        {
+            _gardenDAO.removeGardenerFromGarden(allotmentAllocation);
+        }
+
+
+
+
+
+
+        public EditGardenViewModel ViewSelectedCrops(string userID)
+
+        {
+            return _gardenDAO.ViewSelectedCrops(userID);
+        }
+
+        public IList<EditGardenViewModel> ListSelectedCrops(string userID)
+
         {
 
-            return _gardenDAO.ViewSelectedCrops(gardenid);
+            return _gardenDAO.ListSelectedCrops(userID);
         }
+
+        public void addcropstogarden(string userId, Planted crop, Planted garden)
+        {
+
+            _gardenDAO.addcropstogarden(userId, crop, garden);
+        }
+
+
+        public EditGardenViewModel GetGardenFromUser(string userId)
+        {
+
+            return _gardenDAO.GetGardenFromUser(userId);
+        }
+
 
 
         public EditGardenViewModel GetUserGarden(int id)

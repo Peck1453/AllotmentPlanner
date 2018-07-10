@@ -5,22 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c9ad883f58914183aef38a5a8e6426e8" Name="Diagram1">
-        <EntityTypeShape EntityType="AllotmentModel.AspNetUserClaims" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AllotmentModel.Allotment" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AllotmentModel.AllotmentAllocation" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AllotmentModel.Crop" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AllotmentModel.Crop_Requirements" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AllotmentModel.CropHarvest" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AllotmentModel.CropRequirements" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AllotmentModel.GardenLocation" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AllotmentModel.Planted" Width="1.5" PointX="6.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AllotmentModel.Tended" Width="1.5" PointX="4.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AllotmentModel.TendType" Width="1.5" PointX="6.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AllotmentModel.User" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AllotmentModel.C__MigrationHistory" Width="1.5" PointX="9.75" PointY="3.75" />
-        <EntityTypeShape EntityType="AllotmentModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="11.125" />
-        <EntityTypeShape EntityType="AllotmentModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="11" />
-        <EntityTypeShape EntityType="AllotmentModel.AspNetUsers" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="AllotmentModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Allotment" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AllotmentModel.AllotmentAllocation" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetUserClaims" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="AllotmentModel.AspNetUsers" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="AllotmentModel.Crop" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Crop_Requirements" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AllotmentModel.CropHarvest" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AllotmentModel.CropRequirements" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AllotmentModel.GardenLocation" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Planted" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AllotmentModel.Tended" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AllotmentModel.TendType" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AllotmentModel.User" Width="1.5" PointX="8.75" PointY="9.75" />
         <AssociationConnector Association="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="AllotmentModel.AspNetUserRoles" />
       </Diagram>

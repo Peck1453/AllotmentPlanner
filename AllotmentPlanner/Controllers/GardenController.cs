@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using AllotmentPlanner.Data;
 
 using System.Web.Mvc;
+using AllotmentPlanner.Data.ViewModel;
 
 namespace AllotmentPlanner.Controllers
 {
@@ -16,34 +18,78 @@ namespace AllotmentPlanner.Controllers
             return View(_gardenService.GetGardenLocations());
         }
 
-        public ActionResult ViewSelectedCrops(int gardenid)
+        public ActionResult ViewSelectedCrops()
+        {
+            var userID = User.Identity.GetUserId();
+
+            return View(_gardenService.ViewSelectedCrops(userID));
+        }
+
+        public ActionResult ListSelectedCrops()
+        {
+            var userId = User.Identity.GetUserId();
+            return View(_gardenService.ListSelectedCrops(userId));
+        }
+
+        public ActionResult ViewGardensinLocation(string pcode)
         {
 
+            return View(_gardenService.ViewGardensinLocation(pcode));
 
-            return View(_gardenService.ViewSelectedCrops(gardenid));
         }
+
+        public ActionResult _ViewEmptyGardensinLocation(string pcode)
+        {
+
+            return View(_gardenService.ViewEmptyGardensinLocation(pcode));
+
+        }
+
+
+
 
         // GET: Garden/Details/5
         public ActionResult GardenDetails(string pcode)
         {
             return View(_gardenService.GetGardenViewModel(pcode));
         }
-
+        [HttpGet]
         // GET: Garden/Create
-        public ActionResult Create()
+        public ActionResult _addcropstogarden(string selectedCrop, EditGardenViewModel garden)
         {
+            var userId = User.Identity.GetUserId();
+            {
+                List<SelectListItem> cropList = new List<SelectListItem>();
+                foreach (var item in _cropService.GetCrops())
+                {
+                    cropList.Add(
+                      new SelectListItem()
+                      {
+                          Text = item.cropName,
+                          Value = item.cropID.ToString()
+                          //Selected = (item.cropName == (selectedCrop) ? true : false)
+                      });
+                }
+                ViewBag.cropList = cropList;
+            }
+
+            garden = _gardenService.GetGardenFromUser(userId);
+                
+
             return View();
         }
 
         // POST: Garden/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult _addcropstogarden(Planted crop, Planted garden)
         {
+            var userId = User.Identity.GetUserId();
+
             try
             {
-                // TODO: Add insert logic here
+                _gardenService.addcropstogarden(userId, crop, garden);
 
-                return RedirectToAction("Index");
+                return View();
             }
             catch
             {
