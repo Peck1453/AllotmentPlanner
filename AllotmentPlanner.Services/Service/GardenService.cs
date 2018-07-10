@@ -52,6 +52,12 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.GetGardenViewModel(pcode);
         }
 
+        public AllotmentAllocation GetAllocatedAllotment(int gardenId)
+        {
+            return _gardenDAO.GetAllocatedAllotment(gardenId);
+        }
+
+
         public void addGardenLocation(GardenLocation gardenLocation)
         {
             _gardenDAO.addGardenLocation(gardenLocation);
@@ -77,9 +83,9 @@ namespace AllotmentPlanner.Services.Service
             _gardenDAO.DeleteGarden(gardenLocation);
         }
 
-        public void addGardenerToGarden(AllotmentAllocation allotmentAllocation)
+        public void assignGardenerToGarden(AllotmentAllocation allotmentAllocation)
         {
-            _gardenDAO.addGardenerToGarden(allotmentAllocation);
+            _gardenDAO.assignGardenerToGarden(allotmentAllocation);
         }
         public void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation)
         {

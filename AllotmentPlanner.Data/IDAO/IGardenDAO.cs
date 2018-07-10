@@ -18,16 +18,21 @@ namespace AllotmentPlanner.Data.IDAO
         GardenLocation GetGardenLocation(string pcode);
         Allotment GetAllotment(int gardenId);
         GardenViewModel GetGardenViewModel(string pcode);
+        AllotmentAllocation GetAllocatedAllotment(int gardenId);
+
+
+
+
         void addGardenLocation(GardenLocation gardenLocation);
         void addGardentoAllotment(Allotment allotment);
 
         void editGardenLocation(GardenLocation gardenLocation);
-
         void editGarden(Allotment allotment);
         
         void DeleteGarden(GardenLocation gardenLocation);
 
-        void addGardenerToGarden(AllotmentAllocation allotmentAllocation);
+
+        void assignGardenerToGarden(AllotmentAllocation allotmentAllocation);
         void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation);
 
 

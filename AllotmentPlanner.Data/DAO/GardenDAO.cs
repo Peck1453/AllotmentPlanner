@@ -49,7 +49,22 @@ namespace AllotmentPlanner.Data.DAO
             return _allotment.ToList().First();
         }
 
-        public IList<GardenViewModel> ViewGardensinLocation(string pcode)
+        public AllotmentAllocation GetAllocatedAllotment(int gardenId)
+        {
+            IQueryable<AllotmentAllocation> _allotment;
+
+            _allotment = from allocated
+                    in _context.AllotmentAllocation
+                         where allocated.gardenID == gardenId
+                         select allocated;
+
+            return _allotment.ToList().First();
+        }
+
+
+
+
+            public IList<GardenViewModel> ViewGardensinLocation(string pcode)
         {
             var listWithEmpty = (from allot in _context.Allotment
                                  from allocation in _context.AllotmentAllocation
@@ -151,21 +166,26 @@ namespace AllotmentPlanner.Data.DAO
             _context.SaveChanges();
         }
 
-        public void addGardenerToGarden(AllotmentAllocation allotmentAllocation)
+
+        //Methods for adding and removing Gardeners from garden
+
+        public void assignGardenerToGarden(AllotmentAllocation allotmentAllocation)
         {
-            _context.AllotmentAllocation.Add(allotmentAllocation);
+            AllotmentAllocation myAlloction = GetAllocatedAllotment(allotmentAllocation.gardenID);
+            myAlloction.userID = allotmentAllocation.userID;
+            myAlloction.dateFrom = allotmentAllocation.dateFrom;
             _context.SaveChanges();
-
-
         }
 
         public void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation)
         {
-            _context.AllotmentAllocation.Add(allotmentAllocation);
+            AllotmentAllocation myAlloction = GetAllocatedAllotment(allotmentAllocation.gardenID);
+            myAlloction.dateTo = allotmentAllocation.dateTo;
             _context.SaveChanges();
-
-
         }
+
+
+
 
 
         public void editGardenLocation(GardenLocation gardenLocation)

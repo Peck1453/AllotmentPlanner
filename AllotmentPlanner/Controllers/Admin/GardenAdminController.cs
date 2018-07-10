@@ -152,6 +152,82 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
 
+        [HttpGet]
+        public ActionResult AssignGardenertoGarden(int gardenId)
+        {
+            _gardenService.GetAllocatedAllotment(gardenId);
+
+         List<SelectListItem> assignedGardenerList = new List<SelectListItem>();
+            foreach (var userList in _())
+            {
+                assignedGardenerList.Add(
+                    new SelectListItem()
+                    {
+                        Text = gardener.postCode,
+                        Value = gardener.postCode.ToString()
+
+                    });
+
+
+            }
+            ViewBag.postCodeList = assignedGardenerList;
+
+
+
+
+            return View();
+        }
+        [HttpPut]
+        public ActionResult AssignGardenertoGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
+        {
+            try
+            {
+                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+                {
+                    userID = gardenViewModel.AssignedGardener,
+                    dateFrom = DateTime.Now
+                };
+
+                _gardenService.assignGardenerToGarden(myallotmentAllocation);
+                return RedirectToAction("Gardens", new { controller = "Garden" });
+            }
+            catch
+            {
+                return View();
+            }
+
+
+        }
+        [HttpGet]
+        public ActionResult RemoveGardenerfromGarden(int gardenId)
+        {
+            _gardenService.GetAllocatedAllotment(gardenId);
+            return View();
+
+        }
+        [HttpPut]
+        public ActionResult RemoveGardenerfromGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
+        {
+
+            try
+            {
+                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+                {
+                    dateTo = DateTime.Now
+                };
+
+                _gardenService.removeGardenerFromGarden(myallotmentAllocation);
+                return RedirectToAction("Gardens", new { controller = "Garden" });
+            }
+            catch
+            {
+                return View();
+            }
+
+
+        }
+
+
 
         // GET: GardenAdmin/Delete/5
         public ActionResult Delete(int id)

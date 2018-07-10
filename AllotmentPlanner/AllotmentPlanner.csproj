@@ -309,6 +309,8 @@
     <Content Include="Views\Garden\ViewGardensinLocation.cshtml" />
     <Content Include="Views\GardenAdmin\AddGardentoLocation.cshtml" />
     <Content Include="Views\Garden\_ViewEmptyGardensinLocation.cshtml" />
+    <Content Include="Views\GardenAdmin\AssignGardenertoGarden.cshtml" />
+    <Content Include="Views\GardenAdmin\RemoveGardenerfromGarden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,6 +13,8 @@ namespace AllotmentPlanner.Services.IService
         IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations();
         IList<GardenViewModel> ViewGardensinLocation(string pcode);
         IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode);
+        AllotmentAllocation GetAllocatedAllotment(int gardenId);
+
 
 
         GardenLocation GetGardenLocation(string pcode);
@@ -22,7 +24,7 @@ namespace AllotmentPlanner.Services.IService
         void addGardentoAllotment(Allotment allotment);
         void editGarden(Allotment allotment);
         void DeleteGarden(GardenLocation gardenLocation);
-        void addGardenerToGarden(AllotmentAllocation allotmentAllocation);
+        void assignGardenerToGarden(AllotmentAllocation allotmentAllocation);
         void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation);
 
         EditGardenViewModel ViewSelectedCrops(string userID);
