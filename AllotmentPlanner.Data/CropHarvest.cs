@@ -14,7 +14,7 @@ namespace AllotmentPlanner.Data
     
     public partial class CropHarvest
     {
-        public int cropID { get; set; }
+        public int cropId { get; set; }
         public System.DateTime earliestPlant { get; set; }
         public System.DateTime latestPlant { get; set; }
         public System.DateTime earliestHarvest { get; set; }

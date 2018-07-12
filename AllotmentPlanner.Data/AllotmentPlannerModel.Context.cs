@@ -40,6 +40,5 @@ namespace AllotmentPlanner.Data
         public virtual DbSet<Planted> Planted { get; set; }
         public virtual DbSet<Tended> Tended { get; set; }
         public virtual DbSet<TendType> TendType { get; set; }
-        public virtual DbSet<User> User { get; set; }
     }
 }

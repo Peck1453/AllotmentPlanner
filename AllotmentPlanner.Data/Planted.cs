@@ -14,10 +14,10 @@ namespace AllotmentPlanner.Data
     
     public partial class Planted
     {
-        public int plantedID { get; set; }
-        public int cropID { get; set; }
+        public int plantedId { get; set; }
+        public int cropId { get; set; }
         public Nullable<System.DateTime> dateIn { get; set; }
         public Nullable<System.DateTime> dateOut { get; set; }
-        public int gardenID { get; set; }
+        public int gardenId { get; set; }
     }
 }

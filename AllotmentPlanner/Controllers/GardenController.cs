@@ -55,41 +55,44 @@ namespace AllotmentPlanner.Controllers
         }
         [HttpGet]
         // GET: Garden/Create
-        public ActionResult _addcropstogarden(string selectedCrop, EditGardenViewModel garden)
+        public ActionResult _addcropstogarden(string selectedCrop)
         {
-            var userId = User.Identity.GetUserId();
-            {
+            //var userId = User.Identity.GetUserId();
                 List<SelectListItem> cropList = new List<SelectListItem>();
-                foreach (var item in _cropService.GetCrops())
+                foreach (var crop in _cropService.GetCrops())
                 {
                     cropList.Add(
                       new SelectListItem()
                       {
-                          Text = item.cropName,
-                          Value = item.cropID.ToString()
-                          //Selected = (item.cropName == (selectedCrop) ? true : false)
+                          Text = crop.cropName,
+                          Value = crop.cropId.ToString(),
+                          Selected = (crop.cropName == (selectedCrop) ? true : false)
                       });
                 }
                 ViewBag.cropList = cropList;
-            }
-
-            garden = _gardenService.GetGardenFromUser(userId);
-                
 
             return View();
         }
 
         // POST: Garden/Create
         [HttpPost]
-        public ActionResult _addcropstogarden(Planted crop, Planted garden)
+        public ActionResult _addcropstogarden(Planted crop, Planted garden, GardenViewModel gardenViewModel)
         {
             var userId = User.Identity.GetUserId();
-
+            var usergarden = _gardenService.GetGardenFromUser(userId);
             try
             {
-                _gardenService.addcropstogarden(userId, crop, garden);
+                Planted myusergarden = new Planted
+                {
+                    gardenId = usergarden.gardenId
+                };
 
-                return View();
+            
+
+                _gardenService.addcropstogarden(userId, crop, myusergarden);
+
+            return View();
+        
             }
             catch
             {

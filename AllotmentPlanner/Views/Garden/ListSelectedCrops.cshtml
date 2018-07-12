@@ -13,31 +13,31 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.GardenId)
+            @Html.DisplayNameFor(model => model.gardenId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CropId)
+            @Html.DisplayNameFor(model => model.cropId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GardenSize)
+            @Html.DisplayNameFor(model => model.gardenSize)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CropName)
+            @Html.DisplayNameFor(model => model.cropName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CropSize)
+            @Html.DisplayNameFor(model => model.cropSize)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EarliestPlant)
+            @Html.DisplayNameFor(model => model.earliestPlant)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LatestPlant)
+            @Html.DisplayNameFor(model => model.latestPlant)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EarliestHarvest)
+            @Html.DisplayNameFor(model => model.earliestHarvest)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastestHarvest)
+            @Html.DisplayNameFor(model => model.lastestHarvest)
         </th>
         <th></th>
     </tr>
@@ -45,31 +45,31 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.GardenId)
+            @Html.DisplayFor(modelItem => item.gardenId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CropId)
+            @Html.DisplayFor(modelItem => item.cropId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GardenSize)
+            @Html.DisplayFor(modelItem => item.gardenSize)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CropName)
+            @Html.DisplayFor(modelItem => item.cropName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CropSize)
+            @Html.DisplayFor(modelItem => item.cropSize)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EarliestPlant)
+            @Html.DisplayFor(modelItem => item.earliestPlant)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LatestPlant)
+            @Html.DisplayFor(modelItem => item.latestPlant)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EarliestHarvest)
+            @Html.DisplayFor(modelItem => item.earliestHarvest)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LastestHarvest)
+            @Html.DisplayFor(modelItem => item.lastestHarvest)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

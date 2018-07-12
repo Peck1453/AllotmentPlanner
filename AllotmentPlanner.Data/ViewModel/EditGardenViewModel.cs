@@ -9,15 +9,15 @@ namespace AllotmentPlanner.Data.ViewModel
 {
     public class EditGardenViewModel
     {
-        public int GardenId { get; set; }
-        public int CropId { get; set; }
-        public int GardenSize { get; set; }
-        public string CropName { get; set; }
-        public int CropSize { get; set; }
-        public DateTime EarliestPlant { get; set; }
-        public DateTime LatestPlant { get; set; }
-        public DateTime EarliestHarvest{ get; set; }
-        public DateTime LastestHarvest { get; set; }
+        public int gardenId { get; set; }
+        public int cropId { get; set; }
+        public int gardenSize { get; set; }
+        public string cropName { get; set; }
+        public int cropSize { get; set; }
+        public DateTime earliestPlant { get; set; }
+        public DateTime latestPlant { get; set; }
+        public DateTime earliestHarvest{ get; set; }
+        public DateTime lastestHarvest { get; set; }
 
 
         public EditGardenViewModel() { }

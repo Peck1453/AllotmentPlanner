@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Owner)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gardenID)
+            @Html.DisplayNameFor(model => model.gardenId)
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.AssignedGardener)*@
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Owner)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.gardenID)
+            @Html.DisplayFor(modelItem => item.gardenId)
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.AssignedGardener)*@
@@ -50,7 +50,7 @@
             @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            @Html.ActionLink("Assign Gardener", "AssignGardenertoGarden", new { controller = "GardenAdmin" , id = item.gardenID })
+            @Html.ActionLink("Assign Gardener", "AssignGardenertoGarden", new { controller = "GardenAdmin", id=item.gardenId })
 
 
         </td>

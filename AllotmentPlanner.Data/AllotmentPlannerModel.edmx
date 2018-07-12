@@ -17,19 +17,19 @@
         </EntityType>
         <EntityType Name="Allotment">
           <Key>
-            <PropertyRef Name="gardenID" />
+            <PropertyRef Name="gardenId" />
           </Key>
-          <Property Name="gardenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gardenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="size" Type="int" Nullable="false" />
           <Property Name="postCode" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="AllotmentAllocation">
           <Key>
-            <PropertyRef Name="allocationID" />
+            <PropertyRef Name="allocationId" />
           </Key>
-          <Property Name="allocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userID" Type="nvarchar" MaxLength="128" />
-          <Property Name="gardenID" Type="int" Nullable="false" />
+          <Property Name="allocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+          <Property Name="gardenId" Type="int" Nullable="false" />
           <Property Name="dateFrom" Type="date" />
           <Property Name="dateTo" Type="date" />
         </EntityType>
@@ -86,17 +86,17 @@
         </EntityType>
         <EntityType Name="Crop">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cropId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cropName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cropSize" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Crop Requirements">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="int" Nullable="false" />
+          <Property Name="cropId" Type="int" Nullable="false" />
           <Property Name="birdNetting" Type="bit" Nullable="false" />
           <Property Name="slugPellets" Type="bit" Nullable="false" />
           <Property Name="Feed" Type="bit" Nullable="false" />
@@ -104,9 +104,9 @@
         </EntityType>
         <EntityType Name="CropHarvest">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cropId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="earliestPlant" Type="date" Nullable="false" />
           <Property Name="latestPlant" Type="date" Nullable="false" />
           <Property Name="earliestHarvest" Type="date" Nullable="false" />
@@ -115,9 +115,9 @@
         </EntityType>
         <EntityType Name="CropRequirements">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cropId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="birdNetting" Type="bit" Nullable="false" />
           <Property Name="slugPellets" Type="bit" Nullable="false" />
           <Property Name="Feed" Type="bit" Nullable="false" />
@@ -133,13 +133,13 @@
         </EntityType>
         <EntityType Name="Planted">
           <Key>
-            <PropertyRef Name="plantedID" />
+            <PropertyRef Name="plantedId" />
           </Key>
-          <Property Name="plantedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cropID" Type="int" Nullable="false" />
+          <Property Name="plantedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cropId" Type="int" Nullable="false" />
           <Property Name="dateIn" Type="date" />
           <Property Name="dateOut" Type="date" />
-          <Property Name="gardenID" Type="int" Nullable="false" />
+          <Property Name="gardenId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tended">
           <Key>
@@ -149,7 +149,7 @@
           <Property Name="cropId" Type="int" Nullable="false" />
           <Property Name="tendId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TendType">
           <Key>
@@ -157,13 +157,6 @@
           </Key>
           <Property Name="tendId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tendName" Type="varchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="int" Nullable="false" />
-          <Property Name="userName" Type="nchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -224,7 +217,6 @@
           <EntitySet Name="Planted" EntityType="Self.Planted" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tended" EntityType="Self.Tended" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TendType" EntityType="Self.TendType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
@@ -258,7 +250,6 @@
           <EntitySet Name="Planted" EntityType="AllotmentModel.Planted" />
           <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
           <EntitySet Name="TendType" EntityType="AllotmentModel.TendType" />
-          <EntitySet Name="User" EntityType="AllotmentModel.User" />
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
@@ -280,19 +271,19 @@
         </EntityType>
         <EntityType Name="Allotment">
           <Key>
-            <PropertyRef Name="gardenID" />
+            <PropertyRef Name="gardenId" />
           </Key>
-          <Property Name="gardenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gardenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="size" Type="Int32" Nullable="false" />
           <Property Name="postCode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="AllotmentAllocation">
           <Key>
-            <PropertyRef Name="allocationID" />
+            <PropertyRef Name="allocationId" />
           </Key>
-          <Property Name="allocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="gardenID" Type="Int32" Nullable="false" />
+          <Property Name="allocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="gardenId" Type="Int32" Nullable="false" />
           <Property Name="dateFrom" Type="DateTime" Precision="0" />
           <Property Name="dateTo" Type="DateTime" Precision="0" />
         </EntityType>
@@ -345,17 +336,17 @@
         </EntityType>
         <EntityType Name="Crop">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cropName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cropSize" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Crop_Requirements">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" />
+          <Property Name="cropId" Type="Int32" Nullable="false" />
           <Property Name="birdNetting" Type="Boolean" Nullable="false" />
           <Property Name="slugPellets" Type="Boolean" Nullable="false" />
           <Property Name="Feed" Type="Boolean" Nullable="false" />
@@ -363,9 +354,9 @@
         </EntityType>
         <EntityType Name="CropHarvest">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="earliestPlant" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="latestPlant" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="earliestHarvest" Type="DateTime" Nullable="false" Precision="0" />
@@ -374,9 +365,9 @@
         </EntityType>
         <EntityType Name="CropRequirements">
           <Key>
-            <PropertyRef Name="cropID" />
+            <PropertyRef Name="cropId" />
           </Key>
-          <Property Name="cropID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="birdNetting" Type="Boolean" Nullable="false" />
           <Property Name="slugPellets" Type="Boolean" Nullable="false" />
           <Property Name="Feed" Type="Boolean" Nullable="false" />
@@ -392,13 +383,13 @@
         </EntityType>
         <EntityType Name="Planted">
           <Key>
-            <PropertyRef Name="plantedID" />
+            <PropertyRef Name="plantedId" />
           </Key>
-          <Property Name="plantedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cropID" Type="Int32" Nullable="false" />
+          <Property Name="plantedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropId" Type="Int32" Nullable="false" />
           <Property Name="dateIn" Type="DateTime" Precision="0" />
           <Property Name="dateOut" Type="DateTime" Precision="0" />
-          <Property Name="gardenID" Type="Int32" Nullable="false" />
+          <Property Name="gardenId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Tended">
           <Key>
@@ -408,7 +399,7 @@
           <Property Name="cropId" Type="Int32" Nullable="false" />
           <Property Name="tendId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TendType">
           <Key>
@@ -416,13 +407,6 @@
           </Key>
           <Property Name="tendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tendName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
           <End Type="AllotmentModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
@@ -442,7 +426,7 @@
           <End Type="AllotmentModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="AllotmentModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -463,7 +447,7 @@
               <MappingFragment StoreEntitySet="Allotment">
                 <ScalarProperty Name="postCode" ColumnName="postCode" />
                 <ScalarProperty Name="size" ColumnName="size" />
-                <ScalarProperty Name="gardenID" ColumnName="gardenID" />
+                <ScalarProperty Name="gardenId" ColumnName="gardenId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -472,9 +456,9 @@
               <MappingFragment StoreEntitySet="AllotmentAllocation">
                 <ScalarProperty Name="dateTo" ColumnName="dateTo" />
                 <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
-                <ScalarProperty Name="gardenID" ColumnName="gardenID" />
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="allocationID" ColumnName="allocationID" />
+                <ScalarProperty Name="gardenId" ColumnName="gardenId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="allocationId" ColumnName="allocationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -528,7 +512,7 @@
               <MappingFragment StoreEntitySet="Crop">
                 <ScalarProperty Name="cropSize" ColumnName="cropSize" />
                 <ScalarProperty Name="cropName" ColumnName="cropName" />
-                <ScalarProperty Name="cropID" ColumnName="cropID" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -539,7 +523,7 @@
                 <ScalarProperty Name="Feed" ColumnName="Feed" />
                 <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
                 <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
-                <ScalarProperty Name="cropID" ColumnName="cropID" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -551,7 +535,7 @@
                 <ScalarProperty Name="earliestHarvest" ColumnName="earliestHarvest" />
                 <ScalarProperty Name="latestPlant" ColumnName="latestPlant" />
                 <ScalarProperty Name="earliestPlant" ColumnName="earliestPlant" />
-                <ScalarProperty Name="cropID" ColumnName="cropID" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -562,7 +546,7 @@
                 <ScalarProperty Name="Feed" ColumnName="Feed" />
                 <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
                 <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
-                <ScalarProperty Name="cropID" ColumnName="cropID" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -578,18 +562,18 @@
           <EntitySetMapping Name="Planted">
             <EntityTypeMapping TypeName="AllotmentModel.Planted">
               <MappingFragment StoreEntitySet="Planted">
-                <ScalarProperty Name="gardenID" ColumnName="gardenID" />
+                <ScalarProperty Name="gardenId" ColumnName="gardenId" />
                 <ScalarProperty Name="dateOut" ColumnName="dateOut" />
                 <ScalarProperty Name="dateIn" ColumnName="dateIn" />
-                <ScalarProperty Name="cropID" ColumnName="cropID" />
-                <ScalarProperty Name="plantedID" ColumnName="plantedID" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
+                <ScalarProperty Name="plantedId" ColumnName="plantedId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tended">
             <EntityTypeMapping TypeName="AllotmentModel.Tended">
               <MappingFragment StoreEntitySet="Tended">
-                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="tendId" ColumnName="tendId" />
                 <ScalarProperty Name="cropId" ColumnName="cropId" />
@@ -602,14 +586,6 @@
               <MappingFragment StoreEntitySet="TendType">
                 <ScalarProperty Name="tendName" ColumnName="tendName" />
                 <ScalarProperty Name="tendId" ColumnName="tendId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="AllotmentModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

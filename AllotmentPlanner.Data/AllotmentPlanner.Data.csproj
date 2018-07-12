@@ -116,9 +116,6 @@
     <Compile Include="TendType.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\CropViewModel.cs" />
     <Compile Include="ViewModel\EditGardenViewModel.cs" />
     <Compile Include="ViewModel\GardenViewModel.cs" />

@@ -9,11 +9,11 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @*@Html.LabelFor(model => model.cropID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.LabelFor(model => model.cropId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.LabelFor(model => model.CropId, htmlAttributes: new { @class = "control-label" })
-                @Html.DropDownListFor(model => model.CropId, (List<SelectListItem>)ViewBag.cropList, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CropId, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.cropId, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.cropId, (List<SelectListItem>)ViewBag.cropList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cropId, "", new { @class = "text-danger" })            
             </div>
         </div>
 

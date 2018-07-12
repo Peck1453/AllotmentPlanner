@@ -14,7 +14,7 @@ namespace AllotmentPlanner.Data
     
     public partial class Crop
     {
-        public int cropID { get; set; }
+        public int cropId { get; set; }
         public string cropName { get; set; }
         public int cropSize { get; set; }
     }

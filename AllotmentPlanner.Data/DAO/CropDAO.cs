@@ -34,7 +34,7 @@ namespace AllotmentPlanner.Data.DAO
 
             _crop = from crop
                     in _context.Crop
-                    where crop.cropID == id
+                    where crop.cropId == id
                     select crop;
 
             return _crop.ToList().FirstOrDefault();
@@ -47,7 +47,7 @@ namespace AllotmentPlanner.Data.DAO
 
             _cropharv = from cropharv
                     in _context.CropHarvest
-                        where cropharv.cropID == id
+                        where cropharv.cropId == id
                         select cropharv;
 
             return _cropharv.ToList().FirstOrDefault();
@@ -59,7 +59,7 @@ namespace AllotmentPlanner.Data.DAO
 
             _cropreq = from cropreq
                        in _context.CropRequirements
-                       where cropreq.cropID == id
+                       where cropreq.cropId == id
                        select cropreq;
 
             return _cropreq.ToList().FirstOrDefault();
@@ -71,12 +71,12 @@ namespace AllotmentPlanner.Data.DAO
             IQueryable<CropDataViewModel> _cropDataViewModel = from crop in _context.Crop
                                                                from cropharv in _context.CropHarvest
                                                                from cropreq in _context.CropRequirements
-                                                               where crop.cropID == id
-                                                               && crop.cropID == cropharv.cropID
-                                                               && crop.cropID == cropreq.cropID
+                                                               where crop.cropId == id
+                                                               && crop.cropId == cropharv.cropId
+                                                               && crop.cropId == cropreq.cropId
                                                                select new CropDataViewModel
                                                                {
-                                                                   CropId = crop.cropID,
+                                                                   CropId = crop.cropId,
                                                                    CropName = crop.cropName,
                                                                    SpaceRequired = crop.cropSize,
                                                                    EarlyPlanting = cropharv.earliestPlant,
@@ -128,9 +128,9 @@ namespace AllotmentPlanner.Data.DAO
 
         public void editCrop(Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements)
         {
-            Crop myCrop = GetCrop(crop.cropID);
-            CropHarvest myCroph = GetCropHarvest(cropHarvest.cropID);
-            CropRequirements myCropr = GetCropRequirements(cropRequirements.cropID);
+            Crop myCrop = GetCrop(crop.cropId);
+            CropHarvest myCroph = GetCropHarvest(cropHarvest.cropId);
+            CropRequirements myCropr = GetCropRequirements(cropRequirements.cropId);
             myCrop.cropName = crop.cropName;
             myCrop.cropSize = crop.cropSize;
 
@@ -179,14 +179,14 @@ namespace AllotmentPlanner.Data.DAO
 
         public void DeleteCrop(Crop crop)
         {
-            Crop myCrop = GetCrop(crop.cropID);
+            Crop myCrop = GetCrop(crop.cropId);
 
             _context.Crop.Remove(crop);
             _context.SaveChanges();
         }
         public void DeleteCropHarvest(CropHarvest cropHarvest)
         {
-            CropHarvest myCrop = GetCropHarvest(cropHarvest.cropID);
+            CropHarvest myCrop = GetCropHarvest(cropHarvest.cropId);
 
             _context.CropHarvest.Remove(cropHarvest);
             _context.SaveChanges();
@@ -194,7 +194,7 @@ namespace AllotmentPlanner.Data.DAO
         public void DeleteCropRequirements(CropRequirements cropRequirements)
         {
             
-                CropRequirements myCropRequirements = GetCropRequirements(cropRequirements.cropID);
+                CropRequirements myCropRequirements = GetCropRequirements(cropRequirements.cropId);
 
                 _context.CropRequirements.Remove(cropRequirements);
                 _context.SaveChanges();

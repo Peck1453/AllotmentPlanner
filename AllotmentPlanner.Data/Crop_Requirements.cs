@@ -14,7 +14,7 @@ namespace AllotmentPlanner.Data
     
     public partial class Crop_Requirements
     {
-        public int cropID { get; set; }
+        public int cropId { get; set; }
         public bool birdNetting { get; set; }
         public bool slugPellets { get; set; }
         public bool Feed { get; set; }

@@ -39,14 +39,14 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 Crop mycrop = new Crop
                 {
-                    cropID = cropDataViewModel.CropId,
+                    cropId = cropDataViewModel.CropId,
                     cropName = cropDataViewModel.CropName,
                     cropSize = cropDataViewModel.SpaceRequired
                 };
             _cropService.addCrop(mycrop);
                 CropHarvest myCroph = new CropHarvest
                 {
-                    cropID = cropDataViewModel.CropId,
+                    cropId = cropDataViewModel.CropId,
                     earliestHarvest = cropDataViewModel.EarlyHarvest,
                     latestHarvest = cropDataViewModel.LateHarvest,
                     earliestPlant = cropDataViewModel.EarlyPlanting,
@@ -80,7 +80,7 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 Crop myCrop = new Crop
             {
-                cropID = cropDataViewModel.CropId,
+                cropId = cropDataViewModel.CropId,
                 cropName = cropDataViewModel.CropName,
                 cropSize = cropDataViewModel.SpaceRequired
             };
@@ -88,7 +88,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
             CropHarvest myCroph = new CropHarvest
             {
-                cropID = cropDataViewModel.CropId,
+                cropId = cropDataViewModel.CropId,
                 earliestHarvest = cropDataViewModel.EarlyHarvest,
                 latestHarvest = cropDataViewModel.LateHarvest,
                 earliestPlant = cropDataViewModel.EarlyPlanting,
@@ -99,7 +99,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
             CropRequirements myCropr = new CropRequirements
             {
-                cropID = cropRequirements.cropID,
+                cropId = cropRequirements.cropId,
                 birdNetting = cropRequirements.birdNetting,
                 slugPellets = cropRequirements.slugPellets,
                 Feed = cropRequirements.Feed,

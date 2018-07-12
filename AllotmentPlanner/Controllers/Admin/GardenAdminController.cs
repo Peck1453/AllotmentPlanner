@@ -85,7 +85,7 @@ namespace AllotmentPlanner.Controllers.Admin
                 
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
                 {
-                    gardenID = allotment.gardenID
+                    gardenId = allotment.gardenId
                     
 
                 };
@@ -118,7 +118,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
                     Allotment myAllotment = new Allotment
                     {
-                        gardenID = gardenViewModel.gardenID,
+                        gardenId = gardenViewModel.gardenId,
                         size =     gardenViewModel.size,
                         postCode = gardenViewModel.postCode
                     };
@@ -187,7 +187,7 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
                 {
-                    userID = gardenViewModel.AssignedGardener,
+                    userId = gardenViewModel.AssignedGardener,
                     dateFrom = DateTime.Now
                 };
 
