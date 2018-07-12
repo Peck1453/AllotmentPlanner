@@ -110,19 +110,19 @@ namespace AllotmentPlanner.Data.DAO
 
         }
 
-        public void addCropHarvest(CropHarvest crop)
+        public void addCropHarvest(CropHarvest croph)
         {
 
 
 
-            _context.CropHarvest.Add(crop);
+            _context.CropHarvest.Add(croph);
             _context.SaveChanges();
         }
 
-        public void addCropRequirements(CropRequirements crop)
+        public void addCropRequirements(CropRequirements cropr)
         {
 
-            _context.CropRequirements.Add(crop);
+            _context.CropRequirements.Add(cropr);
             _context.SaveChanges();
         }
 

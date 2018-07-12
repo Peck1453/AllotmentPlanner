@@ -11,7 +11,16 @@ using AllotmentPlanner.Data.ViewModel;
 namespace AllotmentPlanner.Controllers.Admin
 {
     public class GardenAdminController : ApplicationController
+
     {
+        private AllotmentPlanner.Models.ApplicationDbContext _context;
+
+
+        public GardenAdminController()
+        {
+            _context = new AllotmentPlanner.Models.ApplicationDbContext();
+
+        }
         // GET: GardenAdmin
         public ActionResult Index()
         {
@@ -25,7 +34,7 @@ namespace AllotmentPlanner.Controllers.Admin
         }
         // GET: CropAdmin/Create
         [HttpGet]
-        public ActionResult AddGarden()
+        public ActionResult AddGardenLocation()
         {
             return View();
         }
@@ -37,9 +46,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
             try
             {
-                _gardenService.addGardenLocation(garden);
-                _gardenService.addGardentoAllotment(allotment);
-
+                _gardenService.addGardenLocation(garden, allotment);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
             catch
@@ -48,7 +55,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
         [HttpGet]
-        public ActionResult AddGardentoLocation(string selectedPostCode, GardenViewModel garden)
+        public ActionResult AddGardentoLocation(string selectedPostCode, GardenViewModel garden, int id)
         {
             List<SelectListItem> postCodeList = new List<SelectListItem>();
             foreach (var location in _gardenService.GetGardenLocations())
@@ -64,17 +71,25 @@ namespace AllotmentPlanner.Controllers.Admin
                
             }
             ViewBag.postCodeList = postCodeList;
-            return View();
+            
 
+            return View();
         }
 
 
         [HttpPost]
-        public ActionResult AddGardentoLocation(Allotment allotment)
+        public ActionResult AddGardentoLocation(Allotment allotment, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
         {
             try
             {
-                _gardenService.addGardentoAllotment(allotment);
+                
+                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+                {
+                    gardenID = allotment.gardenID
+                    
+
+                };
+                _gardenService.addGardentoAllotment(allotment, myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
 
             }
@@ -158,23 +173,11 @@ namespace AllotmentPlanner.Controllers.Admin
             _gardenService.GetAllocatedAllotment(gardenId);
 
          List<SelectListItem> assignedGardenerList = new List<SelectListItem>();
-            foreach (var userList in _())
-            {
-                assignedGardenerList.Add(
-                    new SelectListItem()
-                    {
-                        Text = gardener.postCode,
-                        Value = gardener.postCode.ToString()
-
-                    });
-
-
-            }
-            ViewBag.postCodeList = assignedGardenerList;
-
-
-
-
+                var userList = _context.Users.OrderBy
+                    (u => u.UserName).ToList().Select
+                    (uu => new SelectListItem
+                    { Value = uu.UserName.ToString(), Text = uu.UserName }).ToList();
+            ViewBag.Users = userList;
             return View();
         }
         [HttpPut]

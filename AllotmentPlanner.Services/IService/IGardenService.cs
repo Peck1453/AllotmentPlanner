@@ -14,14 +14,16 @@ namespace AllotmentPlanner.Services.IService
         IList<GardenViewModel> ViewGardensinLocation(string pcode);
         IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode);
         AllotmentAllocation GetAllocatedAllotment(int gardenId);
+        Allotment GetLastGardenId();
+
 
 
 
         GardenLocation GetGardenLocation(string pcode);
         Allotment GetAllotment(int gardenId);
         GardenViewModel GetGardenViewModel(string pcode);
-        void addGardenLocation(GardenLocation gardenLocation);
-        void addGardentoAllotment(Allotment allotment);
+        void addGardenLocation(GardenLocation gardenLocation, Allotment allotment);
+        void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation);
         void editGarden(Allotment allotment);
         void DeleteGarden(GardenLocation gardenLocation);
         void assignGardenerToGarden(AllotmentAllocation allotmentAllocation);

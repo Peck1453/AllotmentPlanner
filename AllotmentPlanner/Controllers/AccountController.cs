@@ -357,7 +357,7 @@ namespace AllotmentPlanner.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("AdminDashboard", "Home");
             }
 
             if (ModelState.IsValid)

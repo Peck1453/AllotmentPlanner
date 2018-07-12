@@ -25,6 +25,19 @@ namespace AllotmentPlanner.Data.DAO
                      select GardenLocation;
             return _gardens.ToList();
         }
+
+        public Allotment GetLastGardenId()
+        {
+
+            IQueryable<Allotment> _gardens;
+            _gardens = from Allotment
+                       in _context.Allotment
+                       orderby Allotment.gardenID ascending
+                       select Allotment;
+            return _gardens.ToList().First();
+
+
+        }
         public GardenLocation GetGardenLocation(string pcode)
         {
             IQueryable<GardenLocation> _garden;
@@ -127,10 +140,6 @@ namespace AllotmentPlanner.Data.DAO
         }
 
 
-
-
-
-
         public GardenViewModel GetGardenViewModel(string pcode)
         {
             IQueryable<GardenViewModel> _gardenViewModel = from garden in _context.GardenLocation
@@ -154,15 +163,17 @@ namespace AllotmentPlanner.Data.DAO
             return _gardenViewModel.ToList().First();
         }
 
-        public void addGardenLocation(GardenLocation gardenLocation)
+        public void addGardenLocation(GardenLocation gardenLocation, Allotment allotment)
         {
             _context.GardenLocation.Add(gardenLocation);
+            _context.Allotment.Add(allotment);
             _context.SaveChanges();
         }
 
-        public void addGardentoAllotment(Allotment allotment)
+        public void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation)
         {
-            _context.Allotment.Add(allotment);
+            _context.Allotment.Add(allotment);            
+            _context.AllotmentAllocation.Add(allotmentAllocation);
             _context.SaveChanges();
         }
 

@@ -12,6 +12,8 @@ namespace AllotmentPlanner.Data.IDAO
         IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations();
         IList<GardenViewModel> ViewGardensinLocation(string pcode);
         IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode);
+        Allotment GetLastGardenId();
+
 
 
 
@@ -23,8 +25,8 @@ namespace AllotmentPlanner.Data.IDAO
 
 
 
-        void addGardenLocation(GardenLocation gardenLocation);
-        void addGardentoAllotment(Allotment allotment);
+        void addGardenLocation(GardenLocation gardenLocation, Allotment allotment);
+        void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation);
 
         void editGardenLocation(GardenLocation gardenLocation);
         void editGarden(Allotment allotment);

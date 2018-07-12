@@ -47,9 +47,12 @@
             @Html.DisplayFor(modelItem => item.size)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            @Html.ActionLink("Assign Gardener", "AssignGardenertoGarden", new { controller = "GardenAdmin" , id = item.gardenID })
+
+
         </td>
     </tr>
 }

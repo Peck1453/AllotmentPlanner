@@ -38,6 +38,12 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.ViewEmptyGardensinLocation(pcode);
         }
 
+        public Allotment GetLastGardenId()
+        {
+            return _gardenDAO.GetLastGardenId();
+        }
+
+
 
         public GardenLocation GetGardenLocation(string pcode)
         {
@@ -58,15 +64,15 @@ namespace AllotmentPlanner.Services.Service
         }
 
 
-        public void addGardenLocation(GardenLocation gardenLocation)
+        public void addGardenLocation(GardenLocation gardenLocation, Allotment allotment)
         {
-            _gardenDAO.addGardenLocation(gardenLocation);
+            _gardenDAO.addGardenLocation(gardenLocation, allotment);
 
         }
 
-        public void addGardentoAllotment(Allotment allotment)
+        public void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation)
         {
-            _gardenDAO.addGardentoAllotment(allotment);
+            _gardenDAO.addGardentoAllotment(allotment, allotmentAllocation);
         }
 
 
