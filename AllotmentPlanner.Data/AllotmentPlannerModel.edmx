@@ -121,7 +121,7 @@
           <Property Name="birdNetting" Type="bit" Nullable="false" />
           <Property Name="slugPellets" Type="bit" Nullable="false" />
           <Property Name="Feed" Type="bit" Nullable="false" />
-          <Property Name="Water" Type="bit" Nullable="false" />
+          <Property Name="wateringInterval" Type="int" />
         </EntityType>
         <EntityType Name="GardenLocation">
           <Key>
@@ -245,7 +245,6 @@
           <EntitySet Name="Crop" EntityType="AllotmentModel.Crop" />
           <EntitySet Name="Crop_Requirements" EntityType="AllotmentModel.Crop_Requirements" />
           <EntitySet Name="CropHarvest" EntityType="AllotmentModel.CropHarvest" />
-          <EntitySet Name="CropRequirements" EntityType="AllotmentModel.CropRequirements" />
           <EntitySet Name="GardenLocation" EntityType="AllotmentModel.GardenLocation" />
           <EntitySet Name="Planted" EntityType="AllotmentModel.Planted" />
           <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
@@ -258,6 +257,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="CropRequirements" EntityType="AllotmentModel.CropRequirements" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -363,16 +363,6 @@
           <Property Name="latestHarvest" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="growthTime" Type="Int32" />
         </EntityType>
-        <EntityType Name="CropRequirements">
-          <Key>
-            <PropertyRef Name="cropId" />
-          </Key>
-          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
-          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
-          <Property Name="Feed" Type="Boolean" Nullable="false" />
-          <Property Name="Water" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="GardenLocation">
           <Key>
             <PropertyRef Name="postCode" />
@@ -426,6 +416,16 @@
           <End Type="AllotmentModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="AllotmentModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <EntityType Name="CropRequirements">
+          <Key>
+            <PropertyRef Name="cropId" />
+          </Key>
+          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
+          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
+          <Property Name="Feed" Type="Boolean" Nullable="false" />
+          <Property Name="wateringInterval" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -539,17 +539,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CropRequirements">
-            <EntityTypeMapping TypeName="AllotmentModel.CropRequirements">
-              <MappingFragment StoreEntitySet="CropRequirements">
-                <ScalarProperty Name="Water" ColumnName="Water" />
-                <ScalarProperty Name="Feed" ColumnName="Feed" />
-                <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
-                <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
-                <ScalarProperty Name="cropId" ColumnName="cropId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GardenLocation">
             <EntityTypeMapping TypeName="AllotmentModel.GardenLocation">
               <MappingFragment StoreEntitySet="GardenLocation">
@@ -597,6 +586,17 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="CropRequirements">
+            <EntityTypeMapping TypeName="AllotmentModel.CropRequirements">
+              <MappingFragment StoreEntitySet="CropRequirements">
+                <ScalarProperty Name="wateringInterval" ColumnName="wateringInterval" />
+                <ScalarProperty Name="Feed" ColumnName="Feed" />
+                <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
+                <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

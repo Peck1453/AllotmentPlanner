@@ -103,7 +103,7 @@ namespace AllotmentPlanner.Controllers.Admin
                 birdNetting = cropRequirements.birdNetting,
                 slugPellets = cropRequirements.slugPellets,
                 Feed = cropRequirements.Feed,
-                Water = cropRequirements.Water,
+                wateringInterval = cropRequirements.wateringInterval,
             };
 
                 _cropService.editCrop(myCrop, myCroph, myCropr);

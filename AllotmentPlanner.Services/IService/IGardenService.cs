@@ -29,11 +29,10 @@ namespace AllotmentPlanner.Services.IService
         void assignGardenerToGarden(AllotmentAllocation allotmentAllocation);
         void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation);
 
-        EditGardenViewModel ViewSelectedCrops(string userID);
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
-        void addcropstogarden(string userId, Planted crop, Planted garden);
+        void addcropstogarden(Planted crop, Planted garden);
 
-        EditGardenViewModel GetUserGarden(int id);
+        IList<UserGardenViewModel>GetUserGarden(string userId);
 
         EditGardenViewModel GetGardenFromUser(string userId);
 

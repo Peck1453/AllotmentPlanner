@@ -18,6 +18,6 @@ namespace AllotmentPlanner.Data
         public bool birdNetting { get; set; }
         public bool slugPellets { get; set; }
         public bool Feed { get; set; }
-        public bool Water { get; set; }
+        public Nullable<int> wateringInterval { get; set; }
     }
 }

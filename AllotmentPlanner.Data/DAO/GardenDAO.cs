@@ -10,33 +10,27 @@ namespace AllotmentPlanner.Data.DAO
 {
     public class GardenDAO : IGardenDAO
     {
-
         private AllotmentEntities _context;
         public GardenDAO()
         {
             _context = new AllotmentEntities();
         }
-
         public IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations()
         {
             IQueryable<GardenLocation> _gardens;
             _gardens = from GardenLocation
                     in _context.GardenLocation
-                     select GardenLocation;
+                       select GardenLocation;
             return _gardens.ToList();
         }
-
         public Allotment GetLastGardenId()
         {
-
             IQueryable<Allotment> _gardens;
             _gardens = from Allotment
                        in _context.Allotment
                        orderby Allotment.gardenId ascending
                        select Allotment;
             return _gardens.ToList().First();
-
-
         }
         public GardenLocation GetGardenLocation(string pcode)
         {
@@ -56,7 +50,7 @@ namespace AllotmentPlanner.Data.DAO
 
             _allotment = from allotment
                     in _context.Allotment
-                      where allotment.gardenId == gardenId
+                         where allotment.gardenId == gardenId
                          select allotment;
 
             return _allotment.ToList().First();
@@ -77,7 +71,7 @@ namespace AllotmentPlanner.Data.DAO
 
 
 
-            public IList<GardenViewModel> ViewGardensinLocation(string pcode)
+        public IList<GardenViewModel> ViewGardensinLocation(string pcode)
         {
             var listWithEmpty = (from allot in _context.Allotment
                                  from allocation in _context.AllotmentAllocation
@@ -111,7 +105,7 @@ namespace AllotmentPlanner.Data.DAO
             var listWithEmpty = (from allot in _context.Allotment
                                  from allocation in _context.AllotmentAllocation
                                  from location in _context.GardenLocation
-                                 //from user in _context.AspNetUsers
+                                     //from user in _context.AspNetUsers
                                  where allot.postCode == pcode
                                  && location.postCode == allot.postCode
                                  && allot.gardenId == allocation.gardenId
@@ -172,7 +166,7 @@ namespace AllotmentPlanner.Data.DAO
 
         public void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation)
         {
-            _context.Allotment.Add(allotment);            
+            _context.Allotment.Add(allotment);
             _context.AllotmentAllocation.Add(allotmentAllocation);
             _context.SaveChanges();
         }
@@ -201,7 +195,6 @@ namespace AllotmentPlanner.Data.DAO
 
         public void editGardenLocation(GardenLocation gardenLocation)
         {
-
             GardenLocation mygarden = GetGardenLocation(gardenLocation.postCode);
 
 
@@ -209,7 +202,6 @@ namespace AllotmentPlanner.Data.DAO
             mygarden.Owner = gardenLocation.Owner;
 
             _context.SaveChanges();
-
         }
 
         public void editGarden(Allotment allotment)
@@ -221,7 +213,6 @@ namespace AllotmentPlanner.Data.DAO
             myallotment.postCode = allotment.postCode;
 
             _context.SaveChanges();
-
         }
 
 
@@ -234,8 +225,6 @@ namespace AllotmentPlanner.Data.DAO
 
             _context.GardenLocation.Remove(myGarden);
             _context.SaveChanges();
-
-
         }
 
         public void deleteGardenAllotment(Allotment allotment)
@@ -244,33 +233,32 @@ namespace AllotmentPlanner.Data.DAO
 
             _context.Allotment.Add(allotment);
             _context.SaveChanges();
-
         }
 
         public EditGardenViewModel ViewSelectedCrops(string userID)
         {
-                IQueryable<EditGardenViewModel> _selectedcrops;
-                _selectedcrops = from allot in _context.Allotment
-                                 from crop in _context.Crop
-                                 from planted in _context.Planted
-                                 from allocation in _context.AllotmentAllocation
-                                 from user in _context.AspNetUsers
+            IQueryable<EditGardenViewModel> _selectedcrops;
+            _selectedcrops = from allot in _context.Allotment
+                             from crop in _context.Crop
+                             from planted in _context.Planted
+                             from allocation in _context.AllotmentAllocation
+                             from user in _context.AspNetUsers
 
-                                 where allocation.userId == userID
-                                 && allocation.gardenId == planted.gardenId
-                                 && crop.cropId == planted.cropId
-                                 && allocation.dateTo == null
-                                 select new EditGardenViewModel
-                                 {
-                                     gardenId = allot.gardenId,
-                                     cropId = crop.cropId,
-                                     gardenSize = allot.size,
-                                     cropSize = crop.cropSize,
-                                     cropName = crop.cropName
-                                 };
+                             where allocation.userId == userID
+                             && allocation.gardenId == planted.gardenId
+                             && crop.cropId == planted.cropId
+                             && allocation.dateTo == null
+                             select new EditGardenViewModel
+                             {
+                                 gardenId = allot.gardenId,
+                                 cropId = crop.cropId,
+                                 gardenSize = allot.size,
+                                 cropSize = crop.cropSize,
+                                 cropName = crop.cropName
+                             };
 
-                return _selectedcrops.ToList().FirstOrDefault();
-            
+            return _selectedcrops.ToList().FirstOrDefault();
+
 
         }
 
@@ -323,57 +311,92 @@ namespace AllotmentPlanner.Data.DAO
 
             IQueryable<EditGardenViewModel> _usergarden;
             _usergarden = from allot in _context.Allotment
-                             from allocation in _context.AllotmentAllocation
-                             from planted in _context.Planted
+                          from allocation in _context.AllotmentAllocation
+                          from planted in _context.Planted
 
-                             where allocation.userId == userId
-                             select new EditGardenViewModel
-                             {
-                                 gardenId = allot.gardenId,
-                             };
+                          where allocation.userId == userId
+                          select new EditGardenViewModel
+                          {
+                              gardenId = allot.gardenId,
+                          };
 
             return _usergarden.ToList().First();
         }
-            public void addcropstogarden(string userId, Planted crop, Planted garden)
+        public void addcropstogarden(Planted crop, Planted garden)
         {
-            EditGardenViewModel addgarden = GetGardenFromUser(userId);
+            Planted setPlanted = new Planted
+            {
+                gardenId = garden.gardenId,
+                cropId = crop.cropId
+            };
 
-            _context.Planted.Add(crop);
-            _context.Planted.Add(garden);
+            _context.Planted.Add(setPlanted);
             _context.SaveChanges();
 
 
         }
 
-        public EditGardenViewModel GetUserGarden(int id)
-        {
 
+public IList<UserGardenViewModel> GetUserGarden(string userId)
+{
+    var listWithEmpty = (from allocation in _context.AllotmentAllocation
+                         from crop in _context.Crop
+                         from allot in _context.Allotment
+                         from croph in _context.CropHarvest
+                         from cropr in _context.CropRequirements
+                         from planted in _context.Planted
+                         where allocation.userId == userId
+                         && allocation.gardenId == planted.gardenId
+                         && allot.gardenId == planted.gardenId
+                         && crop.cropId == planted.cropId
+                         && croph.cropId == planted.cropId
+                         && cropr.cropId == crop.cropId
+                         && crop.cropId == planted.cropId
+                         && allocation.dateTo == null
 
-            IQueryable<EditGardenViewModel> _editgarden = from allot in _context.Allotment
-                                                          from crop in _context.Crop
-                                                          from planted in _context.Planted
-                                                          from allocation in _context.AllotmentAllocation
-                                                          where allot.gardenId == id
-                                                          where planted.cropId == crop.cropId
-                                                          && allocation.dateTo == null
-
-                                                          select new EditGardenViewModel
-                                                          {
-                                                              gardenId = allot.gardenId,
-                                                              cropId = crop.cropId,
-                                                              gardenSize = allot.size,
-                                                              cropSize = crop.cropSize,
-                                                              cropName = crop.cropName
-                                                          };
-            return _editgarden.ToList().First();
-                                                         
-    }
-
-
-
-
+                         //join plantedjoin in _context.Planted on allocation.gardenID equals plantedjoin.gardenID
+                         //from plantedjoin in ThisList.DefaultIfEmpty()
+                         select new
+                         {
+                             GardenId = allocation.gardenId,
+                             CropId = crop.cropId,
+                             CropName = crop.cropName,
+                             CropSize = crop.cropSize,
+                             growthTime = croph.growthTime,
+                             dateIn = planted.dateIn,
+                             dateOut = planted.dateOut,
+                             EarliestPlant = croph.earliestPlant,
+                             LatestPlant = croph.latestPlant,
+                             EarliestHarvest = croph.earliestHarvest,
+                             EstimatedHarvest = planted.dateIn,
+                             LastestHarvest = croph.latestHarvest
+                         }).ToList().Select(gardenList => new UserGardenViewModel()
+                         {
+                             gardenId = gardenList.GardenId,
+                             cropId = gardenList.CropId,
+                             cropName = gardenList.CropName,
+                             cropSize = gardenList.CropSize,
+                             growthTime = gardenList.growthTime,
+                             dateIn = gardenList.dateIn,
+                             dateOut = gardenList.dateOut,
+                             earliestPlant = gardenList.EarliestPlant,
+                             latestPlant = gardenList.LatestPlant,
+                             earliestHarvest = gardenList.EarliestHarvest,
+                             estimatedHarvestDate = gardenList.EstimatedHarvest,
+                             lastestHarvest = gardenList.LastestHarvest
+                         }
+                             );
+    return listWithEmpty.ToList();
 }
 
+    }
+//    public calculateSeedsNeeded()
+//{
+
+
+
+//}
+
+
 
     }
-

@@ -102,13 +102,6 @@ namespace AllotmentPlanner.Services.Service
 
 
 
-
-        public EditGardenViewModel ViewSelectedCrops(string userID)
-
-        {
-            return _gardenDAO.ViewSelectedCrops(userID);
-        }
-
         public IList<EditGardenViewModel> ListSelectedCrops(string userID)
 
         {
@@ -116,10 +109,10 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.ListSelectedCrops(userID);
         }
 
-        public void addcropstogarden(string userId, Planted crop, Planted garden)
+        public void addcropstogarden(Planted crop, Planted garden)
         {
 
-            _gardenDAO.addcropstogarden(userId, crop, garden);
+            _gardenDAO.addcropstogarden(crop, garden);
         }
 
 
@@ -131,10 +124,10 @@ namespace AllotmentPlanner.Services.Service
 
 
 
-        public EditGardenViewModel GetUserGarden(int id)
+        public IList<UserGardenViewModel>GetUserGarden(string userId)
         {
 
-            return _gardenDAO.GetUserGarden(id);
+            return _gardenDAO.GetUserGarden(userId);
         }
 
     }

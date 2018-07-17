@@ -18,17 +18,16 @@ namespace AllotmentPlanner.Controllers
             return View(_gardenService.GetGardenLocations());
         }
 
-        public ActionResult ViewSelectedCrops()
-        {
-            var userID = User.Identity.GetUserId();
-
-            return View(_gardenService.ViewSelectedCrops(userID));
-        }
-
         public ActionResult ListSelectedCrops()
         {
             var userId = User.Identity.GetUserId();
             return View(_gardenService.ListSelectedCrops(userId));
+        }
+
+        public ActionResult GetUserGarden()
+        {
+            var userId = User.Identity.GetUserId();
+            return View(_gardenService.GetUserGarden(userId));
         }
 
         public ActionResult ViewGardensinLocation(string pcode)
@@ -53,25 +52,51 @@ namespace AllotmentPlanner.Controllers
         {
             return View(_gardenService.GetGardenViewModel(pcode));
         }
+
+        public ActionResult GetAllocatedAllotment(int gardenid)
+        {
+
+            return View(_gardenService.GetAllocatedAllotment(gardenid));
+        }
+
+
         [HttpGet]
         // GET: Garden/Create
         public ActionResult _addcropstogarden(string selectedCrop)
         {
             //var userId = User.Identity.GetUserId();
-                List<SelectListItem> cropList = new List<SelectListItem>();
-                foreach (var crop in _cropService.GetCrops())
-                {
-                    cropList.Add(
-                      new SelectListItem()
-                      {
-                          Text = crop.cropName,
-                          Value = crop.cropId.ToString(),
-                          Selected = (crop.cropName == (selectedCrop) ? true : false)
-                      });
-                }
-                ViewBag.cropList = cropList;
+            List<SelectListItem> cropList = new List<SelectListItem>();
+            foreach (var crop in _cropService.GetCrops())
+            {
+                cropList.Add(
+                  new SelectListItem()
+                  {
+                      Text = crop.cropName,
+                      Value = crop.cropId.ToString(),
+                      Selected = (crop.cropName == (selectedCrop) ? true : false)
+                  });
+            }
+            ViewBag.cropList = cropList;
+
+
 
             return View();
+        }
+
+        public void FillGarden(int cropId)
+        {
+            List<SelectListItem> cropList = new List<SelectListItem>();
+            foreach (var crop in _cropService.GetCrops())
+            {
+                cropList.Add(
+                  new SelectListItem()
+                  {
+                      Text = crop.cropName,
+                      Value = crop.cropId.ToString(),
+                      Selected = (crop.cropId == (cropId) ? true : false)
+                  });
+            }
+            ViewBag.cropList = cropList;
         }
 
         // POST: Garden/Create
@@ -89,7 +114,9 @@ namespace AllotmentPlanner.Controllers
 
             
 
-                _gardenService.addcropstogarden(userId, crop, myusergarden);
+                _gardenService.addcropstogarden(crop, myusergarden);
+
+                FillGarden(crop.cropId);
 
             return View();
         

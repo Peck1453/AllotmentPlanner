@@ -41,12 +41,10 @@ namespace AllotmentPlanner.Data.IDAO
 
 
 
-        EditGardenViewModel ViewSelectedCrops(string userID);
+
+        IList<UserGardenViewModel> GetUserGarden(string userId);
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
-        void addcropstogarden(string userId, Planted crop, Planted garden);
-
-
-        EditGardenViewModel GetUserGarden(int id);
+        void addcropstogarden(Planted crop, Planted garden);
 
 
         EditGardenViewModel GetGardenFromUser(string userId);

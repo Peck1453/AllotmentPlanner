@@ -48,7 +48,7 @@ namespace AllotmentPlanner.Data.ViewModel
         public bool birdNetting { get; set; }
         public bool slugPellets { get; set; }
         public bool Feed { get; set; }
-        public bool Water { get; set; }
+        public int? wateringInterval { get; set; }
 
         public CropDataViewModel() { }
 

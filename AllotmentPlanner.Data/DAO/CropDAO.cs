@@ -87,7 +87,7 @@ namespace AllotmentPlanner.Data.DAO
                                                                    birdNetting = cropreq.birdNetting,
                                                                    slugPellets = cropreq.slugPellets,
                                                                    Feed = cropreq.Feed,
-                                                                   Water = cropreq.Water
+                                                                   wateringInterval = cropreq.wateringInterval
                                                                };
             return _cropDataViewModel.ToList().First();
 
@@ -143,7 +143,7 @@ namespace AllotmentPlanner.Data.DAO
             myCropr.birdNetting = cropRequirements.birdNetting;
             myCropr.slugPellets = cropRequirements.slugPellets;
             myCropr.Feed = cropRequirements.Feed;
-            myCropr.Water = cropRequirements.Water;
+            myCropr.wateringInterval = cropRequirements.wateringInterval;
 
             _context.SaveChanges();
 

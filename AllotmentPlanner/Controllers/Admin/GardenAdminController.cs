@@ -55,7 +55,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
         [HttpGet]
-        public ActionResult AddGardentoLocation(string selectedPostCode, GardenViewModel garden, int id)
+        public ActionResult AddGardentoLocation(int id, GardenViewModel garden)
         {
             List<SelectListItem> postCodeList = new List<SelectListItem>();
             foreach (var location in _gardenService.GetGardenLocations())
@@ -168,26 +168,39 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         [HttpGet]
-        public ActionResult AssignGardenertoGarden(int gardenId)
+        public ActionResult AssignGardenertoGarden(int gardenId, string userId)
         {
-            _gardenService.GetAllocatedAllotment(gardenId);
+         List<SelectListItem> gardenerList = new List<SelectListItem>();
 
-         List<SelectListItem> assignedGardenerList = new List<SelectListItem>();
-                var userList = _context.Users.OrderBy
-                    (u => u.UserName).ToList().Select
-                    (uu => new SelectListItem
-                    { Value = uu.UserName.ToString(), Text = uu.UserName }).ToList();
-            ViewBag.Users = userList;
-            return View();
+            var userList = _context.Users.OrderBy(u => u.UserName)
+                .ToList();
+
+            string selectedUser = "";
+
+            foreach (var user in userList)
+            {
+                gardenerList.Add(
+                  new SelectListItem()
+                  {
+                      Text = user.UserName,
+                      Value = user.Id.ToString(),
+                      Selected = (user.UserName == (selectedUser) ? true : false)
+                  });
+            }
+
+            ViewBag.GardenerList = gardenerList;
+
+            return View(_gardenService.GetAllocatedAllotment(gardenId));
         }
-        [HttpPut]
-        public ActionResult AssignGardenertoGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
+        [HttpPost]
+        public ActionResult AssignGardenertoGarden(int gardenId, AllotmentAllocation allotmentAllocation)
         {
             try
             {
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
                 {
-                    userId = gardenViewModel.AssignedGardener,
+                    userId = allotmentAllocation.userId,
+                    gardenId = gardenId,
                     dateFrom = DateTime.Now
                 };
 
@@ -204,34 +217,30 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpGet]
         public ActionResult RemoveGardenerfromGarden(int gardenId)
         {
-            _gardenService.GetAllocatedAllotment(gardenId);
-            return View();
+           
+            return View( _gardenService.GetAllocatedAllotment(gardenId));
 
         }
-        [HttpPut]
+        [HttpPost]
         public ActionResult RemoveGardenerfromGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
         {
 
-            try
-            {
+            //try
+            //{
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
                 {
+                    gardenId =gardenId,
                     dateTo = DateTime.Now
                 };
 
                 _gardenService.removeGardenerFromGarden(myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
-            }
-            catch
-            {
-                return View();
-            }
-
-
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
-
-
-
         // GET: GardenAdmin/Delete/5
         public ActionResult Delete(int id)
         {
