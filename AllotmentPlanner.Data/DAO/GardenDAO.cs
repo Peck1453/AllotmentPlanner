@@ -308,7 +308,6 @@ namespace AllotmentPlanner.Data.DAO
 
         public EditGardenViewModel GetGardenFromUser(string userId)
         {
-
             IQueryable<EditGardenViewModel> _usergarden;
             _usergarden = from allot in _context.Allotment
                           from allocation in _context.AllotmentAllocation

@@ -21,17 +21,6 @@ namespace AllotmentPlanner.Controllers.Admin
             _context = new AllotmentPlanner.Models.ApplicationDbContext();
 
         }
-        // GET: GardenAdmin
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: GardenAdmin/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
         // GET: CropAdmin/Create
         [HttpGet]
         public ActionResult AddGardenLocation()
@@ -68,10 +57,10 @@ namespace AllotmentPlanner.Controllers.Admin
 
                     });
 
-               
+
             }
             ViewBag.postCodeList = postCodeList;
-            
+
 
             return View();
         }
@@ -82,11 +71,11 @@ namespace AllotmentPlanner.Controllers.Admin
         {
             try
             {
-                
+
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
                 {
                     gardenId = allotment.gardenId
-                    
+
 
                 };
                 _gardenService.addGardentoAllotment(allotment, myallotmentAllocation);
@@ -119,7 +108,7 @@ namespace AllotmentPlanner.Controllers.Admin
                     Allotment myAllotment = new Allotment
                     {
                         gardenId = gardenViewModel.gardenId,
-                        size =     gardenViewModel.size,
+                        size = gardenViewModel.size,
                         postCode = gardenViewModel.postCode
                     };
 
@@ -170,7 +159,7 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpGet]
         public ActionResult AssignGardenertoGarden(int gardenId, string userId)
         {
-         List<SelectListItem> gardenerList = new List<SelectListItem>();
+            List<SelectListItem> gardenerList = new List<SelectListItem>();
 
             var userList = _context.Users.OrderBy(u => u.UserName)
                 .ToList();
@@ -211,9 +200,8 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 return View();
             }
-
-
         }
+            
         [HttpGet]
         public ActionResult RemoveGardenerfromGarden(int gardenId)
         {
@@ -225,8 +213,8 @@ namespace AllotmentPlanner.Controllers.Admin
         public ActionResult RemoveGardenerfromGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
         {
 
-            //try
-            //{
+            try
+            {
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
                 {
                     gardenId =gardenId,
@@ -235,11 +223,11 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 _gardenService.removeGardenerFromGarden(myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            }
+            catch
+            {
+                return View();
+            }
         }
         // GET: GardenAdmin/Delete/5
         public ActionResult Delete(int id)

@@ -20,7 +20,8 @@
         <th>
             @Html.DisplayNameFor(model => model.cropName)
         </th>
-        <th></th>
+        <th>Actions Pending
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.growthTime)
         </th>
@@ -30,9 +31,9 @@
         @*<th>
             @Html.DisplayNameFor(model => model.dateOut)
         </th>*@
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.cropSize)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.earliestPlant)
         </th>
@@ -62,8 +63,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.cropName)
         </td>
+@if (item.dateIn != null)
+{
+        <td>
+            @Html.ActionLink("Harvest", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Water", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Place slug Pellets", "Edit", new { /* id=item.PrimaryKey */ }) |
+        </td>
+}
+@if (item.dateIn == null)
+{
         <td>@Html.ActionLink("Plant", "Edit", new { /* id=item.PrimaryKey */ }) |
-</td>
+         @Html.ActionLink("Water", "Edit", new { /* id=item.PrimaryKey */ }) |
+         @Html.ActionLink("Place slug Pellets", "Edit", new { /* id=item.PrimaryKey */ }) |
+        </td>
+}
         <td>
             @Html.DisplayFor(modelItem => item.growthTime)
         </td>
@@ -73,15 +87,28 @@
         @*<td>
             @Html.DisplayFor(modelItem => item.dateOut)
         </td>*@
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.cropSize)
-        </td>
+        </td>*@
+        @if (item.dateIn != null)
+        {
         <td>
             @Html.DisplayFor(modelItem => item.earliestPlant)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.latestPlant)
         </td>
+        }
+        @if (item.dateIn == null)
+        {
+            <td>
+                <input type="hidden" name="productItemId" id="productItemId" value="@item.earliestPlant" />
+            </td>
+            <td>
+                <input type="hidden" name="productItemId" id="productItemId" value="@item.latestPlant" />
+            </td>
+
+        }
         <td>
             @Html.DisplayFor(modelItem => item.earliestHarvest)
         </td>
@@ -91,11 +118,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.lastestHarvest)
         </td>
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        </td>*@
     </tr>
 }
 

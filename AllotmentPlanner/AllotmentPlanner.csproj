@@ -315,6 +315,8 @@
     <Content Include="Views\GardenAdmin\AddGardenLocation.cshtml" />
     <Content Include="Views\Garden\GetAllocatedAllotment.cshtml" />
     <Content Include="Views\Garden\GetUserGarden.cshtml" />
+    <Content Include="Views\Garden\UserViewEmptyGardensinLocation.cshtml" />
+    <Content Include="Views\Garden\_userSelectPostcode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

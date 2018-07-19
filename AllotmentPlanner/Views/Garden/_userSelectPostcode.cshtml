@@ -1,0 +1,23 @@
+﻿@model AllotmentPlanner.Data.ViewModel.GardenViewModel
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div class="form-horizontal">
+    <h4>GardenViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.postCode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.postCode, (List<SelectListItem>)ViewBag.postCodeList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.postCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <input type="submit" value="Display List" />
+
+    </div>
+

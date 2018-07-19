@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AllotmentPlanner.Data.ViewModel.GardenViewModel>
+
+@{
+    ViewBag.Title = "UserViewEmptyGardensinLocation";
+}
+
+<h2>UserViewEmptyGardensinLocation</h2>
+
+<p>
+    @Html.ActionLink("Can't Find One Your size? Create your own!", "AddGardenLocation", new { controller = "GardenAdmin" })
+</p>
+
+@{
+    Html.RenderAction("_userSelectPostcode", "Garden");
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.postCode)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gardenId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignedGardener)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.size)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.postCode)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gardenId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignedGardener)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.size)
+        </td>
+        <td>
+            @Html.ActionLink("Assign Yourself This Garden", "UserAssignSelftoGarden", new {controller = "Garden", gardenId=item.gardenId }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

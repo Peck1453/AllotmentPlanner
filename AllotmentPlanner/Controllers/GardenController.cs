@@ -44,6 +44,56 @@ namespace AllotmentPlanner.Controllers
 
         }
 
+        public ActionResult UserViewEmptyGardensinLocation(string pcode)
+        {
+
+            return View(_gardenService.ViewEmptyGardensinLocation(pcode));
+
+        }
+
+        [HttpGet]
+        public ActionResult UserAssignSelftoGarden(int gardenId, AllotmentAllocation allotmentAllocation)
+        {
+            var userId = User.Identity.GetUserId();
+            try
+            {
+                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+                {
+                    userId = userId,
+                    gardenId = gardenId,
+                    dateFrom = DateTime.Now
+                };
+
+                _gardenService.assignGardenerToGarden(myallotmentAllocation);
+                return RedirectToAction("GetUserGarden", new { controller = "Garden" });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult _userSelectPostcode(string pcode)
+        {
+            List<SelectListItem> postCodeList = new List<SelectListItem>();
+            foreach (var location in _gardenService.GetGardenLocations())
+            {
+                postCodeList.Add(
+                    new SelectListItem()
+                    {
+                        Text = location.postCode,
+                        Value = location.postCode.ToString(),
+                        Selected = (location.postCode == pcode)
+
+                    });
+
+            }
+            ViewBag.postCodeList = postCodeList;
+
+            return View(UserViewEmptyGardensinLocation(pcode));
+
+        }
+
 
 
 
