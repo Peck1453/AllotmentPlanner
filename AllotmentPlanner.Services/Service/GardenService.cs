@@ -38,6 +38,12 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.ViewEmptyGardensinLocation(pcode);
         }
 
+        public Planted getPlantedCrop(int plantedId)
+        {
+            return _gardenDAO.getPlantedCrop(plantedId);
+        }
+
+
         public Allotment GetLastGardenId()
         {
             return _gardenDAO.GetLastGardenId();
@@ -76,7 +82,7 @@ namespace AllotmentPlanner.Services.Service
         }
 
 
-        public void editGarden(GardenLocation gardenLocation)
+        public void editGardenLocation(GardenLocation gardenLocation)
         {
             _gardenDAO.editGardenLocation(gardenLocation);
         }
@@ -129,6 +135,22 @@ namespace AllotmentPlanner.Services.Service
 
             return _gardenDAO.GetUserGarden(userId);
         }
+        public void logCropAsPlanted(Planted planted)
+        {
+
+            _gardenDAO.logCropAsPlanted(planted);
+
+        }
+
+        public void logCropAsHarvested(Planted planted)
+        {
+            _gardenDAO.logCropAsHarvested(planted);
+        }
+        public void deletePlantedCrop(Planted planted)
+        {
+            _gardenDAO.deletePlantedCrop(planted);
+        }
+
 
     }
 }

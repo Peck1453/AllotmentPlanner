@@ -7,7 +7,7 @@
 <h2>GetUserGarden</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add or Edit Crops", "ListSelectedCrops")
 </p>
 <table class="table">
     <tr>
@@ -66,16 +66,16 @@
 @if (item.dateIn != null)
 {
         <td>
-            @Html.ActionLink("Harvest", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Water", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Place slug Pellets", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Harvest", "HarvestCrop", new { controller = "GardenAdmin", PlantedId =item.plantedId  }) |
+            @Html.ActionLink("Water", "Edit", new { controller = "GardenAdmin", id =item.plantedId }) |
+            @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id =item.plantedId  }) |
         </td>
 }
 @if (item.dateIn == null)
 {
-        <td>@Html.ActionLink("Plant", "Edit", new { /* id=item.PrimaryKey */ }) |
-         @Html.ActionLink("Water", "Edit", new { /* id=item.PrimaryKey */ }) |
-         @Html.ActionLink("Place slug Pellets", "Edit", new { /* id=item.PrimaryKey */ }) |
+        <td>@Html.ActionLink("Plant", "PlantCrop", new { controller = "GardenAdmin", PlantedId =item.plantedId  }) |
+         @Html.ActionLink("Water", "Edit", new { controller = "GardenAdmin",  id =item.plantedId }) |
+         @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id =item.plantedId }) |
         </td>
 }
         <td>

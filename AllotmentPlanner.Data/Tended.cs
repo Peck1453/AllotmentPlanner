@@ -18,6 +18,6 @@ namespace AllotmentPlanner.Data
         public int cropId { get; set; }
         public int tendId { get; set; }
         public System.DateTime Date { get; set; }
-        public int userId { get; set; }
+        public int plantedId { get; set; }
     }
 }

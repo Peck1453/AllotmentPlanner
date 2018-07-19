@@ -11,6 +11,7 @@ namespace AllotmentPlanner.Data.ViewModel
     {
         public int cropId { get; set; }
         public int gardenId { get; set; }
+        public int plantedId { get; set; }
         public string cropName { get; set; }
         public int? growthTime { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

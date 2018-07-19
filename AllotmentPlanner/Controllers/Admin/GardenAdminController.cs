@@ -144,7 +144,7 @@ namespace AllotmentPlanner.Controllers.Admin
                         Owner = gardenViewModel.Owner
                     };
 
-                    _gardenService.editGarden(mygardenLocation);
+                    _gardenService.editGardenLocation(mygardenLocation);
 
 
                     return RedirectToAction("Gardens", new { controller = "Garden" });
@@ -250,5 +250,38 @@ namespace AllotmentPlanner.Controllers.Admin
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult PlantCrop(int plantedId, Planted planted)
+        {
+            Planted myPlanted = new Planted
+            {
+                plantedId = planted.plantedId,
+                dateIn = DateTime.Now
+            };
+
+            _gardenService.logCropAsPlanted(myPlanted);
+
+            return RedirectToAction("GetUserGarden", new { controller = "Garden" });
+
+        }
+
+
+        [HttpGet]
+     public ActionResult HarvestCrop(int PlantedId, Planted planted)
+        {
+            Planted myPlanted = new Planted
+            {
+                plantedId = planted.plantedId,
+                dateOut = DateTime.Now
+            };
+
+            _gardenService.logCropAsHarvested(myPlanted);
+
+            return RedirectToAction("GetUserGarden", new { controller = "Garden" });
+
+
+        }
     }
+
 }

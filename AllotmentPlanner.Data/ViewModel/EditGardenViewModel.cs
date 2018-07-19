@@ -11,6 +11,7 @@ namespace AllotmentPlanner.Data.ViewModel
     {
         public int gardenId { get; set; }
         public int cropId { get; set; }
+        public int plantedId { get; set; }
         public int gardenSize { get; set; }
         public string cropName { get; set; }
         public int cropSize { get; set; }

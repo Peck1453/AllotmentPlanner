@@ -16,5 +16,6 @@ namespace AllotmentPlanner.Data
     {
         public int tendId { get; set; }
         public string tendName { get; set; }
+        public int tendFrequency { get; set; }
     }
 }
