@@ -25,6 +25,7 @@ namespace AllotmentPlanner.Data.ViewModel
         public DateTime latestPlant { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime earliestHarvest { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? estimatedHarvestDate { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime lastestHarvest { get; set; }

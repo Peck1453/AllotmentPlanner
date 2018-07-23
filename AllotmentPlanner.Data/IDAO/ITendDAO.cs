@@ -12,7 +12,7 @@ namespace AllotmentPlanner.Data.IDAO
 
         IList<AllotmentPlanner.Data.TendType> getTends();
         IList<CropMaintenanceViewModel> getTendActions(string userId);
-        IList<CropMaintenanceViewModel> loopTends(string userId);
+        IList<CropMaintenanceViewModel> loopTends(string userId, int plantedId);
 
 
         TendType getTend(int id);

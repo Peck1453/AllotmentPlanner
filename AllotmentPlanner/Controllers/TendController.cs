@@ -30,10 +30,10 @@ namespace AllotmentPlanner.Controllers
             return View(_tendService.getTendActions(userId));
         }
 
-        public ActionResult _loopTends()
+        public ActionResult _loopTends(int plantedId)
         {
             var userId = User.Identity.GetUserId();
-            return View(_tendService.loopTends(userId));
+            return View(_tendService.loopTends(userId, plantedId));
 
         }
     }

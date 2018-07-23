@@ -137,24 +137,31 @@ namespace AllotmentPlanner.Data.DAO
 
 
         }
-        public IList<CropMaintenanceViewModel> loopTends(string userId)
+        public IList<CropMaintenanceViewModel> loopTends(string userId, int plantedId)
         {
             var listWithEmpty = (from crop in _context.Crop
                                  from tends in _context.TendType
                                  from planted in _context.Planted
                                  from allocation in _context.AllotmentAllocation
-                                 where allocation.userId == userId
+                                 where planted.plantedId == plantedId
+                                 && allocation.userId == userId
                                  && allocation.gardenId == planted.gardenId
                                  && crop.cropId == planted.cropId
                                  select new
                                  {
+                                     plantedid = planted.plantedId,
+                                     tendid = tends.tendId,
                                      tendName = tends.tendName,
                                      cropId = crop.cropId,
 
                                  }).ToList().Select(maintencanceShortList => new CropMaintenanceViewModel()
                                  {
+                                     plantedId = maintencanceShortList.plantedid,
+                                     tendId = maintencanceShortList.tendid,
                                      tendName = maintencanceShortList.tendName,
                                      cropId = maintencanceShortList.cropId,
+                                     
+
                                  }
                                  );
             return listWithEmpty.ToList();

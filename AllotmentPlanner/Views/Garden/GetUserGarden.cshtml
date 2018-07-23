@@ -40,15 +40,15 @@
         <th>
             @Html.DisplayNameFor(model => model.latestPlant)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.earliestHarvest)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.estimatedHarvestDate)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.lastestHarvest)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -65,18 +65,15 @@
         </td>
 @if (item.dateIn != null)
 {
-        <td>
-            @Html.ActionLink("Harvest", "HarvestCrop", new { controller = "GardenAdmin", PlantedId =item.plantedId  }) |
-            @Html.ActionLink("Water", "Edit", new { controller = "GardenAdmin", id =item.plantedId }) |
-            @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id =item.plantedId  }) |
-        </td>
+    <td width="10%">
+        @Html.ActionLink("Harvest", "HarvestCrop", new { controller = "GardenAdmin", PlantedId = item.plantedId }) 
+    </td>
 }
 @if (item.dateIn == null)
 {
-        <td>@Html.ActionLink("Plant", "PlantCrop", new { controller = "GardenAdmin", PlantedId =item.plantedId  }) |
-         @Html.ActionLink("Water", "Edit", new { controller = "GardenAdmin",  id =item.plantedId }) |
-         @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id =item.plantedId }) |
-        </td>
+    <td width="10%">
+        @Html.ActionLink("Plant", "PlantCrop", new { controller = "GardenAdmin", PlantedId = item.plantedId }) 
+    </td>
 }
         <td>
             @Html.DisplayFor(modelItem => item.growthTime)
@@ -90,7 +87,7 @@
         @*<td>
             @Html.DisplayFor(modelItem => item.cropSize)
         </td>*@
-        @if (item.dateIn != null)
+        @if (item.dateIn == null)
         {
         <td>
             @Html.DisplayFor(modelItem => item.earliestPlant)
@@ -99,7 +96,7 @@
             @Html.DisplayFor(modelItem => item.latestPlant)
         </td>
         }
-        @if (item.dateIn == null)
+        @if (item.dateIn != null)
         {
             <td>
                 <input type="hidden" name="productItemId" id="productItemId" value="@item.earliestPlant" />
@@ -109,27 +106,41 @@
             </td>
 
         }
-        <td>
-            @Html.DisplayFor(modelItem => item.earliestHarvest)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estimatedHarvestDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastestHarvest)
-        </td>
         @*<td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.earliestHarvest)
+       
+          </td>*@
+@if (item.dateIn == null)
+{
+    <td>
+        <input type="hidden" name="productItemId" id="productItemId" value="@item.estimatedHarvestDate" />
+    </td>
+}
+@if (item.dateIn != null)
+{
+
+    <td>
+        @Html.DisplayFor(modelItem => item.estimatedHarvestDate)
+    </td>
+
+}
+
+        @*<td>
+            @Html.DisplayFor(modelItem => item.lastestHarvest)
         </td>*@
+
+     <td width="40%">
+             @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id = item.plantedId }) |
+
+        @{
+            Html.RenderAction("_loopTends", "Tend", new { plantedId = item.plantedId });
+        }
+
+     </td>
     </tr>
 }
 
 </table>
 
-@{
-    Html.RenderAction("_loopTends", "Tend");
-}
 
 

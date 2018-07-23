@@ -59,10 +59,10 @@ namespace AllotmentPlanner.Services.Service
 
            return _tendDAO.getTendActions(userId);
         }
-        public IList<CropMaintenanceViewModel> loopTends(string userId)
+        public IList<CropMaintenanceViewModel> loopTends(string userId, int plantedId)
         {
 
-            return _tendDAO.loopTends(userId);
+            return _tendDAO.loopTends(userId, plantedId);
         }
 
 
