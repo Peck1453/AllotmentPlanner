@@ -6,22 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AllotmentPlanner.Data.ViewModel;
+using Microsoft.AspNet.Identity;
+
 
 namespace AllotmentPlanner.Controllers.Admin
 {
     public class TendAdminController : ApplicationController
     {
-        // GET: TendAdmin
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: TendAdmin/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
         [HttpGet]
         // GET: TendAdmin/Create
         public ActionResult AddTend()
@@ -77,17 +68,36 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpPost]
         public ActionResult DeleteTend(int id, TendType tend)
         {
-            //try
-            //{
+            try
+            {
                 TendType myTend = _tendService.getTend(id);
                 _tendService.deleteTend(myTend);
 
                 return RedirectToAction("Tends", new { controller = "Tend" });
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        public ActionResult setAsTended(Tended tended, CropMaintenanceViewModel cropMaintenance)
+        {
+
+            var userId = User.Identity.GetUserId();
+            Tended myTended = new Tended
+            {
+                cropId = cropMaintenance.cropId,
+                tendId = cropMaintenance.tendId,
+                Date = DateTime.Now,
+                plantedId = cropMaintenance.plantedId
+            };
+
+            _tendService.setAsTended(myTended);
+
+            return View(_gardenService.GetUserGarden(userId));
+
         }
     }
 }

@@ -54,5 +54,25 @@ namespace AllotmentPlanner.Services.Service
 
         }
 
+        public IList<CropMaintenanceViewModel> getTendActions(string userId)
+        {
+
+           return _tendDAO.getTendActions(userId);
+        }
+        public IList<CropMaintenanceViewModel> loopTends(string userId)
+        {
+
+            return _tendDAO.loopTends(userId);
+        }
+
+
+
+        public void setAsTended(Tended tended)
+        {
+
+            _tendDAO.setAsTended(tended);
+            
+        }
+
     }
 }

@@ -44,5 +44,12 @@ namespace AllotmentPlanner.Data.IDAO
         void logCropAsHarvested(Planted planted);
         void deletePlantedCrop(Planted planted);
         void addcropstogarden(Planted crop, Planted garden);
+
+
+        //Tend Functionalities
+
+        void setAsTended(Tended tended);
+
+
     }
 }

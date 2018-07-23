@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using AllotmentPlanner.Data;
-
 using System.Web.Mvc;
 using AllotmentPlanner.Data.ViewModel;
 

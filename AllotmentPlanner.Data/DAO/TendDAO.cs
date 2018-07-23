@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AllotmentPlanner.Data.IDAO;
+using AllotmentPlanner.Data.ViewModel;
+
 
 namespace AllotmentPlanner.Data.DAO
 {
@@ -73,6 +75,95 @@ namespace AllotmentPlanner.Data.DAO
 
 
         }
+
+
+        public void setAsTended(Tended tended)
+        {
+            Tended myTended = new Tended
+            {
+                cropId = tended.cropId,
+                tendId = tended.tendId,
+                Date = tended.Date,
+                plantedId = tended.plantedId,
+
+            };
+            _context.Tended.Add(myTended);
+            _context.SaveChanges();
+        }
+
+        public IList<CropMaintenanceViewModel> getTendActions(string userId)
+        {
+            var listWithEmpty = (from crop in _context.Crop
+                                 from cropr in _context.CropRequirements
+                                 from tends in _context.TendType
+                                 from tended in _context.Tended
+                                 from planted in _context.Planted
+                                 from allocation in _context.AllotmentAllocation
+                                 from allot in _context.Allotment
+                                 where allocation.userId == userId
+                                 && allocation.gardenId == planted.gardenId
+                                 && allot.gardenId == planted.gardenId
+                                 && crop.cropId == planted.cropId
+                                 && cropr.cropId == crop.cropId
+                                 && crop.cropId == planted.cropId
+                                 && allocation.dateTo == null
+                                 && planted.dateOut == null
+                                 select new 
+                                 {
+                                     cropId = crop.cropId,
+                                     tendId = tends.tendId,
+                                     tendName = tends.tendName,
+                                     cropName = crop.cropName,
+                                     plantedId = planted.plantedId,
+                                     waterFrequency = cropr.wateringInterval,
+                                     Date = tended.Date,
+                                     gardenId = planted.gardenId,
+
+
+                                 }).ToList().Select(maintencanceList => new CropMaintenanceViewModel()
+                                 {
+                                     cropId = maintencanceList.cropId,
+                                     tendId = maintencanceList.tendId,
+                                     plantedId = maintencanceList.plantedId,
+                                     cropName = maintencanceList.cropName,
+                                     tendName = maintencanceList.tendName,
+                                     waterFrequency = maintencanceList.waterFrequency,
+                                     Date = maintencanceList.Date,
+                                     gardenId = maintencanceList.gardenId,
+
+                                 }
+                                );
+            return listWithEmpty.ToList();
+
+
+        }
+        public IList<CropMaintenanceViewModel> loopTends(string userId)
+        {
+            var listWithEmpty = (from crop in _context.Crop
+                                 from tends in _context.TendType
+                                 from planted in _context.Planted
+                                 from allocation in _context.AllotmentAllocation
+                                 where allocation.userId == userId
+                                 && allocation.gardenId == planted.gardenId
+                                 && crop.cropId == planted.cropId
+                                 select new
+                                 {
+                                     tendName = tends.tendName,
+                                     cropId = crop.cropId,
+
+                                 }).ToList().Select(maintencanceShortList => new CropMaintenanceViewModel()
+                                 {
+                                     tendName = maintencanceShortList.tendName,
+                                     cropId = maintencanceShortList.cropId,
+                                 }
+                                 );
+            return listWithEmpty.ToList();
+
+
+
+
+        }
+
 
 
     }

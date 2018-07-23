@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+
 
 namespace AllotmentPlanner.Controllers
 {
@@ -20,71 +22,19 @@ namespace AllotmentPlanner.Controllers
             return View();
         }
 
-        // GET: Tend/Create
-        [HttpGet]
-        public ActionResult Create()
+
+        public ActionResult _getTendActions()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            
+            return View(_tendService.getTendActions(userId));
         }
 
-        // POST: Tend/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult _loopTends()
         {
-            try
-            {
-                // TODO: Add insert logic here
+            var userId = User.Identity.GetUserId();
+            return View(_tendService.loopTends(userId));
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Tend/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Tend/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Tend/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Tend/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

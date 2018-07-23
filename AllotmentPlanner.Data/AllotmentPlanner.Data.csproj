@@ -91,9 +91,6 @@
     <Compile Include="CropRequirements.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Crop_Requirements.cs">
-      <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
@@ -116,6 +113,7 @@
     <Compile Include="TendType.cs">
       <DependentUpon>AllotmentPlannerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CropMaintenanceViewModel.cs" />
     <Compile Include="ViewModel\CropViewModel.cs" />
     <Compile Include="ViewModel\EditGardenViewModel.cs" />
     <Compile Include="ViewModel\GardenViewModel.cs" />

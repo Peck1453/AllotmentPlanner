@@ -92,16 +92,6 @@
           <Property Name="cropName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cropSize" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Crop Requirements">
-          <Key>
-            <PropertyRef Name="cropId" />
-          </Key>
-          <Property Name="cropId" Type="int" Nullable="false" />
-          <Property Name="birdNetting" Type="bit" Nullable="false" />
-          <Property Name="slugPellets" Type="bit" Nullable="false" />
-          <Property Name="Feed" Type="bit" Nullable="false" />
-          <Property Name="Water" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="CropHarvest">
           <Key>
             <PropertyRef Name="cropId" />
@@ -121,7 +111,7 @@
           <Property Name="birdNetting" Type="bit" Nullable="false" />
           <Property Name="slugPellets" Type="bit" Nullable="false" />
           <Property Name="Feed" Type="bit" Nullable="false" />
-          <Property Name="wateringInterval" Type="int" />
+          <Property Name="wateringInterval" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="GardenLocation">
           <Key>
@@ -211,7 +201,6 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Crop" EntityType="Self.Crop" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Crop Requirements" EntityType="Self.Crop Requirements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CropHarvest" EntityType="Self.CropHarvest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CropRequirements" EntityType="Self.CropRequirements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GardenLocation" EntityType="Self.GardenLocation" Schema="dbo" store:Type="Tables" />
@@ -244,7 +233,6 @@
           <EntitySet Name="AspNetUserLogins" EntityType="AllotmentModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="AllotmentModel.AspNetUsers" />
           <EntitySet Name="Crop" EntityType="AllotmentModel.Crop" />
-          <EntitySet Name="Crop_Requirements" EntityType="AllotmentModel.Crop_Requirements" />
           <EntitySet Name="CropHarvest" EntityType="AllotmentModel.CropHarvest" />
           <EntitySet Name="GardenLocation" EntityType="AllotmentModel.GardenLocation" />
           <EntitySet Name="Planted" EntityType="AllotmentModel.Planted" />
@@ -256,9 +244,9 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="CropRequirements" EntityType="AllotmentModel.CropRequirements" />
           <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
           <EntitySet Name="TendType" EntityType="AllotmentModel.TendType" />
+          <EntitySet Name="CropRequirements" EntityType="AllotmentModel.CropRequirements" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -343,16 +331,6 @@
           <Property Name="cropName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cropSize" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Crop_Requirements">
-          <Key>
-            <PropertyRef Name="cropId" />
-          </Key>
-          <Property Name="cropId" Type="Int32" Nullable="false" />
-          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
-          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
-          <Property Name="Feed" Type="Boolean" Nullable="false" />
-          <Property Name="Water" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="CropHarvest">
           <Key>
             <PropertyRef Name="cropId" />
@@ -400,16 +378,6 @@
           <End Type="AllotmentModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="AllotmentModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityType Name="CropRequirements">
-          <Key>
-            <PropertyRef Name="cropId" />
-          </Key>
-          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
-          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
-          <Property Name="Feed" Type="Boolean" Nullable="false" />
-          <Property Name="wateringInterval" Type="Int32" />
-        </EntityType>
         <EntityType Name="Tended">
           <Key>
             <PropertyRef Name="tendedId" />
@@ -427,6 +395,16 @@
           <Property Name="tendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tendName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="tendFrequency" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CropRequirements">
+          <Key>
+            <PropertyRef Name="cropId" />
+          </Key>
+          <Property Name="cropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="birdNetting" Type="Boolean" Nullable="false" />
+          <Property Name="slugPellets" Type="Boolean" Nullable="false" />
+          <Property Name="Feed" Type="Boolean" Nullable="false" />
+          <Property Name="wateringInterval" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -518,17 +496,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Crop_Requirements">
-            <EntityTypeMapping TypeName="AllotmentModel.Crop_Requirements">
-              <MappingFragment StoreEntitySet="Crop Requirements">
-                <ScalarProperty Name="Water" ColumnName="Water" />
-                <ScalarProperty Name="Feed" ColumnName="Feed" />
-                <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
-                <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
-                <ScalarProperty Name="cropId" ColumnName="cropId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CropHarvest">
             <EntityTypeMapping TypeName="AllotmentModel.CropHarvest">
               <MappingFragment StoreEntitySet="CropHarvest">
@@ -569,17 +536,6 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="CropRequirements">
-            <EntityTypeMapping TypeName="AllotmentModel.CropRequirements">
-              <MappingFragment StoreEntitySet="CropRequirements">
-                <ScalarProperty Name="wateringInterval" ColumnName="wateringInterval" />
-                <ScalarProperty Name="Feed" ColumnName="Feed" />
-                <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
-                <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
-                <ScalarProperty Name="cropId" ColumnName="cropId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tended">
             <EntityTypeMapping TypeName="AllotmentModel.Tended">
               <MappingFragment StoreEntitySet="Tended">
@@ -597,6 +553,17 @@
                 <ScalarProperty Name="tendFrequency" ColumnName="tendFrequency" />
                 <ScalarProperty Name="tendName" ColumnName="tendName" />
                 <ScalarProperty Name="tendId" ColumnName="tendId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CropRequirements">
+            <EntityTypeMapping TypeName="AllotmentModel.CropRequirements">
+              <MappingFragment StoreEntitySet="CropRequirements">
+                <ScalarProperty Name="wateringInterval" ColumnName="wateringInterval" />
+                <ScalarProperty Name="Feed" ColumnName="Feed" />
+                <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
+                <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
