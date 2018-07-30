@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-
+using AllotmentPlanner.Data.ViewModel;
+using System.Collections;
 
 namespace AllotmentPlanner.Controllers
 {
@@ -33,8 +34,22 @@ namespace AllotmentPlanner.Controllers
         public ActionResult _loopTends(int plantedId)
         {
             var userId = User.Identity.GetUserId();
-            return View(_tendService.loopTends(userId, plantedId));
+            //_tendService.loopTends(userId, plantedId);
 
+            List<CropMaintenanceViewModel> filteredList = new List<CropMaintenanceViewModel>();
+
+            var plantedCrop = _gardenService.getPlantedCrop(plantedId); // Get planted crop
+
+            var tends = _tendService.loopTends(userId, plantedId);
+
+            foreach (var item in tends)
+            {
+                if (DateTime.Now > Convert.ToDateTime(item.Date).AddDays(Convert.ToDouble(item.tendFrequency)) || item.Date == null) 
+                  
+            }
+
+
+            return PartialView(filteredList);
         }
     }
 }

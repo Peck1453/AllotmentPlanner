@@ -351,6 +351,18 @@ namespace AllotmentPlanner.Data.DAO
 
         public IList<UserGardenViewModel> GetUserGarden(string userId)
         {
+            // var planted =  use the method to find the planted date
+            // Date plantedDate = planted.plantedDate (or somehting like this)
+            // var growth = get the crop harvest growth time
+            // int growthTime = growth.GrowthTime;
+            // Date newHarvestDate = plantedDate.AddDays(growthtime);
+
+
+            // DateTime plantedDate = _context.Planted.PlantedDate;
+            // int growthTime = _context.CropHarvest.GrowthTime;
+            // Date estHarvestDate = plantedDate.AddDays(growthTime);
+
+            
             var listWithEmpty = (from allocation in _context.AllotmentAllocation
                                  from crop in _context.Crop
                                  from allot in _context.Allotment

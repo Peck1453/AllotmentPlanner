@@ -16,6 +16,8 @@ namespace AllotmentPlanner.Data.IDAO
 
 
         TendType getTend(int id);
+        Tended GetTendActionsperPlanted(int plantedId);
+
         void addTend(TendType tend);
         void editTend(TendType tend);
         void deleteTend(TendType tend);

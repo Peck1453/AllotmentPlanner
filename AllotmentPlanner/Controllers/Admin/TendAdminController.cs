@@ -81,7 +81,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
 
-
+        [HttpGet]
         public ActionResult setAsTended(Tended tended, CropMaintenanceViewModel cropMaintenance)
         {
 
@@ -96,7 +96,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
             _tendService.setAsTended(myTended);
 
-            return View(_gardenService.GetUserGarden(userId));
+            return RedirectToAction("GetUserGarden", new { controller = "Garden" });
 
         }
     }

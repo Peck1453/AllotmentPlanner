@@ -36,8 +36,8 @@ namespace AllotmentPlanner.Data
         public virtual DbSet<CropHarvest> CropHarvest { get; set; }
         public virtual DbSet<GardenLocation> GardenLocation { get; set; }
         public virtual DbSet<Planted> Planted { get; set; }
-        public virtual DbSet<Tended> Tended { get; set; }
         public virtual DbSet<TendType> TendType { get; set; }
         public virtual DbSet<CropRequirements> CropRequirements { get; set; }
+        public virtual DbSet<Tended> Tended { get; set; }
     }
 }

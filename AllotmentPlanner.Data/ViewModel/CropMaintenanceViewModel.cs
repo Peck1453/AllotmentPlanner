@@ -16,7 +16,7 @@ namespace AllotmentPlanner.Data.ViewModel
         public string tendName { get; set; }
         public int waterFrequency { get; set; }
         public int? tendFrequency { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public int gardenId { get; set; }
         public CropMaintenanceViewModel() { }
 

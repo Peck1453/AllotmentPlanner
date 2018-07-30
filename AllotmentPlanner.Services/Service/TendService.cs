@@ -65,6 +65,10 @@ namespace AllotmentPlanner.Services.Service
             return _tendDAO.loopTends(userId, plantedId);
         }
 
+        public Tended GetTendActionsperPlanted(int plantedId)
+        {
+            return _tendDAO.GetTendActionsperPlanted(plantedId);
+        }
 
 
         public void setAsTended(Tended tended)

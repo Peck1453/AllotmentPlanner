@@ -135,7 +135,7 @@
           <Key>
             <PropertyRef Name="tendedId" />
           </Key>
-          <Property Name="tendedId" Type="int" Nullable="false" />
+          <Property Name="tendedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cropId" Type="int" Nullable="false" />
           <Property Name="tendId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
@@ -244,9 +244,9 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
           <EntitySet Name="TendType" EntityType="AllotmentModel.TendType" />
           <EntitySet Name="CropRequirements" EntityType="AllotmentModel.CropRequirements" />
+          <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -378,16 +378,6 @@
           <End Type="AllotmentModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="AllotmentModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityType Name="Tended">
-          <Key>
-            <PropertyRef Name="tendedId" />
-          </Key>
-          <Property Name="tendedId" Type="Int32" Nullable="false" />
-          <Property Name="cropId" Type="Int32" Nullable="false" />
-          <Property Name="tendId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="plantedId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="TendType">
           <Key>
             <PropertyRef Name="tendId" />
@@ -405,6 +395,16 @@
           <Property Name="slugPellets" Type="Boolean" Nullable="false" />
           <Property Name="Feed" Type="Boolean" Nullable="false" />
           <Property Name="wateringInterval" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tended">
+          <Key>
+            <PropertyRef Name="tendedId" />
+          </Key>
+          <Property Name="tendedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cropId" Type="Int32" Nullable="false" />
+          <Property Name="tendId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="plantedId" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -536,17 +536,6 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Tended">
-            <EntityTypeMapping TypeName="AllotmentModel.Tended">
-              <MappingFragment StoreEntitySet="Tended">
-                <ScalarProperty Name="plantedId" ColumnName="plantedId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="tendId" ColumnName="tendId" />
-                <ScalarProperty Name="cropId" ColumnName="cropId" />
-                <ScalarProperty Name="tendedId" ColumnName="tendedId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TendType">
             <EntityTypeMapping TypeName="AllotmentModel.TendType">
               <MappingFragment StoreEntitySet="TendType">
@@ -564,6 +553,17 @@
                 <ScalarProperty Name="slugPellets" ColumnName="slugPellets" />
                 <ScalarProperty Name="birdNetting" ColumnName="birdNetting" />
                 <ScalarProperty Name="cropId" ColumnName="cropId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tended">
+            <EntityTypeMapping TypeName="AllotmentModel.Tended">
+              <MappingFragment StoreEntitySet="Tended">
+                <ScalarProperty Name="plantedId" ColumnName="plantedId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="tendId" ColumnName="tendId" />
+                <ScalarProperty Name="cropId" ColumnName="cropId" />
+                <ScalarProperty Name="tendedId" ColumnName="tendedId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

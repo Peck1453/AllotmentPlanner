@@ -129,7 +129,7 @@ namespace AllotmentPlanner.Controllers
 
 
 
-            return View();
+            return PartialView();
         }
 
         public void FillGarden(int cropId)
@@ -167,7 +167,7 @@ namespace AllotmentPlanner.Controllers
 
                 FillGarden(crop.cropId);
 
-            return View();
+            return PartialView();
         
             }
             catch

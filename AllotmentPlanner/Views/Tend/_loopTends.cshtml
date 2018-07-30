@@ -46,10 +46,24 @@
         <td>
             @Html.DisplayFor(modelItem => item.cropName)
         </td>*@
-        <tr>
-             @Html.ActionLink(item.tendName, "Details", new { cropId=item.cropId , tendId=item.tendId , plantedId =item.plantedId }) |
 
-        </tr>
+
+        @*@if (DateTime.Now > Convert.ToDateTime(item.Date).AddDays(Convert.ToDouble(item.tendFrequency))){*@
+             @Html.ActionLink(item.tendName, "setAsTended", new { controller = "TendAdmin", cropId = item.cropId, tendId = item.tendId, plantedId = item.plantedId })
+         @*}*@
+        @*@if (item.Date == null)
+        {
+            @Html.ActionLink(item.tendName, "setAsTended", new { controller = "TendAdmin", cropId = item.cropId, tendId = item.tendId, plantedId = item.plantedId })
+        }*@
+
+        @*@if (item.Date != null)
+        {
+            <td>
+                <input type="hidden" name="productItemId" id="productItemId" value="@item.tendName" />
+            </td>
+        }*@
+
+
         @*<td>
         @Html.DisplayFor(modelItem => item.waterFrequency)
     </td>
