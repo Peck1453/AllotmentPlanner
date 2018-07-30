@@ -16,7 +16,7 @@ namespace AllotmentPlanner.Data.IDAO
         IList<UserGardenViewModel> GetUserGarden(string userId);
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
 
-        Allotment GetLastGardenId();
+        int GetLastGardenId();
 
 
         //Get Specific Functions
@@ -25,14 +25,15 @@ namespace AllotmentPlanner.Data.IDAO
         Allotment GetAllotment(int gardenId);
         GardenViewModel GetGardenViewModel(string pcode);
         AllotmentAllocation GetAllocatedAllotment(int gardenId);
-        EditGardenViewModel GetGardenFromUser(string userId);
+        UserGardenViewModel GetGardenFromUser(string userId);
         Planted getPlantedCrop(int plantedId);
 
 
         //Edit Garden Functions
 
         void addGardenLocation(GardenLocation gardenLocation, Allotment allotment);
-        void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation);
+        void addGardentoAllotment(Allotment allotment);
+        void AllocateGarden();
         void editGardenLocation(GardenLocation gardenLocation);
         void editGarden(Allotment allotment);
         void DeleteGarden(GardenLocation gardenLocation);
@@ -43,8 +44,7 @@ namespace AllotmentPlanner.Data.IDAO
         void logCropAsPlanted(Planted planted);
         void logCropAsHarvested(Planted planted);
         void deletePlantedCrop(Planted planted);
-        void addcropstogarden(Planted crop, Planted garden);
-
+        void addcropstogarden(Planted planted);
 
         //Tend Functionalities
 

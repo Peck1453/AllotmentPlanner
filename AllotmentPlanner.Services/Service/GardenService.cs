@@ -43,13 +43,10 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.getPlantedCrop(plantedId);
         }
 
-
-        public Allotment GetLastGardenId()
+        public int GetLastGardenId()
         {
             return _gardenDAO.GetLastGardenId();
         }
-
-
 
         public GardenLocation GetGardenLocation(string pcode)
         {
@@ -76,11 +73,15 @@ namespace AllotmentPlanner.Services.Service
 
         }
 
-        public void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation)
+        public void addGardentoAllotment(Allotment allotment)
         {
-            _gardenDAO.addGardentoAllotment(allotment, allotmentAllocation);
+            _gardenDAO.addGardentoAllotment(allotment);
         }
-
+        
+        public void AllocateGarden()
+        {
+            _gardenDAO.AllocateGarden();
+        }
 
         public void editGardenLocation(GardenLocation gardenLocation)
         {
@@ -115,26 +116,23 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.ListSelectedCrops(userID);
         }
 
-        public void addcropstogarden(Planted crop, Planted garden)
+        public void addcropstogarden(Planted planted)
         {
 
-            _gardenDAO.addcropstogarden(crop, garden);
+            _gardenDAO.addcropstogarden(planted);
         }
 
 
-        public EditGardenViewModel GetGardenFromUser(string userId)
+        public UserGardenViewModel GetGardenFromUser(string userId)
         {
-
             return _gardenDAO.GetGardenFromUser(userId);
         }
 
-
-
         public IList<UserGardenViewModel>GetUserGarden(string userId)
         {
-
             return _gardenDAO.GetUserGarden(userId);
         }
+
         public void logCropAsPlanted(Planted planted)
         {
 

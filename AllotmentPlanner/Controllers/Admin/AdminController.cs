@@ -18,6 +18,7 @@ namespace AllotmentPlanner.Controllers.Admin
             _context = new AllotmentPlanner.Models.ApplicationDbContext();
         }
 
+        [HttpGet]
         public ActionResult GetUsers()
         {
             return View(_context.Users.ToList());
@@ -37,7 +38,9 @@ namespace AllotmentPlanner.Controllers.Admin
                 _context.Roles.Add(
                     new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
                     { Name = collection["RoleName"] });
+
                 _context.SaveChanges();
+
                 return RedirectToAction("GetRoles");
             }
             catch
@@ -46,6 +49,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
 
+        [HttpGet]
         public ActionResult GetRoles()
         {
             return View(_context.Roles.ToList());
@@ -54,8 +58,6 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpGet]
         public ActionResult ManageUserRoles()
         {
-
-
             //populate roles for the view dropdown
             var roleList = _context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = roleList;
@@ -75,19 +77,24 @@ namespace AllotmentPlanner.Controllers.Admin
                 _context.Users.Where
                 (u => u.UserName.Equals(UserName,
                     StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+
             var um = new UserManager<ApplicationUser>
                 (new UserStore<ApplicationUser>(_context));
+
             var idResult = um.AddToRole(user.Id, RoleName);
+
             // prepopulate roles for the view dropdown
             var roleList = _context.Roles.OrderBy
                 (r => r.Name).ToList().Select
                 (rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = roleList;
+
             // prepopulate users for the view dropdown
             var userList = _context.Users.OrderBy
                 (u => u.UserName).ToList().Select
                 (uu => new SelectListItem { Value = uu.UserName.ToString(), Text = uu.UserName }).ToList();
             ViewBag.Users = userList;
+
             return View("ManageUserRoles");
         }
 
@@ -96,8 +103,6 @@ namespace AllotmentPlanner.Controllers.Admin
         {
             return View();
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -109,9 +114,8 @@ namespace AllotmentPlanner.Controllers.Admin
                 var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
                 ViewBag.RolesForThisUser = um.GetRoles(user.Id);
             }
+
             return View("GetRolesForUserConfirmed");
         }
-
-
     }
 }

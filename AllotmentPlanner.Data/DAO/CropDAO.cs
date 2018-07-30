@@ -12,19 +12,19 @@ namespace AllotmentPlanner.Data.DAO
     public class CropDAO : ICropDAO
     {
         private AllotmentEntities _context;
+
         public CropDAO()
         {
-
             _context = new AllotmentEntities();
         }
-
 
         public IList<Crop> GetCrops()
         {
             IQueryable<Crop> _crops;
-            _crops = from Crop
-                     in _context.Crop
+
+            _crops = from Crop in _context.Crop
                      select Crop;
+
             return _crops.ToList();
         }
 
@@ -32,8 +32,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             IQueryable<Crop> _crop;
 
-            _crop = from crop
-                    in _context.Crop
+            _crop = from crop in _context.Crop
                     where crop.cropId == id
                     select crop;
 
@@ -45,8 +44,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             IQueryable<CropHarvest> _cropharv;
 
-            _cropharv = from cropharv
-                    in _context.CropHarvest
+            _cropharv = from cropharv in _context.CropHarvest
                         where cropharv.cropId == id
                         select cropharv;
 
@@ -57,8 +55,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             IQueryable<CropRequirements> _cropreq;
 
-            _cropreq = from cropreq
-                       in _context.CropRequirements
+            _cropreq = from cropreq in _context.CropRequirements
                        where cropreq.cropId == id
                        select cropreq;
 
@@ -90,49 +87,40 @@ namespace AllotmentPlanner.Data.DAO
                                                                    wateringInterval = cropreq.wateringInterval
                                                                };
             return _cropDataViewModel.ToList().First();
-
-
-
         }
-
-
-
-
 
         public void addCrop(Crop crop)
         {
-            Crop myCrop = new Crop();
-            myCrop.cropName = crop.cropName;
-            myCrop.cropSize = crop.cropSize;
+            Crop myCrop = new Crop()
+            {
+                cropName = crop.cropName,
+                cropSize = crop.cropSize
+            };
 
             _context.Crop.Add(myCrop);
             _context.SaveChanges();
-
         }
 
-        public void addCropHarvest(CropHarvest croph)
+        public void addCropHarvest(CropHarvest cropHarvest)
         {
-
-
-
-            _context.CropHarvest.Add(croph);
+            _context.CropHarvest.Add(cropHarvest);
             _context.SaveChanges();
         }
 
-        public void addCropRequirements(CropRequirements cropr)
+        public void addCropRequirements(CropRequirements cropRequirements)
         {
-
-            _context.CropRequirements.Add(cropr);
+            _context.CropRequirements.Add(cropRequirements);
             _context.SaveChanges();
         }
 
         public void editCrop(Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements)
         {
             Crop myCrop = GetCrop(crop.cropId);
-            CropHarvest myCroph = GetCropHarvest(cropHarvest.cropId);
-            CropRequirements myCropr = GetCropRequirements(cropRequirements.cropId);
+
             myCrop.cropName = crop.cropName;
             myCrop.cropSize = crop.cropSize;
+
+            CropHarvest myCroph = GetCropHarvest(cropHarvest.cropId);
 
             myCroph.earliestHarvest = cropHarvest.earliestHarvest;
             myCroph.latestHarvest = cropHarvest.latestHarvest;
@@ -140,64 +128,32 @@ namespace AllotmentPlanner.Data.DAO
             myCroph.latestPlant = cropHarvest.latestPlant;
             myCroph.growthTime = cropHarvest.growthTime;
 
+            CropRequirements myCropr = GetCropRequirements(cropRequirements.cropId);
+
             myCropr.birdNetting = cropRequirements.birdNetting;
             myCropr.slugPellets = cropRequirements.slugPellets;
             myCropr.Feed = cropRequirements.Feed;
             myCropr.wateringInterval = cropRequirements.wateringInterval;
 
             _context.SaveChanges();
-
-
         }
-        //public void editCropHarvest(CropDataViewModel cropDataViewModel)
-        //{
-
-        //    myCrop.earliestHarvest = cropDataViewModel.EarlyHarvest;
-        //    myCrop.latestHarvest = cropDataViewModel.LateHarvest;
-        //    myCrop.earliestPlant = cropDataViewModel.EarlyPlanting;
-        //    myCrop.latestPlant = cropDataViewModel.LatePlanting;
-        //    myCrop.growthTime = cropDataViewModel.growthTime;
-
-        //    _context.SaveChanges();
-
-
-        //}
-        //public void editCropRequirements(CropDataViewModel cropDataViewModel)
-        //{
-        //    CropRequirements myCrop = GetCropRequirements(cropDataViewModel.CropId);
-
-        //    myCrop.birdNetting = cropDataViewModel.birdNetting;
-        //    myCrop.slugPellets = cropDataViewModel.slugPellets;
-        //    myCrop.Feed = cropDataViewModel.Feed;
-        //    myCrop.Water = cropDataViewModel.Water;
-
-        //    _context.SaveChanges();
-
-
-        //}
-
 
         public void DeleteCrop(Crop crop)
         {
-            Crop myCrop = GetCrop(crop.cropId);
-
             _context.Crop.Remove(crop);
             _context.SaveChanges();
         }
+
         public void DeleteCropHarvest(CropHarvest cropHarvest)
         {
-            CropHarvest myCrop = GetCropHarvest(cropHarvest.cropId);
-
             _context.CropHarvest.Remove(cropHarvest);
             _context.SaveChanges();
         }
-        public void DeleteCropRequirements(CropRequirements cropRequirements)
-        {
-            
-                CropRequirements myCropRequirements = GetCropRequirements(cropRequirements.cropId);
 
-                _context.CropRequirements.Remove(cropRequirements);
-                _context.SaveChanges();
+        public void DeleteCropRequirements(CropRequirements cropRequirements)
+        {       
+            _context.CropRequirements.Remove(cropRequirements);
+            _context.SaveChanges();
         }
     }
 }

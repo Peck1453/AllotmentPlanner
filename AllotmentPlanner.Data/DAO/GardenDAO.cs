@@ -15,29 +15,31 @@ namespace AllotmentPlanner.Data.DAO
         {
             _context = new AllotmentEntities();
         }
-        public IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations()
+        public IList<GardenLocation> GetGardenLocations()
         {
             IQueryable<GardenLocation> _gardens;
-            _gardens = from GardenLocation
-                    in _context.GardenLocation
+
+            _gardens = from GardenLocation in _context.GardenLocation
                        select GardenLocation;
+
             return _gardens.ToList();
         }
-        public Allotment GetLastGardenId()
+
+        public int GetLastGardenId()
         {
             IQueryable<Allotment> _gardens;
-            _gardens = from Allotment
-                       in _context.Allotment
-                       orderby Allotment.gardenId ascending
+
+            _gardens = from Allotment in _context.Allotment
+                       orderby Allotment.gardenId descending
                        select Allotment;
-            return _gardens.ToList().First();
+
+            return _gardens.ToList().First().gardenId;
         }
         public GardenLocation GetGardenLocation(string pcode)
         {
             IQueryable<GardenLocation> _garden;
 
-            _garden = from garden
-                      in _context.GardenLocation
+            _garden = from garden in _context.GardenLocation
                       where garden.postCode == pcode
                       select garden;
 
@@ -48,8 +50,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             IQueryable<Allotment> _allotment;
 
-            _allotment = from allotment
-                    in _context.Allotment
+            _allotment = from allotment in _context.Allotment
                          where allotment.gardenId == gardenId
                          select allotment;
 
@@ -60,8 +61,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             IQueryable<AllotmentAllocation> _allotment;
 
-            _allotment = from allocated
-                    in _context.AllotmentAllocation
+            _allotment = from allocated in _context.AllotmentAllocation
                          where allocated.gardenId == gardenId
                          select allocated;
 
@@ -72,14 +72,12 @@ namespace AllotmentPlanner.Data.DAO
         {
             IQueryable<Planted> _planted;
 
-            _planted = from planted
-                      in _context.Planted
+            _planted = from planted in _context.Planted
                        where planted.plantedId == plantedId
                        select planted;
 
             return _planted.ToList().First();
         }
-
 
         public IList<GardenViewModel> ViewGardensinLocation(string pcode)
         {
@@ -92,57 +90,38 @@ namespace AllotmentPlanner.Data.DAO
                                  && allot.gardenId == allocation.gardenId
                                  && allocation.userId == user.Id
                                  && allocation.dateTo == null
-                                 select new
+                                 select new GardenViewModel
                                  {
                                      postCode = allot.postCode,
                                      Name = location.Name,
                                      gardenId = allot.gardenId,
-                                     Size = allot.size,
+                                     size = allot.size,
                                      AssignedGardener = user.UserName
-                                 }).ToList().Select(GardensList => new GardenViewModel()
-                                 {
-                                     postCode = GardensList.postCode,
-                                     Name = GardensList.Name,
-                                     gardenId = GardensList.gardenId,
-                                     size = GardensList.Size,
-                                     AssignedGardener = GardensList.AssignedGardener
-                                 }
-                                 );
+                                 });
+
             return listWithEmpty.ToList();
         }
+
         public IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode)
         {
             var listWithEmpty = (from allot in _context.Allotment
                                  from allocation in _context.AllotmentAllocation
                                  from location in _context.GardenLocation
-                                     //from user in _context.AspNetUsers
                                  where allot.postCode == pcode
                                  && location.postCode == allot.postCode
                                  && allot.gardenId == allocation.gardenId
                                  && allocation.userId == null
                                  && allocation.allocationId == allocation.allocationId
-                                 //&& allocation.dateTo == null
-                                 select new
+                                 select new GardenViewModel
                                  {
                                      postCode = allot.postCode,
                                      Name = location.Name,
                                      gardenId = allot.gardenId,
-                                     Size = allot.size,
-                                     //AssignedGardener = user.UserName
+                                     size = allot.size
+                                 });
 
-                                 }).ToList().Select(GardensList => new GardenViewModel()
-                                 {
-                                     postCode = GardensList.postCode,
-                                     Name = GardensList.Name,
-                                     gardenId = GardensList.gardenId,
-                                     size = GardensList.Size,
-                                     //AssignedGardener = GardensList.AssignedGardener
-
-                                 }
-                                 );
             return listWithEmpty.ToList();
         }
-
 
         public GardenViewModel GetGardenViewModel(string pcode)
         {
@@ -174,40 +153,50 @@ namespace AllotmentPlanner.Data.DAO
             _context.SaveChanges();
         }
 
-        public void addGardentoAllotment(Allotment allotment, AllotmentAllocation allotmentAllocation)
+        public void addGardentoAllotment(Allotment allotment)
         {
             _context.Allotment.Add(allotment);
-            _context.AllotmentAllocation.Add(allotmentAllocation);
             _context.SaveChanges();
         }
 
+        public void AllocateGarden()
+        {
+            int gardenId = GetLastGardenId();
+
+            AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+            {
+                gardenId = gardenId
+            };
+
+            _context.AllotmentAllocation.Add(myallotmentAllocation);
+            _context.SaveChanges();
+        }
 
         //Methods for adding and removing Gardeners from garden
 
         public void assignGardenerToGarden(AllotmentAllocation allotmentAllocation)
         {
             AllotmentAllocation myAlloction = GetAllocatedAllotment(allotmentAllocation.gardenId);
+
             myAlloction.userId = allotmentAllocation.userId;
             myAlloction.dateFrom = allotmentAllocation.dateFrom;
+
             _context.SaveChanges();
         }
 
         public void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation)
         {
             AllotmentAllocation myAlloction = GetAllocatedAllotment(allotmentAllocation.gardenId);
+
             myAlloction.dateTo = allotmentAllocation.dateTo;
+
             _context.SaveChanges();
         }
-
-
-
-
 
         public void editGardenLocation(GardenLocation gardenLocation)
         {
             GardenLocation mygarden = GetGardenLocation(gardenLocation.postCode);
-
-
+            
             mygarden.Name = gardenLocation.Name;
             mygarden.Owner = gardenLocation.Owner;
 
@@ -216,7 +205,6 @@ namespace AllotmentPlanner.Data.DAO
 
         public void editGarden(Allotment allotment)
         {
-
             Allotment myallotment = GetAllotment(allotment.gardenId);
 
             myallotment.size = allotment.size;
@@ -225,26 +213,26 @@ namespace AllotmentPlanner.Data.DAO
             _context.SaveChanges();
         }
 
-
-
-
-
         public void DeleteGarden(GardenLocation gardenLocation)
         {
             GardenLocation myGarden = GetGardenLocation(gardenLocation.postCode);
 
             _context.GardenLocation.Remove(myGarden);
+
             _context.SaveChanges();
         }
 
-        public void deleteGardenAllotment(Allotment allotment)
+        // DS - I don't think this is used anywhere
+        public void DeleteGardenAllotment(Allotment allotment)
         {
             Allotment myallotment = GetAllotment(allotment.gardenId);
 
             _context.Allotment.Add(allotment);
+
             _context.SaveChanges();
         }
 
+        // DS - I also don't think this is used anywhere
         public EditGardenViewModel ViewSelectedCrops(string userID)
         {
             IQueryable<EditGardenViewModel> _selectedcrops;
@@ -268,10 +256,43 @@ namespace AllotmentPlanner.Data.DAO
                              };
 
             return _selectedcrops.ToList().FirstOrDefault();
-
-
         }
 
+        //public IList<EditGardenViewModel> ListSelectedCrops(string userId)
+        //{
+        //    var listWithEmpty = (from allocation in _context.AllotmentAllocation
+        //                         from crop in _context.Crop
+        //                         from allot in _context.Allotment
+        //                         from croph in _context.CropHarvest
+        //                         from planted in _context.Planted
+        //                         where allocation.userId == userId
+        //                         && allocation.gardenId == planted.gardenId
+        //                         && allot.gardenId == planted.gardenId
+        //                         && crop.cropId == planted.cropId
+        //                         && croph.cropId == planted.cropId
+        //                         && crop.cropId == planted.cropId
+        //                         && allocation.dateTo == null
+        //                         && planted.dateOut == null
+        //                         // DS - Is this incomplete?
+        //                         // join plantedjoin in _context.Planted on allocation.gardenID equals plantedjoin.gardenID
+        //                         // from plantedjoin in ThisList.DefaultIfEmpty()
+        //                         select new EditGardenViewModel
+        //                         {
+        //                             gardenId = allocation.gardenId,
+        //                             cropId = crop.cropId,
+        //                             plantedId = planted.plantedId,
+        //                             gardenSize = allot.size,
+        //                             cropName = crop.cropName,
+        //                             cropSize = crop.cropSize,
+        //                             earliestPlant = croph.earliestPlant,
+        //                             latestPlant = croph.latestPlant,
+        //                             earliestHarvest = croph.earliestHarvest,
+        //                             lastestHarvest = croph.latestHarvest
+        //                         });
+
+        //    return listWithEmpty.ToList();
+        //}
+        
         public IList<EditGardenViewModel> ListSelectedCrops(string userId)
         {
             var listWithEmpty = (from allocation in _context.AllotmentAllocation
@@ -285,72 +306,53 @@ namespace AllotmentPlanner.Data.DAO
                                  && crop.cropId == planted.cropId
                                  && croph.cropId == planted.cropId
                                  && crop.cropId == planted.cropId
-                                 && allocation.dateTo == null
+                                 // && allocation.dateTo == null
                                  && planted.dateOut == null
-
-                                 //join plantedjoin in _context.Planted on allocation.gardenID equals plantedjoin.gardenID
-                                 //from plantedjoin in ThisList.DefaultIfEmpty()
-                                 select new
+                                 // DS - Is this incomplete?
+                                 // join plantedjoin in _context.Planted on allocation.gardenID equals plantedjoin.gardenID
+                                 // from plantedjoin in ThisList.DefaultIfEmpty()
+                                 select new EditGardenViewModel
                                  {
-                                     GardenId = allocation.gardenId,
-                                     CropId = crop.cropId,
+                                     gardenId = allocation.gardenId,
+                                     cropId = crop.cropId,
                                      plantedId = planted.plantedId,
-                                     GardenSize = allot.size,
-                                     CropName = crop.cropName,
-                                     CropSize = crop.cropSize,
-                                     EarliestPlant = croph.earliestPlant,
-                                     LatestPlant = croph.latestPlant,
-                                     EarliestHarvest = croph.earliestHarvest,
-                                     LastestHarvest = croph.latestHarvest
-                                 }).ToList().Select(CropList => new EditGardenViewModel()
-                                 {
-                                     gardenId = CropList.GardenId,
-                                     cropId = CropList.CropId,
-                                     plantedId = CropList.plantedId,
-                                     gardenSize = CropList.GardenSize,
-                                     cropName = CropList.CropName,
-                                     cropSize = CropList.CropSize,
-                                     earliestPlant = CropList.EarliestPlant,
-                                     latestPlant = CropList.LatestPlant,
-                                     earliestHarvest = CropList.EarliestHarvest,
-                                     lastestHarvest = CropList.LastestHarvest
-                                 }
-                                     );
+                                     gardenSize = allot.size,
+                                     cropName = crop.cropName,
+                                     cropSize = crop.cropSize,
+                                     earliestPlant = croph.earliestPlant,
+                                     latestPlant = croph.latestPlant,
+                                     earliestHarvest = croph.earliestHarvest,
+                                     lastestHarvest = croph.latestHarvest
+                                 });
+
             return listWithEmpty.ToList();
         }
 
-        public EditGardenViewModel GetGardenFromUser(string userId)
+        public UserGardenViewModel GetGardenFromUser(string userId)
         {
-            IQueryable<EditGardenViewModel> _usergarden;
+            IQueryable<UserGardenViewModel> _usergarden;
+
             _usergarden = from allot in _context.Allotment
                           from allocation in _context.AllotmentAllocation
-                          from planted in _context.Planted
-
                           where allocation.userId == userId
-                          select new EditGardenViewModel
+                          select new UserGardenViewModel
                           {
-                              gardenId = allot.gardenId,
+                              gardenId = allocation.gardenId,
                           };
 
             return _usergarden.ToList().First();
         }
-        public void addcropstogarden(Planted crop, Planted garden)
+
+        // Adds a crop to a garden
+        public void addcropstogarden(Planted planted)
         {
-            Planted setPlanted = new Planted
-            {
-                gardenId = garden.gardenId,
-                cropId = crop.cropId
-            };
-
-            _context.Planted.Add(setPlanted);
+            _context.Planted.Add(planted);
             _context.SaveChanges();
-
-
         }
-
 
         public IList<UserGardenViewModel> GetUserGarden(string userId)
         {
+            // DS - This still needs implementing
             // var planted =  use the method to find the planted date
             // Date plantedDate = planted.plantedDate (or somehting like this)
             // var growth = get the crop harvest growth time
@@ -361,8 +363,7 @@ namespace AllotmentPlanner.Data.DAO
             // DateTime plantedDate = _context.Planted.PlantedDate;
             // int growthTime = _context.CropHarvest.GrowthTime;
             // Date estHarvestDate = plantedDate.AddDays(growthTime);
-
-            
+                        
             var listWithEmpty = (from allocation in _context.AllotmentAllocation
                                  from crop in _context.Crop
                                  from allot in _context.Allotment
@@ -378,41 +379,26 @@ namespace AllotmentPlanner.Data.DAO
                                  && crop.cropId == planted.cropId
                                  && allocation.dateTo == null
                                  && planted.dateOut == null
-
+                                 // DS - Is this incomplete?
                                  //join plantedjoin in _context.Planted on allocation.gardenID equals plantedjoin.gardenID
                                  //from plantedjoin in ThisList.DefaultIfEmpty()
-                                 select new
+                                 select new UserGardenViewModel
                                  {
-                                     GardenId = allocation.gardenId,
-                                     CropId = crop.cropId,
+                                     gardenId = allocation.gardenId,
+                                     cropId = crop.cropId,
                                      plantedId = planted.plantedId,
-                                     CropName = crop.cropName,
-                                     CropSize = crop.cropSize,
+                                     cropName = crop.cropName,
+                                     cropSize = crop.cropSize,
                                      growthTime = croph.growthTime,
                                      dateIn = planted.dateIn,
                                      dateOut = planted.dateOut,
-                                     EarliestPlant = croph.earliestPlant,
-                                     LatestPlant = croph.latestPlant,
-                                     EarliestHarvest = croph.earliestHarvest,
-                                     EstimatedHarvest = planted.dateIn,
-                                     LastestHarvest = croph.latestHarvest
-                                 }).ToList().Select(gardenList => new UserGardenViewModel()
-                                 {
-                                     gardenId = gardenList.GardenId,
-                                     cropId = gardenList.CropId,
-                                     plantedId = gardenList.plantedId,
-                                     cropName = gardenList.CropName,
-                                     cropSize = gardenList.CropSize,
-                                     growthTime = gardenList.growthTime,
-                                     dateIn = gardenList.dateIn,
-                                     dateOut = gardenList.dateOut,
-                                     earliestPlant = gardenList.EarliestPlant,
-                                     latestPlant = gardenList.LatestPlant,
-                                     earliestHarvest = gardenList.EarliestHarvest,
-                                     estimatedHarvestDate = gardenList.EstimatedHarvest,
-                                     lastestHarvest = gardenList.LastestHarvest
-                                 }
-                                     );
+                                     earliestPlant = croph.earliestPlant,
+                                     latestPlant = croph.latestPlant,
+                                     earliestHarvest = croph.earliestHarvest,
+                                     estimatedHarvestDate = planted.dateIn,
+                                     lastestHarvest = croph.latestHarvest
+                                 });
+
             return listWithEmpty.ToList();
         }
 
@@ -423,9 +409,9 @@ namespace AllotmentPlanner.Data.DAO
                 cropId = tended.cropId,
                 tendId = tended.tendId,
                 Date = tended.Date,
-                plantedId = tended.plantedId,
-
+                plantedId = tended.plantedId
             };
+
             _context.Tended.Add(myTended);
             _context.SaveChanges();
         }
@@ -443,7 +429,7 @@ namespace AllotmentPlanner.Data.DAO
                                  && planted.cropId == crop.cropId
                                  && allocation.gardenId == planted.gardenId
                                  && allocation.userId == userId
-                                 select new
+                                 select new CropMaintenanceViewModel
                                  {
                                      cropId = crop.cropId,
                                      tendId = tends.tendId,
@@ -452,40 +438,28 @@ namespace AllotmentPlanner.Data.DAO
                                      tendName = tends.tendName,
                                      waterFrequency = cropr.wateringInterval,
                                      Date = tended.Date,
-                                     gardenId = planted.gardenId,
+                                     gardenId = planted.gardenId
+                                 });
 
-
-                                 }).ToList().Select(maintencanceList => new CropMaintenanceViewModel()
-                                 {
-                                     cropId = maintencanceList.cropId,
-                                     tendId = maintencanceList.tendId,
-                                     plantedId = maintencanceList.plantedId,
-                                     cropName = maintencanceList.cropName,
-                                     tendName = maintencanceList.tendName,
-                                     waterFrequency = maintencanceList.waterFrequency,
-                                     Date = maintencanceList.Date,
-                                     gardenId = maintencanceList.gardenId,
-
-                                 }
-                                );
             return listWithEmpty.ToList();
-
-
         }
 
         public void logCropAsPlanted(Planted planted)
         {
             Planted myPlanted = getPlantedCrop(planted.plantedId);
-            myPlanted.dateIn = planted.dateIn;
-            _context.SaveChanges();
 
+            myPlanted.dateIn = planted.dateIn;
+
+            _context.SaveChanges();
         }
 
 
         public void logCropAsHarvested(Planted planted)
         {
             Planted myPlanted = getPlantedCrop(planted.plantedId);
+
             myPlanted.dateOut = planted.dateOut;
+
             _context.SaveChanges();
 
         }
@@ -494,20 +468,5 @@ namespace AllotmentPlanner.Data.DAO
             _context.Planted.Remove(planted);
             _context.SaveChanges();
         }
-
     }
-
-
-
-
-
-//    public calculateSeedsNeeded()
-//{
-
-
-
-//}
-
-
-
  }

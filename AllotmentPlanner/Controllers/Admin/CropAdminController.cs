@@ -12,12 +12,14 @@ namespace AllotmentPlanner.Controllers.Admin
     public class CropAdminController : ApplicationController
     {
         // GET: CropAdmin
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: CropAdmin/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             return View();
@@ -43,7 +45,8 @@ namespace AllotmentPlanner.Controllers.Admin
                     cropName = cropDataViewModel.CropName,
                     cropSize = cropDataViewModel.SpaceRequired
                 };
-            _cropService.addCrop(mycrop);
+                _cropService.addCrop(mycrop);
+
                 CropHarvest myCroph = new CropHarvest
                 {
                     cropId = cropDataViewModel.CropId,
@@ -53,9 +56,9 @@ namespace AllotmentPlanner.Controllers.Admin
                     latestPlant = cropDataViewModel.LatePlanting,
                     growthTime = cropDataViewModel.growthTime,
                 };
+                _cropService.addCropHarvest(myCroph);
 
-            _cropService.addCropHarvest(myCroph);
-            _cropService.addCropRequirements(cropr);
+                _cropService.addCropRequirements(cropr);
                 
                 return RedirectToAction("Crops", new { controller = "Crop" });
             }
@@ -79,36 +82,36 @@ namespace AllotmentPlanner.Controllers.Admin
             try
             {
                 Crop myCrop = new Crop
-            {
-                cropId = cropDataViewModel.CropId,
-                cropName = cropDataViewModel.CropName,
-                cropSize = cropDataViewModel.SpaceRequired
-            };
-
-
-            CropHarvest myCroph = new CropHarvest
-            {
-                cropId = cropDataViewModel.CropId,
-                earliestHarvest = cropDataViewModel.EarlyHarvest,
-                latestHarvest = cropDataViewModel.LateHarvest,
-                earliestPlant = cropDataViewModel.EarlyPlanting,
-                latestPlant = cropDataViewModel.LatePlanting,
-                growthTime = cropDataViewModel.growthTime,
+                {
+                    cropId = cropDataViewModel.CropId,
+                    cropName = cropDataViewModel.CropName,
+                    cropSize = cropDataViewModel.SpaceRequired
                 };
 
 
-            CropRequirements myCropr = new CropRequirements
-            {
-                cropId = cropRequirements.cropId,
-                birdNetting = cropRequirements.birdNetting,
-                slugPellets = cropRequirements.slugPellets,
-                Feed = cropRequirements.Feed,
-                wateringInterval = cropRequirements.wateringInterval,
-            };
+                CropHarvest myCroph = new CropHarvest
+                {
+                    cropId = cropDataViewModel.CropId,
+                    earliestHarvest = cropDataViewModel.EarlyHarvest,
+                    latestHarvest = cropDataViewModel.LateHarvest,
+                    earliestPlant = cropDataViewModel.EarlyPlanting,
+                    latestPlant = cropDataViewModel.LatePlanting,
+                    growthTime = cropDataViewModel.growthTime
+                };
 
+
+                CropRequirements myCropr = new CropRequirements
+                {
+                    cropId = cropRequirements.cropId,
+                    birdNetting = cropRequirements.birdNetting,
+                    slugPellets = cropRequirements.slugPellets,
+                    Feed = cropRequirements.Feed,
+                    wateringInterval = cropRequirements.wateringInterval
+                };
+
+                // DS - I'd seperate this off into different methods to help identify, if anything went wrong, where the problem is
                 _cropService.editCrop(myCrop, myCroph, myCropr);
-
-
+                
                 return RedirectToAction("Crops", new { controller = "Crop" });
             }
             catch
@@ -118,6 +121,7 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         // GET: CropAdmin/Delete/5
+        [HttpGet]
         public ActionResult DeleteCrop(int id) //Pulls the method for displaying the requested Product
         {
             return View(_cropService.GetCropViewModel(id));
@@ -128,23 +132,16 @@ namespace AllotmentPlanner.Controllers.Admin
         {
             try
             {
-                {
-                    Crop myCrop = _cropService.GetCrop(id);
-                    _cropService.DeleteCrop(myCrop);
-                }
+                Crop myCrop = _cropService.GetCrop(id);
+                _cropService.DeleteCrop(myCrop);
 
-                {
-                    CropHarvest myCropHarvest = _cropService.GetCropHarvest(id);
-                    _cropService.DeleteCropHarvest(myCropHarvest);
+                CropHarvest myCropHarvest = _cropService.GetCropHarvest(id);
+                _cropService.DeleteCropHarvest(myCropHarvest);
 
-                }
+                CropRequirements myCropRequirements = _cropService.GetCropRequirements(id);
+                _cropService.DeleteCropRequirements(myCropRequirements);
 
-                {
-                    CropRequirements myCropRequirements = _cropService.GetCropRequirements(id);
-                    _cropService.DeleteCropRequirements(myCropRequirements);
-
-                }
-
+                // DS -  Do you not want to redirect to different places on success/failure? If not, there's no point of the catch.
             }
             catch
             {

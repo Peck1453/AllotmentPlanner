@@ -13,8 +13,8 @@ namespace AllotmentPlanner.Controllers.Admin
 {
     public class TendAdminController : ApplicationController
     {
-        [HttpGet]
         // GET: TendAdmin/Create
+        [HttpGet]
         public ActionResult AddTend()
         {
             return View();
@@ -59,6 +59,7 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         // GET: TendAdmin/Delete/5
+        [HttpGet]
         public ActionResult DeleteTend(int id)
         {
             return View(_tendService.getTend(id));
@@ -84,7 +85,6 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpGet]
         public ActionResult setAsTended(Tended tended, CropMaintenanceViewModel cropMaintenance)
         {
-
             var userId = User.Identity.GetUserId();
             Tended myTended = new Tended
             {
@@ -97,7 +97,6 @@ namespace AllotmentPlanner.Controllers.Admin
             _tendService.setAsTended(myTended);
 
             return RedirectToAction("GetUserGarden", new { controller = "Garden" });
-
         }
     }
 }

@@ -35,6 +35,7 @@
             @Html.DisplayFor(modelItem => item.Owner)
         </td>
         <td>
+            @* DS - You will need to pass an identifier to this action as a garden id for it to find the relevant garden to edit. Not sure what that is. *@
             @Html.ActionLink("Edit", "EditGardenLocation", new { controller = "GardenAdmin", pcode = item.postCode }) |
             @Html.ActionLink("View Gardens at Location", "ViewGardensinLocation", new { pcode = item.postCode }) |
             @*@Html.ActionLink("Details", "GardenDetails", new { pcode = item.postCode }) |*@

@@ -15,12 +15,11 @@ namespace AllotmentPlanner.Controllers.Admin
     {
         private AllotmentPlanner.Models.ApplicationDbContext _context;
 
-
         public GardenAdminController()
         {
             _context = new AllotmentPlanner.Models.ApplicationDbContext();
-
         }
+
         // GET: CropAdmin/Create
         [HttpGet]
         public ActionResult AddGardenLocation()
@@ -32,10 +31,10 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpPost]
         public ActionResult AddGardenLocation(GardenLocation garden, Allotment allotment)
         {
-
             try
             {
                 _gardenService.addGardenLocation(garden, allotment);
+
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
             catch
@@ -43,8 +42,9 @@ namespace AllotmentPlanner.Controllers.Admin
                 return View();
             }
         }
+
         [HttpGet]
-        public ActionResult AddGardentoLocation(int id, GardenViewModel garden)
+        public ActionResult AddGardentoLocation()
         {
             List<SelectListItem> postCodeList = new List<SelectListItem>();
             foreach (var location in _gardenService.GetGardenLocations())
@@ -54,31 +54,25 @@ namespace AllotmentPlanner.Controllers.Admin
                     {
                         Text = location.postCode,
                         Value = location.postCode.ToString()
-
                     });
-
-
             }
-            ViewBag.postCodeList = postCodeList;
 
+            ViewBag.postCodeList = postCodeList;
 
             return View();
         }
-
-
+        
         [HttpPost]
-        public ActionResult AddGardentoLocation(Allotment allotment, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
+        public ActionResult AddGardentoLocation(Allotment allotment)
         {
             try
             {
+                // DS - Adds a new garden to an allotment
+                _gardenService.addGardentoAllotment(allotment);
 
-                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
-                {
-                    gardenId = allotment.gardenId
+                // DS - Allocates the most recent garden
+                _gardenService.AllocateGarden();
 
-
-                };
-                _gardenService.addGardentoAllotment(allotment, myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
 
             }
@@ -86,11 +80,9 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 return View();
             }
-
         }
 
         [HttpGet]
-
         // GET: GardenAdmin/Edit/5
         public ActionResult EditGarden(string pcode)
         {
@@ -101,52 +93,48 @@ namespace AllotmentPlanner.Controllers.Admin
         [HttpPost]
         public ActionResult EditGarden(string pcode, GardenViewModel gardenViewModel, Allotment allotment)
         {
+            try
             {
-                try
+                Allotment myAllotment = new Allotment
                 {
+                    gardenId = gardenViewModel.gardenId,
+                    size = gardenViewModel.size,
+                    postCode = gardenViewModel.postCode
+                };
 
-                    Allotment myAllotment = new Allotment
-                    {
-                        gardenId = gardenViewModel.gardenId,
-                        size = gardenViewModel.size,
-                        postCode = gardenViewModel.postCode
-                    };
-
-                    _gardenService.editGarden(myAllotment);
-
-
-                    return RedirectToAction("Gardens", new { controller = "Garden" });
-                }
-                catch
-                {
-                    return View();
-                }
+                _gardenService.editGarden(myAllotment);
+                
+                return RedirectToAction("Gardens", new { controller = "Garden" });
+            }
+            catch
+            {
+                return View();
             }
         }
+
         [HttpGet]
         // GET: GardenAdmin/Edit/5
-        public ActionResult editGardenLocation(int gardenid)
+        public ActionResult editGardenLocation(string pcode)
         {
-            return View(_gardenService.GetAllotment(gardenid));
+            return View(_gardenService.GetGardenLocation(pcode));
         }
 
         // POST: GardenAdmin/Edit/5
         [HttpPost]
-        public ActionResult editGardenLocation(int gardenid, GardenViewModel gardenViewModel, GardenLocation location)
+        public ActionResult editGardenLocation(GardenLocation location)
         {
             {
                 try
                 {
                     GardenLocation mygardenLocation = new GardenLocation
                     {
-                        postCode = gardenViewModel.postCode,
-                        Name = gardenViewModel.Name,
-                        Owner = gardenViewModel.Owner
+                        postCode = location.postCode,
+                        Name = location.Name,
+                        Owner = location.Owner
                     };
 
                     _gardenService.editGardenLocation(mygardenLocation);
-
-
+                    
                     return RedirectToAction("Gardens", new { controller = "Garden" });
                 }
                 catch
@@ -161,8 +149,7 @@ namespace AllotmentPlanner.Controllers.Admin
         {
             List<SelectListItem> gardenerList = new List<SelectListItem>();
 
-            var userList = _context.Users.OrderBy(u => u.UserName)
-                .ToList();
+            var userList = _context.Users.OrderBy(u => u.UserName).ToList();
 
             string selectedUser = "";
 
@@ -181,6 +168,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
             return View(_gardenService.GetAllocatedAllotment(gardenId));
         }
+
         [HttpPost]
         public ActionResult AssignGardenertoGarden(int gardenId, AllotmentAllocation allotmentAllocation)
         {
@@ -204,15 +192,13 @@ namespace AllotmentPlanner.Controllers.Admin
             
         [HttpGet]
         public ActionResult RemoveGardenerfromGarden(int gardenId)
-        {
-           
+        {           
             return View( _gardenService.GetAllocatedAllotment(gardenId));
-
         }
+
         [HttpPost]
         public ActionResult RemoveGardenerfromGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
         {
-
             try
             {
                 AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
@@ -223,27 +209,6 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 _gardenService.removeGardenerFromGarden(myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        // GET: GardenAdmin/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: GardenAdmin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
             }
             catch
             {
@@ -263,12 +228,11 @@ namespace AllotmentPlanner.Controllers.Admin
             _gardenService.logCropAsPlanted(myPlanted);
 
             return RedirectToAction("GetUserGarden", new { controller = "Garden" });
-
         }
 
 
         [HttpGet]
-     public ActionResult HarvestCrop(int PlantedId, Planted planted)
+        public ActionResult HarvestCrop(int PlantedId, Planted planted)
         {
             Planted myPlanted = new Planted
             {
@@ -279,9 +243,6 @@ namespace AllotmentPlanner.Controllers.Admin
             _gardenService.logCropAsHarvested(myPlanted);
 
             return RedirectToAction("GetUserGarden", new { controller = "Garden" });
-
-
         }
     }
-
 }

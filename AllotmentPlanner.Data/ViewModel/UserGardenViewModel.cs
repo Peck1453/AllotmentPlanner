@@ -30,7 +30,9 @@ namespace AllotmentPlanner.Data.ViewModel
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime lastestHarvest { get; set; }
 
-        public UserGardenViewModel() { }
+        //public UserGardenViewModel() {
+
+        //}
 
 
     }

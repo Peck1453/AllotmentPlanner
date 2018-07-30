@@ -12,42 +12,44 @@ namespace AllotmentPlanner.Controllers
     public class GardenController : ApplicationController
     {
         // GET: Garden
+        [HttpGet]
         public ActionResult Gardens()
         {
             return View(_gardenService.GetGardenLocations());
         }
 
+        [HttpGet]
         public ActionResult ListSelectedCrops()
         {
             var userId = User.Identity.GetUserId();
             return View(_gardenService.ListSelectedCrops(userId));
         }
 
+        [HttpGet]
         public ActionResult GetUserGarden()
         {
             var userId = User.Identity.GetUserId();
             return View(_gardenService.GetUserGarden(userId));
         }
 
+        [HttpGet]
         public ActionResult ViewGardensinLocation(string pcode)
         {
+            ViewBag.PostCode = pcode;
 
             return View(_gardenService.ViewGardensinLocation(pcode));
-
         }
 
+        [HttpGet]
         public ActionResult _ViewEmptyGardensinLocation(string pcode)
         {
-
-            return View(_gardenService.ViewEmptyGardensinLocation(pcode));
-
+            return PartialView(_gardenService.ViewEmptyGardensinLocation(pcode));
         }
 
+        [HttpGet]
         public ActionResult UserViewEmptyGardensinLocation(string pcode)
         {
-
             return View(_gardenService.ViewEmptyGardensinLocation(pcode));
-
         }
 
         [HttpGet]
@@ -72,6 +74,7 @@ namespace AllotmentPlanner.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult _userSelectPostcode(string pcode)
         {
             List<SelectListItem> postCodeList = new List<SelectListItem>();
@@ -85,35 +88,30 @@ namespace AllotmentPlanner.Controllers
                         Selected = (location.postCode == pcode)
 
                     });
-
             }
+
             ViewBag.postCodeList = postCodeList;
 
             return View(UserViewEmptyGardensinLocation(pcode));
-
         }
 
-
-
-
         // GET: Garden/Details/5
+        [HttpGet]
         public ActionResult GardenDetails(string pcode)
         {
             return View(_gardenService.GetGardenViewModel(pcode));
         }
 
+        [HttpGet]
         public ActionResult GetAllocatedAllotment(int gardenid)
         {
-
             return View(_gardenService.GetAllocatedAllotment(gardenid));
         }
 
-
-        [HttpGet]
         // GET: Garden/Create
+        [HttpGet]
         public ActionResult _addcropstogarden(string selectedCrop)
         {
-            //var userId = User.Identity.GetUserId();
             List<SelectListItem> cropList = new List<SelectListItem>();
             foreach (var crop in _cropService.GetCrops())
             {
@@ -125,94 +123,32 @@ namespace AllotmentPlanner.Controllers
                       Selected = (crop.cropName == (selectedCrop) ? true : false)
                   });
             }
+
             ViewBag.cropList = cropList;
-
-
-
+            
             return PartialView();
         }
 
-        public void FillGarden(int cropId)
-        {
-            List<SelectListItem> cropList = new List<SelectListItem>();
-            foreach (var crop in _cropService.GetCrops())
-            {
-                cropList.Add(
-                  new SelectListItem()
-                  {
-                      Text = crop.cropName,
-                      Value = crop.cropId.ToString(),
-                      Selected = (crop.cropId == (cropId) ? true : false)
-                  });
-            }
-            ViewBag.cropList = cropList;
-        }
-
+        // DS - Move to the admin controller
         // POST: Garden/Create
-        [HttpPost]
-        public ActionResult _addcropstogarden(Planted crop, Planted garden, GardenViewModel gardenViewModel)
+        [HttpGet]
+        public ActionResult ConfirmCropsToGarden(Planted planted)
         {
             var userId = User.Identity.GetUserId();
-            var usergarden = _gardenService.GetGardenFromUser(userId);
+            var userGarden = _gardenService.GetGardenFromUser(userId);
             try
             {
-                Planted myusergarden = new Planted
+                // DS - Create a new object containing planted information
+                Planted setPlanted = new Planted
                 {
-                    gardenId = usergarden.gardenId
+                    gardenId = userGarden.gardenId,
+                    cropId = planted.cropId
                 };
 
-            
+                // DS - Pass it to the method
+                _gardenService.addcropstogarden(setPlanted);
 
-                _gardenService.addcropstogarden(crop, myusergarden);
-
-                FillGarden(crop.cropId);
-
-            return PartialView();
-        
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Garden/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Garden/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Garden/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Garden/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("ListSelectedCrops", new { controller = "Garden" });
             }
             catch
             {
