@@ -17,6 +17,7 @@ namespace AllotmentPlanner.Data.IDAO
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
 
         int GetLastGardenId();
+        Planted GetLastPlanted();
 
 
         //Get Specific Functions

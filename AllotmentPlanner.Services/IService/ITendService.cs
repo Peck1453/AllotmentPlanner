@@ -16,7 +16,9 @@ namespace AllotmentPlanner.Services.IService
 
 
         TendType getTend(int id);
-        Tended GetTendActionsperPlanted(int plantedId);
+        IList<Tended> GetTendActionsperPlanted(int plantedId, int tendedId);
+
+        CropMaintenanceViewModel GetRecentTend(int tendId, int plantedId);
 
         void addTend(TendType tend);
         void editTend(TendType tend);

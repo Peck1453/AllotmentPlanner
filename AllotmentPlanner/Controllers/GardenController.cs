@@ -148,6 +148,23 @@ namespace AllotmentPlanner.Controllers
                 // DS - Pass it to the method
                 _gardenService.addcropstogarden(setPlanted);
 
+                Planted lastPlanted = _gardenService.GetLastPlanted();
+
+                var tends = _tendService.getTends();
+
+                foreach (var tend in tends)
+                {                    
+                    Tended myTended = new Tended
+                    {
+                        cropId = planted.cropId,
+                        tendId = tend.tendId,
+                        Date = DateTime.Now,
+                        plantedId = lastPlanted.plantedId
+                    };
+
+                    _tendService.setAsTended(myTended);
+                }
+
                 return RedirectToAction("ListSelectedCrops", new { controller = "Garden" });
             }
             catch

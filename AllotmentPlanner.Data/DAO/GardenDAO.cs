@@ -35,6 +35,18 @@ namespace AllotmentPlanner.Data.DAO
 
             return _gardens.ToList().First().gardenId;
         }
+
+        public Planted GetLastPlanted()
+        {
+            IQueryable<Planted> _planted;
+
+            _planted = from planted in _context.Planted
+                       orderby planted.plantedId descending
+                       select planted;
+
+            return _planted.ToList().First();
+        }
+
         public GardenLocation GetGardenLocation(string pcode)
         {
             IQueryable<GardenLocation> _garden;
@@ -404,15 +416,7 @@ namespace AllotmentPlanner.Data.DAO
 
         public void setAsTended(Tended tended)
         {
-            Tended myTended = new Tended
-            {
-                cropId = tended.cropId,
-                tendId = tended.tendId,
-                Date = tended.Date,
-                plantedId = tended.plantedId
-            };
-
-            _context.Tended.Add(myTended);
+            _context.Tended.Add(tended);
             _context.SaveChanges();
         }
 

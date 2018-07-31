@@ -116,6 +116,7 @@ namespace AllotmentPlanner.Data.DAO
         {
             var listWithEmpty = (from crop in _context.Crop
                                  from tends in _context.TendType
+                                 from tendactions in _context.Tended
                                  from planted in _context.Planted
                                  from croph in _context.CropHarvest
                                  from allocation in _context.AllotmentAllocation
@@ -128,26 +129,52 @@ namespace AllotmentPlanner.Data.DAO
                                  {
                                      plantedId = planted.plantedId,
                                      tendId = tends.tendId,
+                                     tendedId = tendactions.tendedId,
                                      tendName = tends.tendName,
-                                     cropId = crop.cropId
+                                     cropId = crop.cropId,
+                                     tendFrequency = tends.tendFrequency
 
                                  });
 
             return listWithEmpty.ToList();
 
         }
-        
-        public Tended GetTendActionsperPlanted(int plantedId)
+
+        public CropMaintenanceViewModel GetRecentTend(int tendId, int plantedId)
+        {
+            IQueryable<CropMaintenanceViewModel> _tended;
+
+            _tended = from tended in _context.Tended
+                      from tends in _context.TendType
+                      where tended.tendId == tendId
+                      && tended.plantedId == plantedId
+                      && tended.tendId == tends.tendId
+                       orderby tended.tendedId descending
+                       select new CropMaintenanceViewModel
+                       {
+                           tendedId = tended.tendedId,
+                           cropId = tended.cropId,
+                           tendId = tended.tendId,
+                           tendName = tends.tendName,
+                           tendFrequency = tends.tendFrequency,
+                           Date = tended.Date,
+                           plantedId = tended.plantedId
+                       };
+
+            return _tended.ToList().First();
+        }
+
+        public IList<Tended> GetTendActionsperPlanted(int plantedId, int tendedId)
         {
             {
                 IQueryable<Tended> _tend;
 
                 _tend = from tended in _context.Tended
-                        where tended.plantedId == plantedId
+                        where tended.plantedId == plantedId && tended.tendedId == tendedId
                         orderby tended.Date descending
                         select tended;
 
-                return _tend.ToList().First();
+                return _tend.ToList();
             }
         }
     }

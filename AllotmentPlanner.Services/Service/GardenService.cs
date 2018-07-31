@@ -48,6 +48,11 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.GetLastGardenId();
         }
 
+        public Planted GetLastPlanted()
+        {
+            return _gardenDAO.GetLastPlanted();
+        }
+
         public GardenLocation GetGardenLocation(string pcode)
         {
             return _gardenDAO.GetGardenLocation(pcode);

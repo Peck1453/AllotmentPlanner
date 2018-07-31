@@ -129,14 +129,17 @@
             @Html.DisplayFor(modelItem => item.lastestHarvest)
         </td>*@
 
-     <td width="40%">
-             @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id = item.plantedId }) |
+<td width="40%">
+    @Html.ActionLink("Place slug Pellets", "Edit", new { controller = "GardenAdmin", id = item.plantedId }) |
 
-        @{
-            Html.RenderAction("_loopTends", "Tend", new { plantedId = item.plantedId });
-        }
+</td>
 
-     </td>
+        <td width="40%">
+            @{
+                Html.RenderAction("_loopTends", "Tend", new { plantedId = item.plantedId });
+            }
+        </td>
+
     </tr>
 }
 

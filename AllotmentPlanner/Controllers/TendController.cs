@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using AllotmentPlanner.Data;
 using AllotmentPlanner.Data.ViewModel;
 using System.Collections;
 
@@ -38,28 +39,18 @@ namespace AllotmentPlanner.Controllers
         public ActionResult _loopTends(int plantedId)
         {
             var userId = User.Identity.GetUserId();
-            var tends = _tendService.loopTends(userId, plantedId);
-            //var plantedCrop = _gardenService.getPlantedCrop(plantedId);
+            var tendTypes = _tendService.getTends();
 
             List<CropMaintenanceViewModel> filteredList = new List<CropMaintenanceViewModel>();
-            foreach (var item in tends)
+            foreach (var type in tendTypes)
             {
-                // DS - Loop through each tend and if it meets the requirements, add it to the list
+                var recentTend = _tendService.GetRecentTend(type.tendId, plantedId);
+                int frequency = recentTend.tendFrequency ?? 0;
 
-                // DS - if date is not null, use it, else take todays date and add 1 year so it appears in the future.
-                DateTime tendDate = item.Date ?? DateTime.Now.AddYears(1);
+                bool needsTending = recentTend.Date < DateTime.Now.AddDays(-frequency);
 
-                // DS - if tend frequency is not null, use it, else set it to 999
-                // DS - This shouldn't be a nullable so when you change this, you can remove this bit of code and just pass item.tendFrequency to the next line.
-                int frequency = item.tendFrequency ?? 999;
-
-                DateTime tendDays = tendDate.AddDays(frequency);
-
-                // DS - when today's date is greater than the 
-                if (DateTime.Now > tendDays)
-                {
-                    filteredList.Add(item);
-                }
+                if (needsTending == true)
+                 filteredList.Add(recentTend);
             }
 
             return PartialView(filteredList);

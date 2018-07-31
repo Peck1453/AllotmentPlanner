@@ -65,11 +65,17 @@ namespace AllotmentPlanner.Services.Service
             return _tendDAO.loopTends(userId, plantedId);
         }
 
-        public Tended GetTendActionsperPlanted(int plantedId)
+        public IList<Tended> GetTendActionsperPlanted(int plantedId, int tendedId)
         {
-            return _tendDAO.GetTendActionsperPlanted(plantedId);
+            return _tendDAO.GetTendActionsperPlanted(plantedId, tendedId);
         }
 
+
+
+        public CropMaintenanceViewModel GetRecentTend(int tendId, int plantedId)
+        {
+            return _tendDAO.GetRecentTend(tendId, plantedId);
+        }
 
         public void setAsTended(Tended tended)
         {

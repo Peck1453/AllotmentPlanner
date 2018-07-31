@@ -12,6 +12,7 @@ namespace AllotmentPlanner.Data.ViewModel
         public int cropId { get; set; }
         public int tendId { get; set; }
         public int plantedId { get; set; }
+        public int tendedId { get; set; }
         public string cropName { get; set; }
         public string tendName { get; set; }
         public int waterFrequency { get; set; }

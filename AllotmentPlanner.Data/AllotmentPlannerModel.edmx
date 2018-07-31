@@ -138,7 +138,7 @@
           <Property Name="tendedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cropId" Type="int" Nullable="false" />
           <Property Name="tendId" Type="int" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="date" />
           <Property Name="plantedId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TendType">
@@ -403,7 +403,7 @@
           <Property Name="tendedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cropId" Type="Int32" Nullable="false" />
           <Property Name="tendId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="plantedId" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>

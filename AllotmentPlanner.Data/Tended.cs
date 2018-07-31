@@ -17,7 +17,7 @@ namespace AllotmentPlanner.Data
         public int tendedId { get; set; }
         public int cropId { get; set; }
         public int tendId { get; set; }
-        public System.DateTime Date { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public int plantedId { get; set; }
     }
 }

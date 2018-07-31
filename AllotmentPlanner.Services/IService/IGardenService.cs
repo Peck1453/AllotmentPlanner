@@ -18,6 +18,7 @@ namespace AllotmentPlanner.Services.IService
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
 
         int GetLastGardenId();
+        Planted GetLastPlanted();
 
 
         //Get Specific Functions
