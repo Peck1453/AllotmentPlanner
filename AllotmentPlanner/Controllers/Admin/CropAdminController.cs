@@ -11,19 +11,7 @@ namespace AllotmentPlanner.Controllers.Admin
 {
     public class CropAdminController : ApplicationController
     {
-        // GET: CropAdmin
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        // GET: CropAdmin/Details/5
-        [HttpGet]
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: CropAdmin/Create
         [HttpGet]
@@ -141,11 +129,10 @@ namespace AllotmentPlanner.Controllers.Admin
                 CropRequirements myCropRequirements = _cropService.GetCropRequirements(id);
                 _cropService.DeleteCropRequirements(myCropRequirements);
 
-                // DS -  Do you not want to redirect to different places on success/failure? If not, there's no point of the catch.
             }
             catch
             {
-
+                return View();
             }
             return RedirectToAction("Crops", new { controller = "Crop" });
         }

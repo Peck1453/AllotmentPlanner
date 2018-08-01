@@ -375,7 +375,15 @@ namespace AllotmentPlanner.Data.DAO
             // DateTime plantedDate = _context.Planted.PlantedDate;
             // int growthTime = _context.CropHarvest.GrowthTime;
             // Date estHarvestDate = plantedDate.AddDays(growthTime);
-                        
+            //DateTime plantedDate = _context.Planted.()
+            //var int growthTime = from croph in _context.CropHarvest
+            //                 from planted in _context.Planted
+            //                 where croph.cropId == planted.cropId select new growthTime
+
+
+            //var estHarvestDate = plantedDate.AddDays(growthTime);
+
+
             var listWithEmpty = (from allocation in _context.AllotmentAllocation
                                  from crop in _context.Crop
                                  from allot in _context.Allotment
@@ -391,9 +399,6 @@ namespace AllotmentPlanner.Data.DAO
                                  && crop.cropId == planted.cropId
                                  && allocation.dateTo == null
                                  && planted.dateOut == null
-                                 // DS - Is this incomplete?
-                                 //join plantedjoin in _context.Planted on allocation.gardenID equals plantedjoin.gardenID
-                                 //from plantedjoin in ThisList.DefaultIfEmpty()
                                  select new UserGardenViewModel
                                  {
                                      gardenId = allocation.gardenId,

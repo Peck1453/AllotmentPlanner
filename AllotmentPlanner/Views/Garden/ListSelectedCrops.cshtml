@@ -7,7 +7,7 @@
 <h2>ListSelectedCrops</h2>
 
 @{
-    Html.RenderAction("_addcropstogarden", "Garden");
+    Html.RenderAction("_addcropstogarden", new { controller = "GardenAdmin" });
 }
 
 <table class="table">

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using AllotmentPlanner.Data.ViewModel;
 
 
@@ -216,6 +217,73 @@ namespace AllotmentPlanner.Controllers.Admin
             }
         }
 
+        // GET: Garden/Create
+        [HttpGet]
+        public ActionResult _addcropstogarden(string selectedCrop)
+        {
+            List<SelectListItem> cropList = new List<SelectListItem>();
+            foreach (var crop in _cropService.GetCrops())
+            {
+                cropList.Add(
+                  new SelectListItem()
+                  {
+                      Text = crop.cropName,
+                      Value = crop.cropId.ToString(),
+                      Selected = (crop.cropName == (selectedCrop) ? true : false)
+                  });
+            }
+
+            ViewBag.cropList = cropList;
+
+            return PartialView();
+        }
+
+        // DS - Move to the admin controller
+        // POST: Garden/Create
+        [HttpGet]
+        public ActionResult ConfirmCropsToGarden(Planted planted)
+        {
+            var userId = User.Identity.GetUserId();
+            var userGarden = _gardenService.GetGardenFromUser(userId);
+            try
+            {
+                // DS - Create a new object containing planted information
+                Planted setPlanted = new Planted
+                {
+                    gardenId = userGarden.gardenId,
+                    cropId = planted.cropId
+                };
+
+                // DS - Pass it to the method
+                _gardenService.addcropstogarden(setPlanted);
+
+                Planted lastPlanted = _gardenService.GetLastPlanted();
+
+                var tends = _tendService.getTends();
+
+                foreach (var tend in tends)
+                {
+                    Tended myTended = new Tended
+                    {
+                        cropId = planted.cropId,
+                        tendId = tend.tendId,
+                        Date = DateTime.Now,
+                        plantedId = lastPlanted.plantedId
+                    };
+
+                    _tendService.setAsTended(myTended);
+                }
+
+                return RedirectToAction("ListSelectedCrops", new { controller = "Garden" });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
         [HttpGet]
         public ActionResult PlantCrop(int plantedId, Planted planted)
         {
@@ -244,5 +312,32 @@ namespace AllotmentPlanner.Controllers.Admin
 
             return RedirectToAction("GetUserGarden", new { controller = "Garden" });
         }
+
+
+
+        [HttpGet]
+        public ActionResult UserAssignSelftoGarden(int gardenId, AllotmentAllocation allotmentAllocation)
+        {
+            var userId = User.Identity.GetUserId();
+            try
+            {
+                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+                {
+                    userId = userId,
+                    gardenId = gardenId,
+                    dateFrom = DateTime.Now
+                };
+
+                _gardenService.assignGardenerToGarden(myallotmentAllocation);
+                return RedirectToAction("GetUserGarden", new { controller = "Garden" });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
+
+
 }

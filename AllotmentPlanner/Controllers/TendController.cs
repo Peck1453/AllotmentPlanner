@@ -12,19 +12,10 @@ namespace AllotmentPlanner.Controllers
 {
     public class TendController : ApplicationController
     {
-        // GET: Tend
         [HttpGet]
         public ActionResult Tends()
         {
             return View(_tendService.getTends());
-        }
-
-        // DS - Are you using this?
-        // GET: Tend/Details/5
-        [HttpGet]
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         [HttpGet]
@@ -34,7 +25,6 @@ namespace AllotmentPlanner.Controllers
             
             return View(_tendService.getTendActions(userId));
         }
-
         [HttpGet]
         public ActionResult _loopTends(int plantedId)
         {
