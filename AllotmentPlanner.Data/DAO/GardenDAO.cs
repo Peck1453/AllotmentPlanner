@@ -58,6 +58,22 @@ namespace AllotmentPlanner.Data.DAO
             return _garden.ToList().First();
         }
 
+        public IList<AllotmentAllocation> CountUserActiveGardens(string userId)
+        {
+            IQueryable<AllotmentAllocation> _countUserGardens;
+            _countUserGardens = from allocation in _context.AllotmentAllocation
+                                where allocation.userId == userId
+                                && allocation.dateTo == null
+                                select allocation;
+
+
+            return _countUserGardens.ToList();
+
+                                
+
+
+        }
+
         public Allotment GetAllotment(int gardenId)
         {
             IQueryable<Allotment> _allotment;

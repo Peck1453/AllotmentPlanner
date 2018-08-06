@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AllotmentPlanner.Data.ViewModel.GardenViewModel>
 
 
-<h2>Assigned Gardens</h2>
+<h2>Assigned Gardens for @ViewBag.LocationName</h2>
 
 <p>
     @Html.ActionLink("Add Garden to Location", "AddGardentoLocation", new { Controller = "GardenAdmin" })
@@ -48,9 +48,10 @@
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
 
-
-            @Html.ActionLink("Remove Gardener", "RemoveGardenerfromGarden", new {controller = "GardenAdmin",  gardenId=item.gardenId})
-
+@if (User.IsInRole("Administrator"))
+{
+            @Html.ActionLink("Remove Gardener", "RemoveGardenerfromGarden", new { controller = "GardenAdmin", gardenId = item.gardenId })
+}
 
         </td>
     </tr>

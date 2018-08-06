@@ -190,7 +190,29 @@ namespace AllotmentPlanner.Controllers.Admin
                 return View();
             }
         }
-            
+        [HttpGet]
+        public ActionResult AssignGardenertoGardenAsUser(int gardenId, AllotmentAllocation allotmentAllocation)
+        {
+            var userId = User.Identity.GetUserId();
+            try
+            {
+                AllotmentAllocation myallotmentAllocation = new AllotmentAllocation
+                {
+                    userId = userId,
+                    gardenId = gardenId,
+                    dateFrom = DateTime.Now
+                };
+
+                _gardenService.assignGardenerToGarden(myallotmentAllocation);
+                return RedirectToAction("GetUserGarden", new { controller = "Garden" } );
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
         [HttpGet]
         public ActionResult RemoveGardenerfromGarden(int gardenId)
         {           
@@ -238,7 +260,6 @@ namespace AllotmentPlanner.Controllers.Admin
             return PartialView();
         }
 
-        // DS - Move to the admin controller
         // POST: Garden/Create
         [HttpGet]
         public ActionResult ConfirmCropsToGarden(Planted planted)

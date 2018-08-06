@@ -393,7 +393,7 @@ namespace AllotmentPlanner.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AdminDashboard", "Home");
         }
 
         //
@@ -450,7 +450,7 @@ namespace AllotmentPlanner.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AdminDashboard", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

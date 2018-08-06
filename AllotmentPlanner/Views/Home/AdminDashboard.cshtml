@@ -5,22 +5,42 @@
 <div class="row">
     <div class="col-md-12">
         <h1>Welcome back to Allotment Planner!</h1>
-        <p class="lead">From this Dashboard Page you should be able to manage crops, gardens and users. Should be</p>
         <hr class="my-4">
     </div>
 </div>
 
+@if (User.IsInRole("Administrator"))
+{
+
 <h2>AdminDashboard</h2>
+
+<p class="lead">From this Dashboard Page you should be able to manage crops, gardens and users.</p>
+
+
 
 @Html.ActionLink("View and Edit Crops", "Crops", "Crop")<br />
 @Html.ActionLink("View and Edit Tend Actions", "Tends", "Tend")<br />
 @Html.ActionLink("View and Edit Gardens", "Gardens", "Garden")<br />
-@Html.ActionLink("View and Edit Users (Current unused)", "GetUsers", "Admin")<br />
+@Html.ActionLink("View and Edit Users", "GetUsers", "Admin")<br />
+}
 
+@if (User.IsInRole("Gardener"))
+{
 <h2>Gardener Functionality</h2>
 
-@Html.ActionLink("Add Crops to Garden", "ListSelectedCrops", "Garden")<br />
+<p class="lead">From this Dashboard Page you should be able to jump to your garden, manage your crops join or leave an allotment.</p>
 
-@Html.ActionLink("View Garden", "GetUserGarden", "Garden")<br />
-@Html.ActionLink("View Empty Gardens as User", "UserViewEmptyGardensinLocation", "Garden")<br />
+    if (ViewBag.GardenCheck == 0){@Html.ActionLink("Get Started!", "GetUserGarden", "Garden")};
 
+    if (ViewBag.GardenCheck >= 1)
+    {
+        <h3>@Html.ActionLink("View Garden", "GetUserGarden", "Garden")</h3><br />
+
+
+        @Html.ActionLink("Add Crops to Garden", "ListSelectedCrops", "Garden")<br />
+
+    }
+
+
+
+}

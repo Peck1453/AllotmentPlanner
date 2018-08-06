@@ -18,10 +18,23 @@ namespace AllotmentPlanner.Controllers
             return View(_gardenService.GetGardenLocations());
         }
 
+        public ActionResult GardensUserView()
+        {
+            return View(_gardenService.GetGardenLocations());
+        }
+
+
         [HttpGet]
         public ActionResult ListSelectedCrops()
         {
             var userId = User.Identity.GetUserId();
+            int countUserCrops = _gardenService.ListSelectedCrops(userId).Count();
+            ViewBag.CountCrops = countUserCrops;
+            ViewBag.NoCrops = "There are No Crops planned for your Garden! Select the button above to add a few";
+
+            ViewBag.GardenCheck = _gardenService.CountUserActiveGardens(userId).Count();
+            ViewBag.NoGarden = "You do not have a Garden Yet, please select one from the Dashboard";
+
             return View(_gardenService.ListSelectedCrops(userId));
         }
 
@@ -30,11 +43,13 @@ namespace AllotmentPlanner.Controllers
         {
             var userId = User.Identity.GetUserId();
 
+            ViewBag.GardenCheck = _gardenService.CountUserActiveGardens(userId).Count();
+            ViewBag.NoGarden = "You do not have a Garden Yet, please select one from the Dashboard";
+
+
             int countUserCrops = _gardenService.ListSelectedCrops(userId).Count();
             ViewBag.CountCrops = countUserCrops;
             ViewBag.NoCrops = "There are No Crops planned for your Garden! Select the button above to add a few";
-
-
 
             return View(_gardenService.GetUserGarden(userId));
         }
@@ -43,6 +58,7 @@ namespace AllotmentPlanner.Controllers
         public ActionResult ViewGardensinLocation(string pcode)
         {
             ViewBag.PostCode = pcode;
+            ViewBag.LocationName = _gardenService.GetGardenLocation(pcode).Name;
 
             return View(_gardenService.ViewGardensinLocation(pcode));
         }

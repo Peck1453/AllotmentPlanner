@@ -47,7 +47,17 @@
             @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+@if (User.IsInRole("Administrator"))
+{
             @Html.ActionLink("Assign Gardener", "AssignGardenertoGarden", new { controller = "GardenAdmin", gardenId = item.gardenId })
+}
+
+@if (User.IsInRole("Gardener"))
+
+{
+    @Html.ActionLink("Assign Yourself to this Garden", "AssignGardenertoGardenAsUser", new { controller = "GardenAdmin", gardenId = item.gardenId })
+
+}
 
 
         </td>

@@ -38,6 +38,14 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.ViewEmptyGardensinLocation(pcode);
         }
 
+
+        public IList<AllotmentAllocation> CountUserActiveGardens(string userId)
+        {
+
+            return _gardenDAO.CountUserActiveGardens(userId);
+        }
+
+
         public Planted getPlantedCrop(int plantedId)
         {
             return _gardenDAO.getPlantedCrop(plantedId);
