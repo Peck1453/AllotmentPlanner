@@ -47,6 +47,7 @@ namespace AllotmentPlanner.Data.DAO
             return _planted.ToList().First();
         }
 
+
         public GardenLocation GetGardenLocation(string pcode)
         {
             IQueryable<GardenLocation> _garden;
@@ -56,6 +57,17 @@ namespace AllotmentPlanner.Data.DAO
                       select garden;
 
             return _garden.ToList().First();
+        }
+
+        public IList<Planted> getPlantedCrops()
+        {
+            IQueryable<Planted> _planted;
+
+            _planted = from Planted in _context.Planted
+                       select Planted;
+
+            return _planted.ToList();
+
         }
 
         public IList<AllotmentAllocation> CountUserActiveGardens(string userId)

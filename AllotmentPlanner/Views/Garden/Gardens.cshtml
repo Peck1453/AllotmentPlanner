@@ -40,10 +40,11 @@
 @if (User.IsInRole("Administrator"))
 {
     Html.ActionLink("Edit", "EditGardenLocation", new { controller = "GardenAdmin", pcode = item.postCode });
-    Html.ActionLink("Delete", "DeleteGarden", new { pcode = item.postCode });
-};
+    Html.ActionLink("Delete", "DeleteGarden", new { controller = "GardenAdmin", pcode = item.postCode });
+}
 
-@Html.ActionLink("View Gardens at Location", "ViewGardensinLocation", new { pcode = item.postCode }) |
+
+@Html.ActionLink("View Gardens at Location", "ViewGardensinLocation", new { pcode = item.postCode })
             @*@Html.ActionLink("Details", "GardenDetails", new { pcode = item.postCode }) |*@
 
 

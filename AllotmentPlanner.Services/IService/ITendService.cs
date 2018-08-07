@@ -13,6 +13,8 @@ namespace AllotmentPlanner.Services.IService
         IList<AllotmentPlanner.Data.TendType> getTends();
         IList<CropMaintenanceViewModel> getTendActions(string userId);
         IList<CropMaintenanceViewModel> loopTends(string userId, int plantedId);
+        TendType GetLastTendCreated();
+
 
 
         TendType getTend(int id);

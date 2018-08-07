@@ -16,6 +16,8 @@ namespace AllotmentPlanner.Services.IService
         IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode);
         IList<UserGardenViewModel> GetUserGarden(string userId);
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
+        IList<Planted> getPlantedCrops();
+
         IList<AllotmentAllocation> CountUserActiveGardens(string userId);
 
 

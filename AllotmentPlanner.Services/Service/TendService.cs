@@ -35,6 +35,13 @@ namespace AllotmentPlanner.Services.Service
 
         }
 
+        public TendType GetLastTendCreated()
+        {
+
+            return _tendDAO.GetLastTendCreated();
+        }
+
+
         public void addTend(TendType tend)
         {
 

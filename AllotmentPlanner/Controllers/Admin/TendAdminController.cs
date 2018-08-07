@@ -28,6 +28,24 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 _tendService.addTend(tend);
 
+                var planted = _gardenService.getPlantedCrops();
+                TendType lastcreated = _tendService.GetLastTendCreated();
+
+
+                foreach (var plant in planted)
+                {
+                    Tended myTended = new Tended
+                    {
+                        cropId = plant.cropId,
+                        plantedId = plant.plantedId,
+                        tendId = lastcreated.tendId,
+                        Date = DateTime.Now
+                    };
+                    _tendService.setAsTended(myTended);
+
+                }
+
+
                 return RedirectToAction("Tends", new { controller = "Tend" });
             }
             catch (Exception ex)

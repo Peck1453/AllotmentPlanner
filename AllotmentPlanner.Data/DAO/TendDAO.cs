@@ -40,6 +40,19 @@ namespace AllotmentPlanner.Data.DAO
             return _tend.ToList().First();
         }
 
+        public TendType GetLastTendCreated()
+        {
+            IQueryable<TendType> _lasttend;
+
+            _lasttend = from tend in _context.TendType
+                       orderby tend.tendId descending
+                       select tend;
+
+            return _lasttend.ToList().First();
+
+
+        }
+
         public void addTend(TendType tend)
         {
             _context.TendType.Add(tend);
