@@ -19,7 +19,7 @@ namespace AllotmentPlanner.Data.DAO
             _context = new AllotmentEntities();
         }
 
-        public IList<AllotmentPlanner.Data.TendType> getTends()
+        public IList<TendType> getTends()
         {
             IQueryable<TendType> _tends;
 
@@ -104,9 +104,7 @@ namespace AllotmentPlanner.Data.DAO
                                      plantedId = planted.plantedId,
                                      waterFrequency = cropr.wateringInterval,
                                      Date = tended.Date,
-                                     gardenId = planted.gardenId,
-
-
+                                     gardenId = planted.gardenId
                                  });
 
             return listWithEmpty.ToList();
@@ -133,11 +131,9 @@ namespace AllotmentPlanner.Data.DAO
                                      tendName = tends.tendName,
                                      cropId = crop.cropId,
                                      tendFrequency = tends.tendFrequency
-
                                  });
 
             return listWithEmpty.ToList();
-
         }
 
         public CropMaintenanceViewModel GetRecentTend(int tendId, int plantedId)

@@ -62,7 +62,6 @@ namespace AllotmentPlanner.Data.DAO
             return _cropreq.ToList().FirstOrDefault();
         }
 
-
         public CropDataViewModel GetCropViewModel(int id)
         {
             IQueryable<CropDataViewModel> _cropDataViewModel = from crop in _context.Crop

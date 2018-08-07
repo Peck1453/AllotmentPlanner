@@ -38,8 +38,10 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -77,8 +79,10 @@ namespace AllotmentPlanner.Controllers.Admin
                 return RedirectToAction("Gardens", new { controller = "Garden" });
 
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -107,8 +111,10 @@ namespace AllotmentPlanner.Controllers.Admin
                 
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -138,8 +144,10 @@ namespace AllotmentPlanner.Controllers.Admin
                     
                     return RedirectToAction("Gardens", new { controller = "Garden" });
                 }
-                catch
+                catch (Exception ex)
                 {
+                    // DS - Might be worth looking at redirection to an error page or something?
+                    ViewBag.Exception = ex;
                     return View();
                 }
             }
@@ -185,11 +193,14 @@ namespace AllotmentPlanner.Controllers.Admin
                 _gardenService.assignGardenerToGarden(myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
+
         [HttpGet]
         public ActionResult AssignGardenertoGardenAsUser(int gardenId, AllotmentAllocation allotmentAllocation)
         {
@@ -206,8 +217,10 @@ namespace AllotmentPlanner.Controllers.Admin
                 _gardenService.assignGardenerToGarden(myallotmentAllocation);
                 return RedirectToAction("GetUserGarden", new { controller = "Garden" } );
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -233,8 +246,10 @@ namespace AllotmentPlanner.Controllers.Admin
                 _gardenService.removeGardenerFromGarden(myallotmentAllocation);
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -297,13 +312,13 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 return RedirectToAction("ListSelectedCrops", new { controller = "Garden" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
-
-
 
         [HttpGet]
         public ActionResult PlantCrop(int plantedId, Planted planted)
@@ -319,7 +334,6 @@ namespace AllotmentPlanner.Controllers.Admin
             return RedirectToAction("GetUserGarden", new { controller = "Garden" });
         }
 
-
         [HttpGet]
         public ActionResult HarvestCrop(int PlantedId, Planted planted)
         {
@@ -333,8 +347,6 @@ namespace AllotmentPlanner.Controllers.Admin
 
             return RedirectToAction("GetUserGarden", new { controller = "Garden" });
         }
-
-
 
         [HttpGet]
         public ActionResult UserAssignSelftoGarden(int gardenId, AllotmentAllocation allotmentAllocation)
@@ -352,13 +364,12 @@ namespace AllotmentPlanner.Controllers.Admin
                 _gardenService.assignGardenerToGarden(myallotmentAllocation);
                 return RedirectToAction("GetUserGarden", new { controller = "Garden" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
-
     }
-
-
 }

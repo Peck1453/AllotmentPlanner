@@ -380,27 +380,7 @@ namespace AllotmentPlanner.Data.DAO
 
         public IList<UserGardenViewModel> GetUserGarden(string userId)
         {
-            // DS - This still needs implementing
-            // var planted =  use the method to find the planted date
-            // Date plantedDate = planted.plantedDate (or somehting like this)
-            // var growth = get the crop harvest growth time
-            // int growthTime = growth.GrowthTime;
-            // Date newHarvestDate = plantedDate.AddDays(growthtime);
-
-
-            // DateTime plantedDate = _context.Planted.PlantedDate;
-            // int growthTime = _context.CropHarvest.GrowthTime;
-            // Date estHarvestDate = plantedDate.AddDays(growthTime);
-            //DateTime plantedDate = _context.Planted.()
-            //var int growthTime = from croph in _context.CropHarvest
-            //                 from planted in _context.Planted
-            //                 where croph.cropId == planted.cropId select new growthTime
-
-
-            //var estHarvestDate = plantedDate.AddDays(growthTime);
-
-
-            var listWithEmpty = (from allocation in _context.AllotmentAllocation
+            var cropsPlanted = (from allocation in _context.AllotmentAllocation
                                  from crop in _context.Crop
                                  from allot in _context.Allotment
                                  from croph in _context.CropHarvest
@@ -432,7 +412,28 @@ namespace AllotmentPlanner.Data.DAO
                                      lastestHarvest = croph.latestHarvest
                                  });
 
-            return listWithEmpty.ToList();
+            List<UserGardenViewModel> newCropsPlantedList = new List<UserGardenViewModel>();
+
+            //DS - This is a temporary solution to your problem. If you got rid of the nullables and created some new methods, you could do this right.
+            foreach (var planted in cropsPlanted.ToList())
+            {
+                if (planted.dateIn != null && planted.growthTime != null)
+                {
+                    DateTime plantedDate = planted.dateIn ?? DateTime.Now; // DS - It should never hit datetime now since the if does a check
+                    int growthTime = planted.growthTime ?? 10; // DS - It should never hit 10 since the if does a check
+                    DateTime estmatedHarvest = plantedDate.AddDays(growthTime); // It should only ever set the est harvest as what you need it to be if the values aren't null
+
+                    planted.estimatedHarvestDate = estmatedHarvest; // DS - Sets the est harvest date for the record
+                }
+                else
+                {
+                    planted.estimatedHarvestDate = null;
+                }
+
+                newCropsPlantedList.Add(planted); // DS - Adding the updated values to a new list
+            }
+
+            return newCropsPlantedList; // DS - Pass the new list instead of the cropsPlanted.ToList() that you previously had
         }
 
         public void setAsTended(Tended tended)
@@ -478,7 +479,6 @@ namespace AllotmentPlanner.Data.DAO
             _context.SaveChanges();
         }
 
-
         public void logCropAsHarvested(Planted planted)
         {
             Planted myPlanted = getPlantedCrop(planted.plantedId);
@@ -486,8 +486,8 @@ namespace AllotmentPlanner.Data.DAO
             myPlanted.dateOut = planted.dateOut;
 
             _context.SaveChanges();
-
         }
+
         public void deletePlantedCrop(Planted planted)
         {
             _context.Planted.Remove(planted);

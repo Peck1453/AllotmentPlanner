@@ -25,6 +25,7 @@ namespace AllotmentPlanner.Controllers
             
             return View(_tendService.getTendActions(userId));
         }
+
         [HttpGet]
         public ActionResult _loopTends(int plantedId)
         {

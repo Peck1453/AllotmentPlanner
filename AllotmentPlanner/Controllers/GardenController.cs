@@ -23,7 +23,6 @@ namespace AllotmentPlanner.Controllers
             return View(_gardenService.GetGardenLocations());
         }
 
-
         [HttpGet]
         public ActionResult ListSelectedCrops()
         {
@@ -45,8 +44,7 @@ namespace AllotmentPlanner.Controllers
 
             ViewBag.GardenCheck = _gardenService.CountUserActiveGardens(userId).Count();
             ViewBag.NoGarden = "You do not have a Garden Yet, please select one from the Dashboard";
-
-
+            
             int countUserCrops = _gardenService.ListSelectedCrops(userId).Count();
             ViewBag.CountCrops = countUserCrops;
             ViewBag.NoCrops = "There are No Crops planned for your Garden! Select the button above to add a few";
@@ -74,7 +72,6 @@ namespace AllotmentPlanner.Controllers
         {
             return View(_gardenService.ViewEmptyGardensinLocation(pcode));
         }
-
 
         [HttpGet]
         public ActionResult _userSelectPostcode(string pcode)
@@ -109,6 +106,5 @@ namespace AllotmentPlanner.Controllers
         {
             return View(_gardenService.GetAllocatedAllotment(gardenid));
         }
-
     }
 }

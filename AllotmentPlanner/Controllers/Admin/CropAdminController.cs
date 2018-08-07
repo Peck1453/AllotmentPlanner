@@ -23,8 +23,7 @@ namespace AllotmentPlanner.Controllers.Admin
         // POST: CropAdmin/Create
         [HttpPost]
         public ActionResult AddCrop(Crop crop, CropHarvest croph, CropRequirements cropr, CropDataViewModel cropDataViewModel)
-        {
-                
+        {                
             try
             {
                 Crop mycrop = new Crop
@@ -33,6 +32,7 @@ namespace AllotmentPlanner.Controllers.Admin
                     cropName = cropDataViewModel.CropName,
                     cropSize = cropDataViewModel.SpaceRequired
                 };
+
                 _cropService.addCrop(mycrop);
 
                 CropHarvest myCroph = new CropHarvest
@@ -44,14 +44,17 @@ namespace AllotmentPlanner.Controllers.Admin
                     latestPlant = cropDataViewModel.LatePlanting,
                     growthTime = cropDataViewModel.growthTime,
                 };
+
                 _cropService.addCropHarvest(myCroph);
 
                 _cropService.addCropRequirements(cropr);
                 
                 return RedirectToAction("Crops", new { controller = "Crop" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -76,7 +79,6 @@ namespace AllotmentPlanner.Controllers.Admin
                     cropSize = cropDataViewModel.SpaceRequired
                 };
 
-
                 CropHarvest myCroph = new CropHarvest
                 {
                     cropId = cropDataViewModel.CropId,
@@ -86,7 +88,6 @@ namespace AllotmentPlanner.Controllers.Admin
                     latestPlant = cropDataViewModel.LatePlanting,
                     growthTime = cropDataViewModel.growthTime
                 };
-
 
                 CropRequirements myCropr = new CropRequirements
                 {
@@ -130,10 +131,13 @@ namespace AllotmentPlanner.Controllers.Admin
                 _cropService.DeleteCropRequirements(myCropRequirements);
 
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
+
             return RedirectToAction("Crops", new { controller = "Crop" });
         }
     }

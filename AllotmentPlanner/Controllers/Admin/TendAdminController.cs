@@ -30,8 +30,10 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 return RedirectToAction("Tends", new { controller = "Tend" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -52,8 +54,10 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 return RedirectToAction("Tends", new { controller = "Tend" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }
@@ -76,8 +80,10 @@ namespace AllotmentPlanner.Controllers.Admin
 
                 return RedirectToAction("Tends", new { controller = "Tend" });
             }
-            catch
+            catch (Exception ex)
             {
+                // DS - Might be worth looking at redirection to an error page or something?
+                ViewBag.Exception = ex;
                 return View();
             }
         }

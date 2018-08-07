@@ -48,9 +48,7 @@
     <Compile Include="Service\GardenService.cs" />
     <Compile Include="Service\TendService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AllotmentPlanner.Data\AllotmentPlanner.Data.csproj">
       <Project>{c2c1a860-c45f-4e5d-8c3f-bbe5460b7ddb}</Project>
