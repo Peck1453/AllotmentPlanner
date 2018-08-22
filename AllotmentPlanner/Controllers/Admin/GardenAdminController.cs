@@ -20,7 +20,7 @@ namespace AllotmentPlanner.Controllers.Admin
         {
             _context = new AllotmentPlanner.Models.ApplicationDbContext();
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: CropAdmin/Create
         [HttpGet]
         public ActionResult AddGardenLocation()
@@ -29,6 +29,7 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         // POST: CropAdmin/Create
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult AddGardenLocation(GardenLocation garden, Allotment allotment)
         {
@@ -36,7 +37,7 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 _gardenService.addGardenLocation(garden, allotment);
 
-                // DS - Allocates the most recent garden
+                //Allocates the most recent garden
                 _gardenService.AllocateGarden();
 
 
@@ -44,7 +45,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                // Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
@@ -74,10 +75,10 @@ namespace AllotmentPlanner.Controllers.Admin
         {
             try
             {
-                // DS - Adds a new garden to an allotment
+                // Adds a new garden to an allotment
                 _gardenService.addGardentoAllotment(allotment);
 
-                // DS - Allocates the most recent garden
+                //Allocates the most recent garden
                 _gardenService.AllocateGarden();
 
                 return RedirectToAction("Gardens", new { controller = "Garden" });
@@ -93,6 +94,8 @@ namespace AllotmentPlanner.Controllers.Admin
 
         [HttpGet]
         // GET: GardenAdmin/Edit/5
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult EditGarden(string pcode)
         {
             return View(_gardenService.GetGardenViewModel(pcode));
@@ -100,6 +103,8 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: GardenAdmin/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult EditGarden(string pcode, GardenViewModel gardenViewModel, Allotment allotment)
         {
             try
@@ -117,13 +122,15 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                //Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+
         // GET: GardenAdmin/Edit/5
         public ActionResult editGardenLocation(string pcode)
         {
@@ -132,6 +139,8 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: GardenAdmin/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult editGardenLocation(GardenLocation location)
         {
             {
@@ -158,6 +167,8 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult DeactivateGardenLocation(string pcode)
         {
            return View( _gardenService.GetGardenLocation(pcode));
@@ -165,6 +176,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeactivateGardenLocation(GardenLocation location, string pcode)
         {
 
@@ -196,6 +208,8 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult AssignGardenertoGarden(int gardenId, string userId)
         {
             List<SelectListItem> gardenerList = new List<SelectListItem>();
@@ -221,6 +235,8 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult AssignGardenertoGarden(int gardenId, AllotmentAllocation allotmentAllocation)
         {
             try
@@ -261,18 +277,22 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                //  Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
         }
 
 
+        [Authorize(Roles = "Administrator")]
+
         [HttpGet]
         public ActionResult RemoveGardenerfromGarden(int gardenId)
         {           
             return View( _gardenService.GetAllocatedAllotment(gardenId));
         }
+
+        [Authorize(Roles = "Administrator")]
 
         [HttpPost]
         public ActionResult RemoveGardenerfromGarden(int gardenId, AllotmentAllocation allotmentAllocation, GardenViewModel gardenViewModel)
@@ -290,7 +310,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                // Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
@@ -325,14 +345,14 @@ namespace AllotmentPlanner.Controllers.Admin
             var userGarden = _gardenService.GetGardenFromUser(userId);
             try
             {
-                // DS - Create a new object containing planted information
+                // Create a new object containing planted information
                 Planted setPlanted = new Planted
                 {
                     gardenId = userGarden.gardenId,
                     cropId = planted.cropId
                 };
 
-                // DS - Pass it to the method
+                // Pass it to the method
                 _gardenService.addcropstogarden(setPlanted);
 
                 Planted lastPlanted = _gardenService.GetLastPlanted();
@@ -408,7 +428,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                // Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }

@@ -15,6 +15,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // GET: CropAdmin/Create
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddCrop()
         {
             return View();
@@ -22,6 +23,7 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: CropAdmin/Create
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult AddCrop(Crop crop, CropHarvest croph, CropRequirements cropr, CropDataViewModel cropDataViewModel)
         {                
             try
@@ -53,7 +55,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                // Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
@@ -61,6 +63,8 @@ namespace AllotmentPlanner.Controllers.Admin
 
         [HttpGet]
         // GET: CropAdmin/Edit/5
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult EditCrop(int id)
         {
             return View(_cropService.GetCropViewModel(id));
@@ -68,6 +72,8 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: CropAdmin/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult EditCrop(int id, CropDataViewModel cropDataViewModel, Crop crop, CropHarvest cropHarvest, CropRequirements cropRequirements)
         {
             try
@@ -98,7 +104,6 @@ namespace AllotmentPlanner.Controllers.Admin
                     wateringInterval = cropRequirements.wateringInterval
                 };
 
-                // DS - I'd seperate this off into different methods to help identify, if anything went wrong, where the problem is
                 _cropService.editCrop(myCrop, myCroph, myCropr);
                 
                 return RedirectToAction("Crops", new { controller = "Crop" });
@@ -111,11 +116,13 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // GET: CropAdmin/Delete/5
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult DeleteCrop(int id) //Pulls the method for displaying the requested Product
         {
             return View(_cropService.GetCropViewModel(id));
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult DeleteCrop(int id, CropDataViewModel cropDataViewModel) //Deletes the requested Product (identified by the Product ID)
         {
@@ -133,7 +140,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                // Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }

@@ -15,6 +15,8 @@ namespace AllotmentPlanner.Controllers.Admin
     {
         // GET: TendAdmin/Create
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult AddTend()
         {
             return View();
@@ -22,6 +24,8 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // POST: TendAdmin/Create
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult AddTend(TendType tend)
         {
             try
@@ -57,12 +61,14 @@ namespace AllotmentPlanner.Controllers.Admin
         }
 
         // GET: TendAdmin/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult EditTend(int id)
         {
             return View(_tendService.getTend(id));
         }
 
         // POST: TendAdmin/Edit/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult EditTend(int id, TendType tend)
         {
@@ -82,12 +88,15 @@ namespace AllotmentPlanner.Controllers.Admin
 
         // GET: TendAdmin/Delete/5
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
+
         public ActionResult DeleteTend(int id)
         {
             return View(_tendService.getTend(id));
         }
 
         // POST: TendAdmin/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult DeleteTend(int id, TendType tend)
         {

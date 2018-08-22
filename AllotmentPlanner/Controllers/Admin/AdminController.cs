@@ -9,6 +9,8 @@ using AllotmentPlanner.Models;
 
 namespace AllotmentPlanner.Controllers.Admin
 {
+    [Authorize(Roles = "Administrator")]
+
     public class AdminController : Controller
     {
         private AllotmentPlanner.Models.ApplicationDbContext _context;
