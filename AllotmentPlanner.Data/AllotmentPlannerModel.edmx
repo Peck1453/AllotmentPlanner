@@ -120,6 +120,7 @@
           <Property Name="postCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="150" />
           <Property Name="Owner" Type="varchar" MaxLength="150" />
+          <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Planted">
           <Key>
@@ -234,7 +235,6 @@
           <EntitySet Name="AspNetUsers" EntityType="AllotmentModel.AspNetUsers" />
           <EntitySet Name="Crop" EntityType="AllotmentModel.Crop" />
           <EntitySet Name="CropHarvest" EntityType="AllotmentModel.CropHarvest" />
-          <EntitySet Name="GardenLocation" EntityType="AllotmentModel.GardenLocation" />
           <EntitySet Name="Planted" EntityType="AllotmentModel.Planted" />
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -247,6 +247,7 @@
           <EntitySet Name="TendType" EntityType="AllotmentModel.TendType" />
           <EntitySet Name="CropRequirements" EntityType="AllotmentModel.CropRequirements" />
           <EntitySet Name="Tended" EntityType="AllotmentModel.Tended" />
+          <EntitySet Name="GardenLocation" EntityType="AllotmentModel.GardenLocation" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -342,14 +343,6 @@
           <Property Name="latestHarvest" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="growthTime" Type="Int32" />
         </EntityType>
-        <EntityType Name="GardenLocation">
-          <Key>
-            <PropertyRef Name="postCode" />
-          </Key>
-          <Property Name="postCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Owner" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Planted">
           <Key>
             <PropertyRef Name="plantedId" />
@@ -405,6 +398,15 @@
           <Property Name="tendId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="plantedId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GardenLocation">
+          <Key>
+            <PropertyRef Name="postCode" />
+          </Key>
+          <Property Name="postCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Owner" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -508,15 +510,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GardenLocation">
-            <EntityTypeMapping TypeName="AllotmentModel.GardenLocation">
-              <MappingFragment StoreEntitySet="GardenLocation">
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="postCode" ColumnName="postCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Planted">
             <EntityTypeMapping TypeName="AllotmentModel.Planted">
               <MappingFragment StoreEntitySet="Planted">
@@ -564,6 +557,16 @@
                 <ScalarProperty Name="tendId" ColumnName="tendId" />
                 <ScalarProperty Name="cropId" ColumnName="cropId" />
                 <ScalarProperty Name="tendedId" ColumnName="tendedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GardenLocation">
+            <EntityTypeMapping TypeName="AllotmentModel.GardenLocation">
+              <MappingFragment StoreEntitySet="GardenLocation">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="postCode" ColumnName="postCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

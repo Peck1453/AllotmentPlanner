@@ -36,6 +36,10 @@ namespace AllotmentPlanner.Controllers.Admin
             {
                 _gardenService.addGardenLocation(garden, allotment);
 
+                // DS - Allocates the most recent garden
+                _gardenService.AllocateGarden();
+
+
                 return RedirectToAction("Gardens", new { controller = "Garden" });
             }
             catch (Exception ex)
@@ -50,7 +54,7 @@ namespace AllotmentPlanner.Controllers.Admin
         public ActionResult AddGardentoLocation()
         {
             List<SelectListItem> postCodeList = new List<SelectListItem>();
-            foreach (var location in _gardenService.GetGardenLocations())
+            foreach (var location in _gardenService.GetActiveGardenLocations())
             {
                 postCodeList.Add(
                     new SelectListItem()
@@ -151,6 +155,44 @@ namespace AllotmentPlanner.Controllers.Admin
                     return View();
                 }
             }
+        }
+
+        [HttpGet]
+        public ActionResult DeactivateGardenLocation(string pcode)
+        {
+           return View( _gardenService.GetGardenLocation(pcode));
+        }
+
+
+        [HttpPost]
+        public ActionResult DeactivateGardenLocation(GardenLocation location, string pcode)
+        {
+
+            GardenLocation gardenLocation = new GardenLocation
+            {
+                Active = false
+            };
+
+            _gardenService.DeactivateGardenLocation(location);
+
+            var gardens = _gardenService.ListGardensbyPostCode(pcode);
+
+            foreach (var garden in gardens)
+                {
+                AllotmentAllocation myAllotmentAllocation = new AllotmentAllocation
+                {
+                    dateTo = DateTime.Now
+
+                };
+
+                _gardenService.removeGardenerFromGarden(myAllotmentAllocation);
+
+                }
+
+            return RedirectToAction("Gardens", new { controller = "Garden" });
+
+
+
         }
 
         [HttpGet]

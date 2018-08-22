@@ -14,13 +14,13 @@
         <EntityTypeShape EntityType="AllotmentModel.AspNetUsers" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="AllotmentModel.Crop" Width="1.5" PointX="7.75" PointY="3.75" />
         <EntityTypeShape EntityType="AllotmentModel.CropHarvest" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AllotmentModel.GardenLocation" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="AllotmentModel.Planted" Width="1.5" PointX="9.75" PointY="3.75" />
         <AssociationConnector Association="AllotmentModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="AllotmentModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="AllotmentModel.TendType" Width="1.5" PointX="9.375" PointY="9.75" />
         <EntityTypeShape EntityType="AllotmentModel.CropRequirements" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="AllotmentModel.Tended" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="AllotmentModel.GardenLocation" Width="1.5" PointX="5.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

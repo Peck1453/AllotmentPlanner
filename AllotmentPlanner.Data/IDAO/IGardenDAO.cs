@@ -10,12 +10,17 @@ namespace AllotmentPlanner.Data.IDAO
     public interface IGardenDAO
     {
         //List Functions
-        IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations();
+        IList<AllotmentPlanner.Data.GardenLocation> GetActiveGardenLocations();
+        IList<GardenLocation> GetInactiveGardenLocations();
+
         IList<GardenViewModel> ViewGardensinLocation(string pcode);
         IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode);
         IList<UserGardenViewModel> GetUserGarden(string userId);
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
         IList<Planted> getPlantedCrops();
+
+        IList<Allotment> ListGardensbyPostCode(string pcode);
+
 
         IList<AllotmentAllocation> CountUserActiveGardens(string userId);
 
@@ -41,7 +46,7 @@ namespace AllotmentPlanner.Data.IDAO
         void AllocateGarden();
         void editGardenLocation(GardenLocation gardenLocation);
         void editGarden(Allotment allotment);
-        void DeleteGarden(GardenLocation gardenLocation);
+        void DeactivateGardenLocation(GardenLocation gardenLocation);
         void assignGardenerToGarden(AllotmentAllocation allotmentAllocation);
         void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation);
 

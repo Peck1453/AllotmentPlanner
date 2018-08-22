@@ -1,13 +1,7 @@
 ﻿@model IEnumerable<AllotmentPlanner.Data.GardenLocation>
 
-@{
-    ViewBag.Title = "Gardens";
-}
-
-<h2>Gardens</h2>
-
 <p>
-    @Html.ActionLink("Add Garden", "AddGardenLocation", new { controller = "GardenAdmin" })
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -20,11 +14,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Owner)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
+@foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.postCode)
@@ -36,22 +32,19 @@
             @Html.DisplayFor(modelItem => item.Owner)
         </td>
         <td>
-            @* DS - You will need to pass an identifier to this action as a garden id for it to find the relevant garden to edit. Not sure what that is. *@
-
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
 @if (User.IsInRole("Administrator"))
 {
-    @Html.ActionLink("Edit", "EditGardenLocation", new { controller = "GardenAdmin", pcode = item.postCode }); 
-    @Html.ActionLink("Deactivate Garden", "DeactivateGardenLocation", new { controller = "GardenAdmin", pcode = item.postCode });
+    Html.ActionLink("Edit", "EditGardenLocation", new { controller = "GardenAdmin", pcode = item.postCode });
+    Html.ActionLink("Deactivate Garden", "DeactivateGardenLocation", new { controller = "GardenAdmin", pcode = item.postCode });
 }
 
 
 @Html.ActionLink("View Gardens at Location", "ViewGardensinLocation", new { pcode = item.postCode })
-            @*@Html.ActionLink("Details", "GardenDetails", new { pcode = item.postCode }) |*@
-
-
         </td>
     </tr>
 }
 
 </table>
-@Html.ActionLink("Back to Dashboard", "AdminDashboard", "Home")

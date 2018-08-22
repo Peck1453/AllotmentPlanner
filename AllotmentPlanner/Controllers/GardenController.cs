@@ -15,12 +15,20 @@ namespace AllotmentPlanner.Controllers
         [HttpGet]
         public ActionResult Gardens()
         {
-            return View(_gardenService.GetGardenLocations());
+            return View(_gardenService.GetActiveGardenLocations());
         }
+
+        public ActionResult InactiveGardens()
+        {
+            return View(_gardenService.GetInactiveGardenLocations());
+        }
+
+
+
 
         public ActionResult GardensUserView()
         {
-            return View(_gardenService.GetGardenLocations());
+            return View(_gardenService.GetActiveGardenLocations());
         }
 
         [HttpGet]
@@ -77,7 +85,7 @@ namespace AllotmentPlanner.Controllers
         public ActionResult _userSelectPostcode(string pcode)
         {
             List<SelectListItem> postCodeList = new List<SelectListItem>();
-            foreach (var location in _gardenService.GetGardenLocations())
+            foreach (var location in _gardenService.GetActiveGardenLocations())
             {
                 postCodeList.Add(
                     new SelectListItem()

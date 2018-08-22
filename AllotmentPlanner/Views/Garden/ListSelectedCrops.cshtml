@@ -12,21 +12,21 @@
 
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.gardenId)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.cropId)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.gardenSize)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.cropName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.cropSize)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.earliestPlant)
         </th>
@@ -44,21 +44,21 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.gardenId)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.cropId)
-        </td>
-        <td>
+        </td>*@
+        @*<td>
             @Html.DisplayFor(modelItem => item.gardenSize)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.cropName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.cropSize)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.earliestPlant)
         </td>

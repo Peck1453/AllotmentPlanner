@@ -15,6 +15,7 @@ namespace AllotmentPlanner.Data.ViewModel
         public int gardenId { get; set; }
         public string AssignedGardener { get; set; }
         public int size { get; set; }
+        public bool Active { get; set; }
         public GardenViewModel() { }
 
     }

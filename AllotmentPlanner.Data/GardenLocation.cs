@@ -17,5 +17,6 @@ namespace AllotmentPlanner.Data
         public string postCode { get; set; }
         public string Name { get; set; }
         public string Owner { get; set; }
+        public bool Active { get; set; }
     }
 }

@@ -22,12 +22,21 @@ namespace AllotmentPlanner.Services.Service
         }
 
 
-        public IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations()
+        public IList<AllotmentPlanner.Data.GardenLocation> GetActiveGardenLocations()
         {
-            return _gardenDAO.GetGardenLocations();
+            return _gardenDAO.GetActiveGardenLocations();
 
 
         }
+
+        public IList<AllotmentPlanner.Data.GardenLocation> GetInactiveGardenLocations()
+        {
+            return _gardenDAO.GetInactiveGardenLocations();
+
+
+        }
+
+
         public IList<GardenViewModel> ViewGardensinLocation(string pcode)
         {
             return _gardenDAO.ViewGardensinLocation(pcode);
@@ -44,6 +53,11 @@ namespace AllotmentPlanner.Services.Service
             return _gardenDAO.getPlantedCrops();
         }
 
+        public IList<Allotment> ListGardensbyPostCode(string pcode)
+        {
+
+            return _gardenDAO.ListGardensbyPostCode(pcode);
+        }
 
 
         public IList<AllotmentAllocation> CountUserActiveGardens(string userId)
@@ -111,9 +125,9 @@ namespace AllotmentPlanner.Services.Service
         {
             _gardenDAO.editGarden(allotment);
         }
-            public void DeleteGarden(GardenLocation gardenLocation)
+            public void DeactivateGardenLocation(GardenLocation gardenLocation)
         {
-            _gardenDAO.DeleteGarden(gardenLocation);
+            _gardenDAO.DeactivateGardenLocation(gardenLocation);
         }
 
         public void assignGardenerToGarden(AllotmentAllocation allotmentAllocation)

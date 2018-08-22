@@ -11,12 +11,15 @@ namespace AllotmentPlanner.Services.IService
     public interface IGardenService
     {
         //List Functions
-        IList<AllotmentPlanner.Data.GardenLocation> GetGardenLocations();
+        IList<AllotmentPlanner.Data.GardenLocation> GetActiveGardenLocations();
+        IList<GardenLocation> GetInactiveGardenLocations();
         IList<GardenViewModel> ViewGardensinLocation(string pcode);
         IList<GardenViewModel> ViewEmptyGardensinLocation(string pcode);
         IList<UserGardenViewModel> GetUserGarden(string userId);
         IList<EditGardenViewModel> ListSelectedCrops(string userID);
         IList<Planted> getPlantedCrops();
+        IList<Allotment> ListGardensbyPostCode(string pcode);
+
 
         IList<AllotmentAllocation> CountUserActiveGardens(string userId);
 
@@ -35,6 +38,7 @@ namespace AllotmentPlanner.Services.IService
         Planted getPlantedCrop(int plantedId);
 
 
+
         //Edit Garden Functions
 
         void addGardenLocation(GardenLocation gardenLocation, Allotment allotment);
@@ -42,7 +46,7 @@ namespace AllotmentPlanner.Services.IService
         void AllocateGarden();
         void editGardenLocation(GardenLocation gardenLocation);
         void editGarden(Allotment allotment);
-        void DeleteGarden(GardenLocation gardenLocation);
+        void DeactivateGardenLocation(GardenLocation gardenLocation);
         void assignGardenerToGarden(AllotmentAllocation allotmentAllocation);
         void removeGardenerFromGarden(AllotmentAllocation allotmentAllocation);
 

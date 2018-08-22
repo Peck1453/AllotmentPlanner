@@ -319,6 +319,8 @@
     <Content Include="Views\Garden\_userSelectPostcode.cshtml" />
     <Content Include="Views\Tend\_getTendActions.cshtml" />
     <Content Include="Views\Tend\_loopTends.cshtml" />
+    <Content Include="Views\Garden\InactiveGardens.cshtml" />
+    <Content Include="Views\GardenAdmin\DeactivateGardenLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
