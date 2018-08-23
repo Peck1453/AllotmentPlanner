@@ -18,8 +18,10 @@ namespace AllotmentPlanner.Data
     {
         [Display(Name = "Tend Id")]
         public int tendId { get; set; }
+        [Required(ErrorMessage = "Please Enter the Name of the Tend Action")]
         [Display(Name = "Tend Name")]
         public string tendName { get; set; }
+        [Required(ErrorMessage = "Please Enter The frequency the tend needs to be applied")]
         [Display(Name = "Tend Frequency (days)")]
         public int tendFrequency { get; set; }
     }

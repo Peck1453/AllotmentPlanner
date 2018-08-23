@@ -9,10 +9,13 @@ namespace AllotmentPlanner.Data.ViewModel
 {
     public class GardenViewModel
     {
+        [Required(ErrorMessage = "Please Enter Garden Post Code")]
         [Display(Name = "Garden Post Code")]
         public string  postCode { get; set; }
+        [Required(ErrorMessage = "Please Enter Garden Name")]
         [Display(Name = "Garden Name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please Enter Garden Owner")]
         [Display(Name = "Garden Location Owner")]
         public string Owner { get; set; }
         [Display(Name = "Garden Id Number")]
