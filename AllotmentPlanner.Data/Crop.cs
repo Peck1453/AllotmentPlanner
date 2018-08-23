@@ -11,11 +11,16 @@ namespace AllotmentPlanner.Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class Crop
     {
+        [Display(Name = "Crop Id")]
         public int cropId { get; set; }
+        [Display(Name = "Crop Name")]
         public string cropName { get; set; }
+        [Display(Name = "Seed Space required (sq in)")]
         public int cropSize { get; set; }
     }
 }

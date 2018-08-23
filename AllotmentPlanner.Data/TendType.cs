@@ -11,11 +11,16 @@ namespace AllotmentPlanner.Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class TendType
     {
+        [Display(Name = "Tend Id")]
         public int tendId { get; set; }
+        [Display(Name = "Tend Name")]
         public string tendName { get; set; }
+        [Display(Name = "Tend Frequency (days)")]
         public int tendFrequency { get; set; }
     }
 }

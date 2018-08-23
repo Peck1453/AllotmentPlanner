@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AllotmentPlanner.Data.ViewModel.EditGardenViewModel>
 
 @{
-    ViewBag.Title = "ListSelectedCrops";
+    ViewBag.Title = "Garden Planner";
 }
 
 <h2>ListSelectedCrops</h2>
@@ -78,6 +78,13 @@
 }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("Accept Plan", "GetUserGarden", "Garden")
+</div>
+
+
 
 
 

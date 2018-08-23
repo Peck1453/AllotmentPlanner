@@ -365,7 +365,7 @@ namespace AllotmentPlanner.Controllers.Admin
                     {
                         cropId = planted.cropId,
                         tendId = tend.tendId,
-                        Date = DateTime.Now,
+                        Date = DateTime.Now.AddDays(-40),
                         plantedId = lastPlanted.plantedId
                     };
 

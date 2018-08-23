@@ -9,14 +9,14 @@ namespace AllotmentPlanner.Data.ViewModel
 {
     public class CropDataViewModel
     {
-
+        [Display(Name = "Crop Id")]
         public int CropId { get; set; }
 
-
+        [Display(Name = "Crop Name")]
         public string CropName { get; set; }
 
+        [Display(Name = "Amount of Space seed requires (sq in)")]
         public int SpaceRequired { get; set; }
-
 
         [DataType(DataType.Date)]
         [Display(Name = "Earliest Planting Date")]

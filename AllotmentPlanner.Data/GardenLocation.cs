@@ -11,11 +11,16 @@ namespace AllotmentPlanner.Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class GardenLocation
     {
+        [Display(Name = "Garden Post Code")]
         public string postCode { get; set; }
+        [Display(Name = "Garden Location Name")]
         public string Name { get; set; }
+        [Display(Name = "Garden Location")]
         public string Owner { get; set; }
         public bool Active { get; set; }
     }
