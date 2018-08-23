@@ -72,7 +72,7 @@
             @Html.DisplayFor(modelItem => item.lastestHarvest)
         </td>
         <td>
-            @Html.ActionLink("Remove", "Delete", new { controller = "GardenAdmin", plantedId=item.plantedId })
+            @Html.ActionLink("Remove", "RemovePlantedCrop", new { controller = "GardenAdmin", plantedId=item.plantedId })
         </td>
     </tr>
 }

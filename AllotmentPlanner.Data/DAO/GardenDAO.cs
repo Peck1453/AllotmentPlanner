@@ -382,26 +382,26 @@ namespace AllotmentPlanner.Data.DAO
 
             List<UserGardenViewModel> newCropsPlantedList = new List<UserGardenViewModel>();
 
-            //DS - This is a temporary solution to your problem. If you got rid of the nullables and created some new methods, you could do this right.
+            //This is a temporary solution to the problem. get rid of nullables and create some new methods, could be done right.
             foreach (var planted in cropsPlanted.ToList())
             {
                 if (planted.dateIn != null && planted.growthTime != null)
                 {
-                    DateTime plantedDate = planted.dateIn ?? DateTime.Now; // DS - It should never hit datetime now since the if does a check
-                    int growthTime = planted.growthTime ?? 10; // DS - It should never hit 10 since the if does a check
+                    DateTime plantedDate = planted.dateIn ?? DateTime.Now; // It should never hit datetime now since the if does a check
+                    int growthTime = planted.growthTime ?? 10; // It should never hit 10 since the if does a check
                     DateTime estmatedHarvest = plantedDate.AddDays(growthTime); // It should only ever set the est harvest as what you need it to be if the values aren't null
 
-                    planted.estimatedHarvestDate = estmatedHarvest; // DS - Sets the est harvest date for the record
+                    planted.estimatedHarvestDate = estmatedHarvest; //  Sets the est harvest date for the record
                 }
                 else
                 {
                     planted.estimatedHarvestDate = null;
                 }
 
-                newCropsPlantedList.Add(planted); // DS - Adding the updated values to a new list
+                newCropsPlantedList.Add(planted); // Adding the updated values to a new list
             }
 
-            return newCropsPlantedList; // DS - Pass the new list instead of the cropsPlanted.ToList() that you previously had
+            return newCropsPlantedList; // Pass the new list instead of the cropsPlanted.ToList()
         }
 
         public void setAsTended(Tended tended)

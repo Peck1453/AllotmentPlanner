@@ -81,27 +81,6 @@ namespace AllotmentPlanner.Controllers
             return View(_gardenService.ViewEmptyGardensinLocation(pcode));
         }
 
-        [HttpGet]
-        public ActionResult _userSelectPostcode(string pcode)
-        {
-            List<SelectListItem> postCodeList = new List<SelectListItem>();
-            foreach (var location in _gardenService.GetActiveGardenLocations())
-            {
-                postCodeList.Add(
-                    new SelectListItem()
-                    {
-                        Text = location.postCode,
-                        Value = location.postCode.ToString(),
-                        Selected = (location.postCode == pcode)
-
-                    });
-            }
-
-            ViewBag.postCodeList = postCodeList;
-
-            return View(UserViewEmptyGardensinLocation(pcode));
-        }
-
         // GET: Garden/Details/5
         [HttpGet]
         public ActionResult GardenDetails(string pcode)

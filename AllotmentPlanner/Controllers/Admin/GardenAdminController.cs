@@ -86,7 +86,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                //  Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
@@ -159,7 +159,7 @@ namespace AllotmentPlanner.Controllers.Admin
                 }
                 catch (Exception ex)
                 {
-                    // DS - Might be worth looking at redirection to an error page or something?
+                    //  Might be worth looking at redirection to an error page
                     ViewBag.Exception = ex;
                     return View();
                 }
@@ -253,7 +253,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                //  Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
@@ -376,7 +376,7 @@ namespace AllotmentPlanner.Controllers.Admin
             }
             catch (Exception ex)
             {
-                // DS - Might be worth looking at redirection to an error page or something?
+                //  Might be worth looking at redirection to an error page
                 ViewBag.Exception = ex;
                 return View();
             }
@@ -432,6 +432,17 @@ namespace AllotmentPlanner.Controllers.Admin
                 ViewBag.Exception = ex;
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult RemovePlantedCrop(int plantedId, Planted planted)
+        {
+
+            Planted myPlanted = _gardenService.getPlantedCrop(plantedId);
+            _gardenService.deletePlantedCrop(myPlanted);
+
+            return RedirectToAction("ListSelectedCrops", new { controller = "Garden" });
+
         }
     }
 }

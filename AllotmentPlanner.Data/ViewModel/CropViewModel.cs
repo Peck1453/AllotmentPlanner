@@ -42,12 +42,16 @@ namespace AllotmentPlanner.Data.ViewModel
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 
         public DateTime LateHarvest { get; set; }
+
+        [Display(Name = "Time for Crop to Grow (days)")]
         public int? growthTime { get; set; }
-
-
+        [Display(Name = "Bird Netting required")]
         public bool birdNetting { get; set; }
+        [Display(Name = "slug Pellets required?")]
         public bool slugPellets { get; set; }
+        [Display(Name = "Feed required?")]
         public bool Feed { get; set; }
+        [Display(Name = "Watering Interval (days)")]
         public int? wateringInterval { get; set; }
 
         public CropDataViewModel() { }
